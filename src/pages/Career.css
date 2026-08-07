@@ -1,0 +1,353 @@
+/* ===========================
+CAREER HERO
+=========================== */
+
+.career-hero{
+
+    min-height:55vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:80px 8%;
+
+    background:linear-gradient(135deg,#0b5d35,#18b979);
+
+    color:#fff;
+
+}
+
+.hero-content{
+
+    max-width:850px;
+
+    animation:fadeUp 1s ease;
+
+}
+
+.hero-content h1{
+
+    font-size:58px;
+
+    margin-bottom:20px;
+
+}
+
+.hero-content p{
+
+    font-size:19px;
+
+    line-height:1.8;
+
+}
+
+
+
+/* ===========================
+WHY WORK
+=========================== */
+
+.why-work{
+
+    width:90%;
+
+    margin:90px auto;
+
+}
+
+.why-work h2{
+
+    text-align:center;
+
+    font-size:40px;
+
+    color:#14532d;
+
+    margin-bottom:50px;
+
+}
+
+.why-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+}
+
+.why-card{
+
+    background:#fff;
+
+    padding:40px 30px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.why-card:hover{
+
+    transform:translateY(-12px);
+
+    background:#18b979;
+
+}
+
+.why-card i{
+
+    font-size:55px;
+
+    color:#18b979;
+
+    margin-bottom:20px;
+
+    transition:.3s;
+
+}
+
+.why-card h3{
+
+    color:#14532d;
+
+    margin-bottom:15px;
+
+    transition:.3s;
+
+}
+
+.why-card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+    transition:.3s;
+
+}
+
+.why-card:hover i,
+
+.why-card:hover h3,
+
+.why-card:hover p{
+
+    color:#fff;
+
+}
+
+
+
+/* ===========================
+FORM
+=========================== */
+
+.career-form{
+
+    width:90%;
+
+    max-width:900px;
+
+    margin:100px auto;
+
+    background:#fff;
+
+    padding:60px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+}
+
+.career-form h2{
+
+    text-align:center;
+
+    font-size:40px;
+
+    color:#14532d;
+
+    margin-bottom:40px;
+
+}
+
+.career-form form{
+
+    display:grid;
+
+    gap:22px;
+
+}
+
+.career-form input{
+
+    width:100%;
+
+    padding:16px 20px;
+
+    border:2px solid #ddd;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+
+    font-family:inherit;
+
+}
+
+.career-form input:focus{
+
+    border-color:#18b979;
+
+    box-shadow:0 0 0 4px rgba(24,185,121,.15);
+
+}
+
+.career-form input[type=file]{
+
+    padding:14px;
+
+    cursor:pointer;
+
+}
+
+.career-form button{
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#18b979;
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.career-form button:hover{
+
+    background:#14532d;
+
+    transform:translateY(-3px);
+
+}
+
+.career-form button:disabled{
+
+    background:#999;
+
+    cursor:not-allowed;
+
+}
+
+
+
+/* ===========================
+ANIMATIONS
+=========================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/* ===========================
+RESPONSIVE
+=========================== */
+
+@media(max-width:992px){
+
+    .hero-content h1{
+
+        font-size:42px;
+
+    }
+
+    .hero-content p{
+
+        font-size:17px;
+
+    }
+
+    .career-form{
+
+        padding:40px 25px;
+
+    }
+
+    .career-form h2{
+
+        font-size:32px;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .hero-content h1{
+
+        font-size:34px;
+
+    }
+
+    .why-work h2,
+
+    .career-form h2{
+
+        font-size:28px;
+
+    }
+
+    .career-form{
+
+        width:95%;
+
+        padding:30px 18px;
+
+    }
+
+}

@@ -4,6 +4,8 @@
 
     width:90%;
 
+    height: 30vh;
+
     margin:80px auto;
 
 }
@@ -55,6 +57,8 @@
 .activities{
 
     width:90%;
+
+    height: 100vh;
 
     margin:70px auto;
 
@@ -164,6 +168,8 @@ font-size:32px;
 .featured-activities{
 
     width:90%;
+
+    height:230vh;
 
     margin:100px auto;
 
