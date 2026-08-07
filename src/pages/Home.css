@@ -14,7 +14,7 @@
 section {
     padding: 80px 8%;
 }
-c
+
 
 section h2 {
     color: #14532d;
@@ -1196,6 +1196,167 @@ transform:scale(1.08);
 
     .gallery-item {
         height: 210px;
+    }
+
+}
+
+/* =========================
+   FAQ
+========================= */
+
+.faq {
+    background: #ffffff;
+}
+
+.faq-container {
+    max-width: 850px;
+    margin: 45px auto 0;
+}
+
+
+/* FAQ BOX */
+
+.faq details {
+    background: #f8fff9;
+
+    margin-bottom: 15px;
+
+    border: 1px solid #e1eee5;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.05);
+}
+
+
+.faq details:hover {
+    border-color: #16a34a;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(22, 163, 74, 0.10);
+}
+
+
+/* QUESTION */
+
+.faq summary {
+    padding: 20px 25px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    cursor: pointer;
+
+    list-style: none;
+
+    color: #14532d;
+
+    font-weight: 600;
+
+    font-size: 16px;
+}
+
+
+/* Remove default arrow */
+
+.faq summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/* ICON */
+
+.faq summary i {
+    color: #16a34a;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+
+/* Rotate icon when opened */
+
+.faq details[open] summary i {
+    transform: rotate(180deg);
+}
+
+
+/* ANSWER */
+
+.faq details p {
+    padding: 0 25px 20px;
+
+    margin: 0;
+
+    color: #666;
+
+    line-height: 1.7;
+
+    animation: faqAnswer 0.3s ease;
+}
+
+
+/* OPEN STATE */
+
+.faq details[open] {
+    border-color: #16a34a;
+
+    background: #f7fcf8;
+}
+
+
+/* =========================
+   FAQ ANIMATION
+========================= */
+
+@keyframes faqAnswer {
+
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================
+   FAQ MOBILE
+========================= */
+
+@media (max-width: 576px) {
+
+    .faq-container {
+        margin-top: 30px;
+    }
+
+    .faq summary {
+        padding: 17px 18px;
+
+        font-size: 14px;
+
+        gap: 15px;
+    }
+
+    .faq details p {
+        padding: 0 18px 18px;
+
+        font-size: 14px;
     }
 
 }

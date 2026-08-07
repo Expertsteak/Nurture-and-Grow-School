@@ -300,6 +300,97 @@ function Home() {
 
       </section>
 
+      {/* FAQ */}
+
+<section className="faq">
+
+  <div className="section-heading">
+
+    <span>FAQ</span>
+
+    <h2>
+      Frequently Asked
+      <strong> Questions</strong>
+    </h2>
+
+    <p>
+      Find answers to some common questions about
+      Nurture & Grow Primary School.
+    </p>
+
+  </div>
+
+
+  <div className="faq-container">
+
+    <details>
+      <summary>
+        Which classes are offered at the school?
+        <i className="fa-solid fa-chevron-down"></i>
+      </summary>
+
+      <p>
+        We offer quality English medium education from
+        Nursery to Grade 5.
+      </p>
+    </details>
+
+
+    <details>
+      <summary>
+        Is the school English medium?
+        <i className="fa-solid fa-chevron-down"></i>
+      </summary>
+
+      <p>
+        Yes, Nurture & Grow Primary School provides
+        English medium education.
+      </p>
+    </details>
+
+
+    <details>
+      <summary>
+        How can I apply for admission?
+        <i className="fa-solid fa-chevron-down"></i>
+      </summary>
+
+      <p>
+        You can visit our Admissions page and submit
+        the Admission Enquiry form.
+      </p>
+    </details>
+
+
+    <details>
+      <summary>
+        Where is the school located?
+        <i className="fa-solid fa-chevron-down"></i>
+      </summary>
+
+      <p>
+        Nurture & Grow Primary School is located
+        in Hyderabad.
+      </p>
+    </details>
+
+
+    <details>
+      <summary>
+        How can I contact the school?
+        <i className="fa-solid fa-chevron-down"></i>
+      </summary>
+
+      <p>
+        You can contact us through the Contact page
+        or use the contact details provided in the footer.
+      </p>
+    </details>
+
+  </div>
+
+</section>
+
 
       {/* CTA */}
 
