@@ -1,346 +1,289 @@
-/* ==========================
-   PAGE BANNER
-========================== */
+/* ===========================
+   CAMBRIDGE SECTION
+=========================== */
 
-.page-banner{
-    height:45vh;
-    background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
-    url("../../assets/images/banner.jpg");
-    background-size:cover;
-    background-position:center;
+.cambridge{
+    width:90%;
+    margin:70px auto;
+
     display:flex;
-    flex-direction:column;
-    justify-content:center;
     align-items:center;
-    text-align:center;
-    color:#fff;
+    justify-content:space-between;
+    gap:60px;
 }
 
-.page-banner h1{
-    font-size:55px;
+.cambridge-image .books{
+    width:100%;
+    max-width:420px;
+    height:auto;
+    display:block;
+    margin:0 auto;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+.cambridge-content{
+    flex:1;
+}
+
+.cambridge-content h2{
+    color:#0b7d47;
+    font-size:36px;
+    margin-bottom:20px;
+}
+
+.cambridge-content p{
+    color:#555;
+    line-height:1.8;
     margin-bottom:15px;
 }
 
-.page-banner p{
-    font-size:20px;
-}
-
-
-/* ==========================
-COMMON
-========================== */
-
-.container{
-    width:90%;
-    max-width:1200px;
-    margin:auto;
-}
-
-section{
-    padding:80px 0;
-}
-
-section h2{
-    text-align:center;
-    color:#166534;
-    margin-bottom:20px;
-    font-size:38px;
-}
-
-section p{
-    color:#555;
-    line-height:1.8;
-}
-
-
-/* ==========================
-CURRICULUM
-========================== */
+/* ===========================
+   CURRICULUM
+=========================== */
 
 .curriculum{
+    width:90%;
+    margin:80px auto;
     text-align:center;
+}
+
+.curriculum h2{
+    font-size:38px;
+    color:#0b7d47;
+    margin-bottom:20px;
 }
 
 .curriculum p{
     max-width:900px;
     margin:auto;
-}
-
-
-/* ==========================
-CAMBRIDGE
-========================== */
-
-.cambridge{
-    background:#f8fff8;
-}
-
-.cambridge-content{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:60px;
-    align-items:center;
-}
-
-.cambridge-image img{
-    width:100%;
-    border-radius:15px;
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
-}
-
-.cambridge-text p{
-    margin-bottom:18px;
-}
-
-
-/* ==========================
-CARDS
-========================== */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
-    margin-top:40px;
-}
-
-.card{
-    background:#fff;
-    padding:35px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-10px);
-}
-
-.card svg{
-    font-size:50px;
-    color:#16a34a;
-    margin-bottom:20px;
-}
-
-.card h3{
-    margin-bottom:12px;
-    color:#166534;
-}
-
-
-/* ==========================
-SUBJECTS
-========================== */
-
-.subjects{
-    text-align:center;
-}
-
-.subjects .card{
-    padding:30px;
-}
-
-
-/* ==========================
-TEACHING
-========================== */
-
-.teaching{
-    background:#f8fff8;
-}
-
-
-/* ==========================
-OUTCOMES
-========================== */
-
-.outcomes ul{
-    max-width:750px;
-    margin:auto;
-}
-
-.outcomes li{
-    list-style:none;
-    background:#fff;
-    margin:18px 0;
-    padding:18px 25px;
-    border-left:5px solid #16a34a;
-    border-radius:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-
-/* ==========================
-CTA
-========================== */
-
-.cta{
-    background:#166534;
-    color:#fff;
-    text-align:center;
-}
-
-.cta h2{
-    color:#fff;
-    margin-bottom:20px;
-}
-
-.cta p{
-    color:#ecfdf5;
-    max-width:700px;
-    margin:0 auto 30px;
-}
-
-.btn{
-    display:inline-block;
-    padding:14px 35px;
-    background:#16a34a;
-    color:#fff;
-    text-decoration:none;
-    border-radius:8px;
-    transition:.3s;
-    font-weight:600;
-}
-
-.btn:hover{
-    background:#14532d;
-}
-
-
-/* ==========================
-RESPONSIVE
-========================== */
-
-@media(max-width:992px){
-
-.cambridge-content{
-    grid-template-columns:1fr;
-}
-
-.page-banner h1{
-    font-size:42px;
-}
-
-}
-
-@media(max-width:576px){
-
-section{
-    padding:60px 0;
-}
-
-section h2{
-    font-size:30px;
-}
-
-.page-banner{
-    height:35vh;
-}
-
-.page-banner h1{
-    font-size:34px;
-}
-
-.page-banner p{
-    font-size:16px;
-}
-
-.btn{
-    display:block;
-    width:220px;
-    margin:auto;
-}
-
-}
-.teaching{
-    padding:80px 0;
-    background:#f8fff8;
-}
-
-.section-text{
-    max-width:850px;
-    margin:0 auto 50px;
-    text-align:center;
-    color:#666;
+    color:#555;
     line-height:1.8;
 }
 
-.teaching .cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+/* ===========================
+   SUBJECTS
+=========================== */
+
+.subjects{
+    width:90%;
+    margin:80px auto;
+    text-align:center;
 }
 
-.teaching .card{
+.subjects h2{
+    font-size:38px;
+    color:#0b7d47;
+    margin-bottom:45px;
+}
+
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:25px;
+}
+
+.subject-card{
+
     background:#fff;
-    padding:30px;
-    border-radius:15px;
+
+    padding:35px 20px;
+
     text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    border-radius:15px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
     transition:.3s;
 }
 
-.teaching .card:hover{
-    transform:translateY(-8px);
-}
+.subject-card i{
 
-.teaching .card i{
     font-size:45px;
-    color:#16a34a;
-    margin-bottom:20px;
+
+    color:#17b978;
+
+    margin-bottom:18px;
+
 }
 
-.teaching .card h3{
-    color:#166534;
-    margin-bottom:15px;
+.subject-card h3{
+
+    color:#333;
+
+    font-size:22px;
+
 }
 
-.teaching .card p{
-    color:#555;
-    line-height:1.7;
-}
-/* ==========================
-   LEARNING OUTCOMES
-========================== */
+.subject-card:hover{
 
-.outcomes{
-    padding:80px 0;
-    background:#ffffff;
+    transform:translateY(-10px);
+
+    background:#17b978;
+
 }
 
-.outcomes-grid{
+.subject-card:hover i,
+.subject-card:hover h3{
+
+    color:white;
+
+}
+/* ===========================
+   TEACHING
+=========================== */
+
+.teaching{
+    width:90%;
+    margin:80px auto;
+}
+
+.teaching h2{
+    text-align:center;
+    font-size:38px;
+    color:#0b7d47;
+    margin-bottom:45px;
+}
+
+.teaching-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
-    margin-top:50px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
 }
 
-.outcome-card{
-    background:#f8fff8;
-    padding:30px;
+.teach-card{
+    background:#fff;
+    padding:35px 25px;
     border-radius:15px;
     text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
     transition:.3s;
 }
 
-.outcome-card:hover{
-    transform:translateY(-8px);
-}
-
-.outcome-card i{
-    font-size:45px;
-    color:#16a34a;
+.teach-card i{
+    font-size:50px;
+    color:#17b978;
     margin-bottom:20px;
 }
 
-.outcome-card h3{
-    color:#166534;
+.teach-card h3{
+    color:#333;
     margin-bottom:15px;
 }
 
-.outcome-card p{
-    color:#555;
+.teach-card p{
+    color:#666;
     line-height:1.7;
+}
+
+.teach-card:hover{
+    background:#17b978;
+    transform:translateY(-10px);
+}
+
+.teach-card:hover i,
+.teach-card:hover h3,
+.teach-card:hover p{
+    color:white;
+}
+
+/* ===========================
+   CTA
+=========================== */
+
+.cta{
+
+    margin-top:80px;
+
+    background:linear-gradient(135deg,#0b7d47,#18b979);
+
+    color:white;
+
+    text-align:center;
+
+    padding:80px 20px;
+}
+
+.cta h2{
+
+    font-size:42px;
+
+    margin-bottom:15px;
+}
+
+.cta p{
+
+    font-size:18px;
+
+    margin-bottom:35px;
+}
+
+.cta button{
+
+    border:none;
+
+    background:white;
+
+    color:#0b7d47;
+
+    padding:15px 35px;
+
+    border-radius:50px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.cta button:hover{
+
+    background:#ffe082;
+
+    transform:scale(1.05);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:900px){
+
+.cambridge{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+.cambridge-content{
+
+text-align:center;
+
+}
+
+.cambridge-content h2{
+
+font-size:30px;
+
+}
+
+.curriculum h2,
+.subjects h2,
+.teaching h2{
+
+font-size:32px;
+
+}
+
+.cta h2{
+
+font-size:34px;
+
+}
+
 }
