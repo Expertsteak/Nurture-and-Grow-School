@@ -103,6 +103,8 @@ section{
 
     width:90%;
 
+    height: 300px;
+
     margin:80px auto;
 
     display:flex;
@@ -131,7 +133,9 @@ section{
 
     width:100%;
 
-    max-width:450px;
+    max-width:500px;
+
+    height: 350px;
 
     margin:auto;
 
@@ -219,6 +223,8 @@ section{
 
     width:90%;
 
+    height: 250px;
+
     margin:90px auto;
 
     text-align:center;
@@ -276,6 +282,8 @@ section{
 .subjects{
 
     width:90%;
+
+    height: 500px;
 
     margin:90px auto;
 
