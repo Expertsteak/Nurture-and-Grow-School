@@ -54,9 +54,9 @@ function Contact() {
             <h3>Call Us</h3>
 
             <p>
-              +91 XXXXX XXXXX
+              +91 90325 64893
               <br />
-              Mon - Sat | 9:00 AM - 4:00 PM
+              Mon - Sat | 7:00 AM - 2:30 PM
             </p>
           </div>
 
@@ -70,7 +70,7 @@ function Contact() {
             <h3>Email Us</h3>
 
             <p>
-              info@nurtureandgrow.com
+               nurtureandgrow.alkapoor@gmail.com
               <br />
               We will reply as soon as possible.
             </p>
@@ -88,7 +88,7 @@ function Contact() {
             <p>
               Monday - Saturday
               <br />
-              9:00 AM - 4:00 PM
+              7:00 AM - 2:30 PM
             </p>
           </div>
 
@@ -216,52 +216,24 @@ function Contact() {
 
       </section>
 
-
       {/* ================= LOCATION ================= */}
 
-      <section className="location-section">
+<section className="map">
 
-        <div className="section-heading">
+  <h2>Find Us</h2>
 
-          <span>OUR LOCATION</span>
+  <iframe
+    src="https://www.google.com/maps/embed?pb="
+    // kal dekhna hai
+    width="100%"
+    height="400"
+    style={{ border: 0 }}
+    allowFullScreen=""
+    loading="lazy"
+  ></iframe>
 
-          <h2>
-            Find Us <strong>Easily</strong>
-          </h2>
-
-        </div>
-
-
-        <div className="map-box">
-
-          <i className="fa-solid fa-location-dot"></i>
-
-          <h3>Nurture & Grow Primary School</h3>
-
-          <p>
-            Hyderabad, Telangana
-          </p>
-
-          <section class="map">
-
-        <h2>Find Us</h2>
-
-        <iframe
-            src="https://www.google.com/maps/embed?pb="
-            width="100%"
-            height="400"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy">
-
-           </iframe>
-
-           </section>
-
-        </div>
-
-      </section>
-
+</section>
+       
     </>
   );
 }

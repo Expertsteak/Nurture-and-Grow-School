@@ -103,6 +103,16 @@ function Academics() {
     </div>
 
     <div className="subject-card">
+      <i className="fa-solid fa-book-open"></i>
+      <h3>Urdu</h3>
+    </div>
+
+    <div className="subject-card">
+      <i className="fa-solid fa-book"></i>
+      <h3>Hindi</h3>
+    </div>
+
+    <div className="subject-card">
       <i className="fa-solid fa-palette"></i>
       <h3>Art & Craft</h3>
     </div>

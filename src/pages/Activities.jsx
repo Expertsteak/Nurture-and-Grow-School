@@ -1,6 +1,9 @@
 import Hero from "../components/hero";
 import "./Activities.css";
-// import hero from "../assets/hero/activityHero.jpg";
+import plantation from "../assets/plantation.jpeg"
+import art from "../assets/art&craft.jpeg"
+import sports from "../assets/sports.jpeg"
+
 
 import { Link } from "react-router-dom";
 
@@ -181,7 +184,7 @@ function Activities() {
 
         <div className="feature-image">
 
-            {/* <img src={plantation} alt="Plantation Activity"/> */}
+            <img src={plantation} alt="Plantation Activity"/>
 
         </div>
 
@@ -224,7 +227,7 @@ function Activities() {
 
         <div className="feature-image">
 
-            {/* <img src={sports} alt="Sports"/> */}
+            <img src={sports} alt="Sports"/>
 
         </div>
 
@@ -266,7 +269,7 @@ function Activities() {
 
         <div className="feature-image">
 
-            {/* <img src={art} alt="Art"/> */}
+            <img src={art} alt="Art"/>
 
         </div>
 
