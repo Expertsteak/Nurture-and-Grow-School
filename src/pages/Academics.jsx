@@ -1,6 +1,7 @@
 import "./Academics.css";
 import Hero from "../components/Hero";
 import academicHero from "../assets/academic-hero.png";
+import { Link } from "react-router-dom";
 
 
 function Academics() {
@@ -168,7 +169,9 @@ function Academics() {
           Join Nurture & Grow Primary School today.
         </p>
 
-        <button>Apply Now</button>
+        <Link to="/admissions" className="apply-btn">
+         Apply Now
+         </Link>
 
       </section>
     </>
