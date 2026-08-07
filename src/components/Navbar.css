@@ -1,0 +1,230 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Reset */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+}
+
+#root{
+    width:100%;
+}
+
+/* ================= NAVBAR ================= */
+
+.header{
+
+    width:100%;
+    height:90px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 6%;
+
+    background:#14532d;
+
+    position:sticky;
+    top:0;
+
+    z-index:999;
+
+    box-shadow:0 3px 15px rgba(0,0,0,.12);
+
+}
+
+/* Logo */
+
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+}
+
+.logo img{
+
+    width:60px;
+    height:60px;
+
+    border-radius:50%;
+    object-fit:cover;
+
+}
+
+.logo-text h2{
+
+    color:#fff;
+    font-size:24px;
+    line-height:1;
+
+}
+
+.logo-text p{
+
+    color:#fff;
+    font-size:13px;
+}
+
+/* Navigation */
+
+nav ul{
+
+    display:flex;
+    align-items:center;
+    list-style:none;
+    gap:30px;
+
+}
+
+nav ul li a{
+
+    text-decoration:none;
+    color:white;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+nav ul li a:hover{
+
+    color:#ffe082;
+
+}
+
+nav ul li a.active{
+
+    color:#ffe082;
+    border-bottom:2px solid #ffe082;
+    padding-bottom:4px;
+
+}
+
+/* Apply Button */
+
+.apply-btn{
+
+    text-decoration:none;
+
+    background:white;
+
+    color:#17b978;
+
+    padding:12px 24px;
+
+    border-radius:50px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.apply-btn:hover{
+
+    background:#ffe082;
+
+}
+
+/* Mobile */
+
+@media(max-width:992px){
+
+.header{
+
+flex-direction:column;
+height:auto;
+padding:20px;
+
+}
+
+nav ul{
+
+flex-wrap:wrap;
+justify-content:center;
+gap:18px;
+margin:20px 0;
+
+}
+
+.apply-btn{
+
+margin-bottom:10px;
+
+}
+
+}
+.dropdown{
+    position: relative;
+}
+
+.drop-btn{
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.drop-btn i{
+    margin-left: 5px;
+}
+
+.dropdown-content{
+
+    position: absolute;
+
+    top: 45px;
+    left: 0;
+
+    width: 180px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow: 0 10px 20px rgba(0,0,0,.15);
+
+    overflow: hidden;
+
+}
+
+.dropdown-content a{
+
+    display: block;
+
+    padding: 12px 18px;
+
+    text-decoration: none;
+
+    color: #333;
+
+    transition: .3s;
+
+}
+
+.dropdown-content a:hover{
+
+    background: #17b978;
+
+    color: white;
+
+}

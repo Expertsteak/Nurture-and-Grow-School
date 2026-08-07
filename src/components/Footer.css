@@ -1,0 +1,130 @@
+/* ===========================
+   FOOTER
+=========================== */
+
+.footer {
+  background: #14532d;
+  color: #fff;
+  padding: 70px 0 20px;
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+}
+
+/* ===========================
+   COLUMNS
+=========================== */
+
+.footer-col h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.footer-col h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.footer-col p {
+  color: #d1d5db;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.footer-col a {
+  display: block;
+  text-decoration: none;
+  color: #d1d5db;
+  margin-bottom: 12px;
+  transition: 0.3s;
+}
+
+.footer-col a:hover {
+  color: #4ade80;
+  padding-left: 6px;
+}
+
+/* ===========================
+   CONTACT
+=========================== */
+
+.footer-col p svg {
+  color: #4ade80;
+  margin-right: 10px;
+}
+
+/* ===========================
+   SOCIAL ICONS
+=========================== */
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-icons a {
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  background: #22c55e;
+  transform: translateY(-5px);
+}
+
+/* ===========================
+   FOOTER BOTTOM
+=========================== */
+
+.footer-bottom {
+  margin-top: 50px;
+  border-top: 1px solid rgba(255,255,255,.15);
+  padding-top: 20px;
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: #d1d5db;
+  font-size: 15px;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 768px) {
+
+  .footer {
+    text-align: center;
+  }
+
+  .footer-container {
+    gap: 35px;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  .footer-col a:hover {
+    padding-left: 0;
+  }
+
+}
