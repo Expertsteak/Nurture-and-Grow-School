@@ -1,5 +1,5 @@
 import "./Contact.css";
-import Hero from "../components/Hero";
+import Hero from "../components/hero";
 
 
 function Contact(){

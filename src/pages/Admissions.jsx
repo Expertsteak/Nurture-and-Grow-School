@@ -1,4 +1,4 @@
-import Hero from "../components/Hero";
+import Hero from "../components/hero";
 import  "./Admissions.css";
 
 
@@ -6,8 +6,9 @@ function Admissions(){
   return(
     <>
     <Hero
-  title="Admissions Open"
-  subtitle="Enroll Your Child for a Bright Future"
+ tag="ADMISSIONS"
+title="Admissions Open"
+subtitle="Join Nurture & Grow Primary School and shape your child's future."
 />
     </>
   )

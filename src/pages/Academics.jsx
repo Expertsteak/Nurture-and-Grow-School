@@ -1,5 +1,5 @@
 import "./Academics.css";
-import Hero from "../components/Hero";
+import Hero from "../components/hero";
 import academicHero from "../assets/academic-hero.png";
 import { Link } from "react-router-dom";
 
@@ -8,10 +8,11 @@ function Academics() {
   return (
     <>
      <Hero
-       title="Academics"
-       subtitle="Building Strong Foundations for Lifelong Learning"
-       image={academicHero}
+       tag="ACADEMICS"
+       title="Excellence Through Quality Education"
+       subtitle="Cambridge curriculum with activity-based learning and experienced teachers."
        />
+       
        {/* Cambridge Section */}
 
       <section className="cambridge">

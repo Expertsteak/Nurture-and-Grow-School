@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Hero from "../components/Hero";
+import Hero from "../components/hero";
 import "./Gallery.css";
 import { Link } from "react-router-dom";
 
@@ -199,9 +199,9 @@ return(
 <>
 
 <Hero
-title="Gallery"
-subtitle="Capturing Smiles, Learning & Memorable Moments"
-image={hero}
+tag="GALLERY"
+title="Capturing Beautiful School Memories"
+subtitle="Explore our celebrations, competitions, sports and classroom activities."
 />
 
 <section className="gallery-filter">
