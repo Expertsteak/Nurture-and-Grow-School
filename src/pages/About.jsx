@@ -1,54 +1,30 @@
-import hero from "../components/hero";
+import Hero from "../components/hero";
 import { Link } from "react-router-dom";
 import "./About.css";
+import aboutImage from "../assets/school.webp";
 
 function About() {
   return (
     <div className="about-page">
 
-      {/* =========================
-          PAGE HERO
-      ========================= */}
-
-      <section className="about-hero">
-
-        <div className="about-hero-content">
-
-          <span>ABOUT OUR SCHOOL</span>
-
-          <h1>
-            Nurturing Young Minds,
-            <strong> Building Bright Futures</strong>
-          </h1>
-
-          <p>
-            Discover our journey, vision and commitment towards
-            providing quality education for every child.
-          </p>
-
-        </div>
-
-      </section>
-
-
-      {/* =========================
-          SCHOOL INTRODUCTION
-      ========================= */}
+      {/*PAGE HERO */}
+        <Hero
+       tag="ABOUT OUR SCHOOL"
+       title="Nurturing Young Minds, Building Bright Futures"
+       subtitle="Discover our journey, vision and commitment towards providing quality education for every child."
+       />
+    
+      {/* SCHOOL INTRODUCTION*/}
 
       <section className="school-introduction">
 
-        {/* IMAGE — ADD LATER */}
-
-        {/*
         <div className="about-school-image">
           <img
-            src="/images/school.jpg"
+            src={aboutImage}
             alt="Nurture and Grow Primary School"
           />
         </div>
-        */}
-
-
+      
         <div className="introduction-content">
 
           <span className="section-label">

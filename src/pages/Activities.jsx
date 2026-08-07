@@ -1,4 +1,4 @@
-import Hero from "../components/Hero";
+import Hero from "../components/hero";
 import "./Activities.css";
 // import hero from "../assets/hero/activityHero.jpg";
 
@@ -11,7 +11,6 @@ function Activities() {
       <Hero
         title="School Activities"
         subtitle="Learning Beyond the Classroom"
-        // image={hero}
       />
 
       {/* ================= INTRO ================= */}

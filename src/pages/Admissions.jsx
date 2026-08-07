@@ -1,47 +1,16 @@
 import "./Admissions.css";
+import Hero from "../components/hero"
 
 function Admissions() {
   return (
     <>
-      {/* ================= ADMISSION HERO ================= */}
 
-<section className="admission-hero">
-
-  <div className="admission-hero-content">
-
-    <span className="hero-small-title">
-      ADMISSIONS ARE OPEN
-    </span>
-
-    <h1>
-      Start Your Child's
-      <span>Learning Journey</span>
-    </h1>
-
-    <p>
-      Give your child a caring and inspiring environment
-      where they can learn, explore, grow and become
-      confident individuals.
-    </p>
-
-    <div className="hero-buttons">
-
-      <a href="#enquiry" className="btn">
-        Enquire Now
-        <i className="fa-solid fa-arrow-right"></i>
-      </a>
-
-      <a href="#process" className="btn btn-outline">
-        Admission Process
-      </a>
-
-    </div>
-
-     
-  </div>
-
-</section>
-
+    <Hero
+ tag="ADMISSIONS"
+title="Admissions Open"
+subtitle="Join Nurture & Grow Primary School and shape your child's future."
+/>
+       
       {/* ================= ELIGIBILITY ================= */}
 
       <section className="eligibility">
@@ -223,7 +192,6 @@ function Admissions() {
         </div>
 
       </section>
-
 
       {/* ================= ENQUIRY FORM ================= */}
 
