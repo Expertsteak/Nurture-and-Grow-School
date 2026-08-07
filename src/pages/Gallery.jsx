@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Hero from "../components/Hero";
 import "./Gallery.css";
+import { Link } from "react-router-dom";
 
 import hero from "../assets/gallery-hero.jpeg";
 
@@ -198,13 +199,9 @@ return(
 <>
 
 <Hero
-
 title="Gallery"
-
 subtitle="Capturing Smiles, Learning & Memorable Moments"
-
 image={hero}
-
 />
 
 <section className="gallery-filter">
@@ -254,52 +251,48 @@ Events
 </section>
 
 <section className="gallery-grid">
-
 {
-
 filteredGallery.map((item)=>(
+  <div
+  className="gallery-card"
+  key={item.id}
+ >
+ {
+  item.type==="image"?
+ <img
+ src={item.src}
+ alt=""
+ />
+ :
+ <video controls>
+ <source
+ src={item.src}
+ type="video/mp4"
+ />
+ </video>
+ }
+ </div>
+ ))
+ }
+ </section>
+ {/* CTA */}
 
-<div
-className="gallery-card"
-key={item.id}
->
+      <section className="cta">
 
-{
+        <h2>Give Your Child the Best Future</h2>
 
-item.type==="image"
+        <p>
+          Admissions are open from Nursery to Grade 5.
+          Join Nurture & Grow Primary School today.
+        </p>
 
-?
+        <Link to="/admissions" className="apply-btn">
+         Apply Now
+         </Link>
 
-<img
-src={item.src}
-alt=""
-/>
-
-:
-
-<video controls>
-
-<source
-src={item.src}
-type="video/mp4"
-/>
-
-</video>
-
-}
-
-</div>
-
-))
-
-}
-
-</section>
-
+      </section>
 </>
-
 )
-
 }
 
 export default Gallery;

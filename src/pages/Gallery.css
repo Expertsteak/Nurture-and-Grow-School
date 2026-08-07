@@ -1,120 +1,311 @@
+/* ===================================
+   GALLERY FILTER
+=================================== */
+
 .gallery-filter{
 
-display:flex;
-
-justify-content:center;
-
-flex-wrap:wrap;
-
-gap:15px;
-
-padding:50px 8%;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:18px;
+    padding:60px 8%;
+    animation:fadeUp .8s ease;
 
 }
 
 .gallery-filter button{
 
-padding:12px 28px;
+    position:relative;
 
-border:none;
+    padding:13px 30px;
 
-background:#f1f1f1;
+    border:none;
 
-border-radius:50px;
+    border-radius:50px;
 
-cursor:pointer;
+    background:#f5f5f5;
 
-font-size:16px;
+    color:#333;
 
-font-weight:500;
+    cursor:pointer;
 
-transition:.3s;
+    font-size:16px;
+
+    font-weight:600;
+
+    overflow:hidden;
+
+    transition:.35s ease;
+
+}
+
+.gallery-filter button::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-100%;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.35);
+
+    transform:skewX(-25deg);
+
+    transition:.6s;
+
+}
+
+.gallery-filter button:hover::before{
+
+    left:120%;
 
 }
 
 .gallery-filter button:hover{
 
-background:#17b978;
+    background:#17b978;
 
-color:white;
+    color:#fff;
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 25px rgba(23,185,120,.35);
 
 }
 
 .gallery-filter .active{
 
-background:#14532d;
+    background:#14532d;
 
-color:white;
+    color:white;
+
+    box-shadow:0 10px 25px rgba(20,83,45,.35);
 
 }
+
+/* ===================================
+   GALLERY GRID
+=================================== */
 
 .gallery-grid{
 
-width:90%;
+    width:90%;
 
-margin:auto;
+    margin:auto;
 
-display:grid;
+    display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 
-gap:30px;
+    gap:30px;
 
-padding-bottom:70px;
+    padding-bottom:80px;
 
 }
 
+/* ===================================
+   CARD
+=================================== */
+
 .gallery-card{
 
-overflow:hidden;
+    position:relative;
 
-border-radius:15px;
+    overflow:hidden;
 
-background:white;
+    border-radius:20px;
 
-box-shadow:0 10px 25px rgba(0,0,0,.12);
+    background:white;
 
-transition:.3s;
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+    transition:.4s;
+
+}
+
+.gallery-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(to top,
+    rgba(0,0,0,.45),
+    transparent);
+
+    opacity:0;
+
+    transition:.4s;
+
+}
+
+.gallery-card:hover::after{
+
+    opacity:1;
 
 }
 
 .gallery-card:hover{
 
-transform:translateY(-8px);
+    transform:translateY(-12px);
+
+    box-shadow:0 22px 45px rgba(0,0,0,.2);
 
 }
 
+/* ===================================
+   IMAGE
+=================================== */
+
 .gallery-card img{
 
-width:100%;
+    width:100%;
 
-height:250px;
+    height:260px;
 
-object-fit:cover;
+    object-fit:cover;
 
-display:block;
+    display:block;
 
-transition:.4s;
+    transition:transform .6s ease;
 
 }
 
 .gallery-card:hover img{
 
-transform:scale(1.08);
+    transform:scale(1.12);
 
 }
+
+/* ===================================
+   VIDEO
+=================================== */
 
 .gallery-card video{
 
-width:100%;
+    width:100%;
 
-height:250px;
+    height:260px;
 
-object-fit:cover;
+    object-fit:cover;
 
-display:block;
+    display:block;
+
+    transition:.5s;
 
 }
+
+.gallery-card:hover video{
+
+    transform:scale(1.08);
+
+}
+
+/* ===================================
+   CAPTION
+=================================== */
+
+.gallery-info{
+
+    position:absolute;
+
+    left:25px;
+
+    bottom:20px;
+
+    color:white;
+
+    z-index:2;
+
+    transform:translateY(40px);
+
+    opacity:0;
+
+    transition:.45s;
+
+}
+
+.gallery-card:hover .gallery-info{
+
+    transform:translateY(0);
+
+    opacity:1;
+
+}
+
+.gallery-info h3{
+
+    font-size:22px;
+
+    margin-bottom:6px;
+
+}
+
+.gallery-info p{
+
+    font-size:14px;
+
+}
+
+/* ===================================
+   PLAY ICON
+=================================== */
+
+.video-card .play-icon{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:75px;
+
+    height:75px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.9);
+
+    color:#17b978;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:30px;
+
+    transition:.35s;
+
+    z-index:3;
+
+}
+
+.video-card:hover .play-icon{
+
+    transform:translate(-50%,-50%) scale(1.15);
+
+    background:#17b978;
+
+    color:white;
+
+}
+
+/* ===================================
+   RESPONSIVE
+=================================== */
 
 @media(max-width:768px){
 
@@ -136,8 +327,128 @@ gap:12px;
 
 font-size:14px;
 
-padding:10px 18px;
+padding:10px 20px;
 
 }
+
+.gallery-card img,
+.gallery-card video{
+
+height:220px;
+
+}
+
+}
+
+/* ===================================
+   ANIMATIONS
+=================================== */
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+/* ===================================
+   CTA SECTION
+=================================== */
+
+.cta{
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-top:100px;
+
+    padding:100px 20px;
+
+    text-align:center;
+
+    color:white;
+
+    background:linear-gradient(135deg,#0b7d47,#17b978);
+
+}
+
+.cta::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+
+    height:350px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:50%;
+
+    left:-120px;
+
+    top:-120px;
+
+}
+
+.cta::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+
+    height:300px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:50%;
+
+    right:-120px;
+
+    bottom:-120px;
+
+}
+
+.cta h2{
+
+    position:relative;
+
+    font-size:45px;
+
+    margin-bottom:20px;
+
+    z-index:2;
+
+}
+
+.cta p{
+
+    position:relative;
+
+    max-width:700px;
+
+    margin:auto;
+
+    line-height:1.8;
+
+    margin-bottom:35px;
+
+    z-index:2;
 
 }

@@ -6,7 +6,7 @@ import color3 from "../assets/gallery/images/color3.jpeg"
 import color4 from "../assets/gallery/images/color4.jpeg"
 import color5 from "../assets/gallery/images/color5.jpeg"
 import color6 from "../assets/gallery/images/color6.jpeg"
-// import aboutImage from "../assets/school.jpg";
+import aboutImage from "../assets/school.webp";
 
 function Home() {
   return (
@@ -139,10 +139,10 @@ function Home() {
 
           <div className="image-decoration"></div>
 
-          {/* <img
+          <img
             src={aboutImage}
             alt="Nurture and Grow Primary School"
-          /> */}
+          />
 
           <div className="experience-badge">
             <strong>Quality</strong>
@@ -183,7 +183,7 @@ function Home() {
 
       </section>
 
-      {/* ================= GALLERY ================= */}
+      {/* GALLERY */}
 
 <section className="home-gallery">
 
