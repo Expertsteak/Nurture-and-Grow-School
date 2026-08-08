@@ -1,17 +1,134 @@
 import "./Admissions.css";
-import Hero from "../components/hero"
+import Hero from "../components/hero";
+
+import { useState } from "react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
+
 
 function Admissions() {
+
+  // =========================
+  // FORM STATE
+  // =========================
+
+  const [formData, setFormData] = useState({
+    parentName: "",
+    studentName: "",
+    email: "",
+    phone: "",
+    class: "",
+    message: "",
+  });
+
+
+  const [loading, setLoading] = useState(false);
+
+  const [status, setStatus] = useState("");
+
+
+  // =========================
+  // HANDLE INPUT
+  // =========================
+
+  const handleChange = (e) => {
+
+    const { name, value } = e.target;
+
+    setFormData((previousData) => ({
+      ...previousData,
+      [name]: value,
+    }));
+
+  };
+
+
+  // =========================
+  // SUBMIT FORM
+  // =========================
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    setLoading(true);
+    setStatus("");
+
+
+    try {
+
+      await addDoc(
+        collection(db, "admissionEnquiries"),
+        {
+          parentName: formData.parentName,
+          studentName: formData.studentName,
+          email: formData.email,
+          phone: formData.phone,
+          class: formData.class,
+          message: formData.message,
+
+          createdAt: serverTimestamp(),
+        }
+      );
+
+
+      // SUCCESS
+
+      setStatus(
+        "Admission enquiry submitted successfully! 🎉"
+      );
+
+
+      // CLEAR FORM
+
+      setFormData({
+        parentName: "",
+        studentName: "",
+        email: "",
+        phone: "",
+        class: "",
+        message: "",
+      });
+
+
+    } catch (error) {
+
+      console.error(
+        "Error submitting admission enquiry:",
+        error
+      );
+
+      setStatus(
+        "Something went wrong. Please try again."
+      );
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
+  };
+
+
   return (
+
     <>
 
-    <Hero
- tag="ADMISSIONS"
-title="Admissions Open"
-subtitle="Join Nurture & Grow Primary School and shape your child's future."
-/>
-       
-      {/* ================= ELIGIBILITY ================= */}
+      {/* =========================
+          HERO
+      ========================= */}
+
+      <Hero
+        tag="ADMISSIONS"
+        title="Admissions Open"
+        subtitle="Join Nurture & Grow Primary School and shape your child's future."
+      />
+
+
+      {/* =========================
+          ELIGIBILITY
+      ========================= */}
 
       <section className="eligibility">
 
@@ -36,29 +153,43 @@ subtitle="Join Nurture & Grow Primary School and shape your child's future."
         <div className="eligibility-cards">
 
           <div className="eligibility-card">
+
             <i className="fa-solid fa-child"></i>
+
             <h3>Nursery</h3>
+
             <p>
               Early learning with a fun and child-friendly
               environment.
             </p>
+
           </div>
 
+
           <div className="eligibility-card">
+
             <i className="fa-solid fa-book-open"></i>
+
             <h3>Primary Classes</h3>
+
             <p>
               Admissions available from Grade 1 to Grade 5.
             </p>
+
           </div>
 
+
           <div className="eligibility-card">
+
             <i className="fa-solid fa-user-check"></i>
+
             <h3>Age Requirement</h3>
+
             <p>
               Age eligibility will be considered according to
               the class applied for.
             </p>
+
           </div>
 
         </div>
@@ -66,7 +197,9 @@ subtitle="Join Nurture & Grow Primary School and shape your child's future."
       </section>
 
 
-      {/* ================= DOCUMENTS ================= */}
+      {/* =========================
+          DOCUMENTS
+      ========================= */}
 
       <section className="documents">
 
@@ -85,23 +218,38 @@ subtitle="Join Nurture & Grow Primary School and shape your child's future."
         <div className="document-list">
 
           <div className="document-item">
+
             <i className="fa-solid fa-id-card"></i>
+
             <span>Birth Certificate</span>
+
           </div>
 
+
           <div className="document-item">
+
             <i className="fa-solid fa-file-lines"></i>
+
             <span>Previous School Records</span>
+
           </div>
 
+
           <div className="document-item">
+
             <i className="fa-solid fa-address-card"></i>
+
             <span>Parent / Guardian ID Proof</span>
+
           </div>
 
+
           <div className="document-item">
+
             <i className="fa-solid fa-camera"></i>
+
             <span>Recent Passport Size Photograph</span>
+
           </div>
 
         </div>
@@ -109,9 +257,14 @@ subtitle="Join Nurture & Grow Primary School and shape your child's future."
       </section>
 
 
-      {/* ================= ADMISSION PROCESS ================= */}
+      {/* =========================
+          ADMISSION PROCESS
+      ========================= */}
 
-      <section className="admission-process" id="process">
+      <section
+        className="admission-process"
+        id="process"
+      >
 
         <div className="section-heading">
 
@@ -129,7 +282,9 @@ subtitle="Join Nurture & Grow Primary School and shape your child's future."
 
           <div className="process-card">
 
-            <div className="process-number">01</div>
+            <div className="process-number">
+              01
+            </div>
 
             <i className="fa-solid fa-file-pen"></i>
 
@@ -145,7 +300,9 @@ subtitle="Join Nurture & Grow Primary School and shape your child's future."
 
           <div className="process-card">
 
-            <div className="process-number">02</div>
+            <div className="process-number">
+              02
+            </div>
 
             <i className="fa-solid fa-comments"></i>
 
@@ -161,7 +318,9 @@ subtitle="Join Nurture & Grow Primary School and shape your child's future."
 
           <div className="process-card">
 
-            <div className="process-number">03</div>
+            <div className="process-number">
+              03
+            </div>
 
             <i className="fa-solid fa-folder-open"></i>
 
@@ -176,7 +335,9 @@ subtitle="Join Nurture & Grow Primary School and shape your child's future."
 
           <div className="process-card">
 
-            <div className="process-number">04</div>
+            <div className="process-number">
+              04
+            </div>
 
             <i className="fa-solid fa-circle-check"></i>
 
@@ -193,9 +354,15 @@ subtitle="Join Nurture & Grow Primary School and shape your child's future."
 
       </section>
 
-      {/* ================= ENQUIRY FORM ================= */}
 
-      <section className="enquiry" id="enquiry">
+      {/* =========================
+          ENQUIRY FORM
+      ========================= */}
+
+      <section
+        className="enquiry"
+        id="enquiry"
+      >
 
         <div className="enquiry-content">
 
@@ -216,61 +383,160 @@ subtitle="Join Nurture & Grow Primary School and shape your child's future."
         </div>
 
 
-        <form className="admission-form">
+        {/* =========================
+            FORM
+        ========================= */}
+
+        <form
+          className="admission-form"
+          onSubmit={handleSubmit}
+        >
+
+          {/* Parent Name */}
 
           <input
             type="text"
             name="parentName"
             placeholder="Parent / Guardian Name"
+            value={formData.parentName}
+            onChange={handleChange}
+            required
           />
+
+
+          {/* Student Name */}
 
           <input
             type="text"
             name="studentName"
             placeholder="Student Name"
+            value={formData.studentName}
+            onChange={handleChange}
+            required
           />
+
+
+          {/* Email */}
 
           <input
             type="email"
             name="email"
             placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            required
           />
+
+
+          {/* Phone */}
 
           <input
             type="tel"
             name="phone"
             placeholder="Phone Number"
+            value={formData.phone}
+            onChange={handleChange}
+            required
           />
 
-          <select name="class">
-            <option value="">Select Class</option>
-            <option value="nursery">Nursery</option>
-            <option value="lkg">LKG</option>
-            <option value="ukg">UKG</option>
-            <option value="grade1">Grade 1</option>
-            <option value="grade2">Grade 2</option>
-            <option value="grade3">Grade 3</option>
-            <option value="grade4">Grade 4</option>
-            <option value="grade5">Grade 5</option>
+
+          {/* Class */}
+
+          <select
+            name="class"
+            value={formData.class}
+            onChange={handleChange}
+            required
+          >
+
+            <option value="">
+              Select Class
+            </option>
+
+            <option value="Nursery">
+              Nursery
+            </option>
+
+            <option value="LKG">
+              LKG
+            </option>
+
+            <option value="UKG">
+              UKG
+            </option>
+
+            <option value="Grade 1">
+              Grade 1
+            </option>
+
+            <option value="Grade 2">
+              Grade 2
+            </option>
+
+            <option value="Grade 3">
+              Grade 3
+            </option>
+
+            <option value="Grade 4">
+              Grade 4
+            </option>
+
+            <option value="Grade 5">
+              Grade 5
+            </option>
+
           </select>
+
+
+          {/* Message */}
 
           <textarea
             name="message"
             rows="5"
             placeholder="Your Message"
+            value={formData.message}
+            onChange={handleChange}
           ></textarea>
 
-          <button type="submit">
-            Submit Enquiry
-            <i className="fa-solid fa-paper-plane"></i>
+
+          {/* Submit */}
+
+          <button
+            type="submit"
+            disabled={loading}
+          >
+
+            {loading
+              ? "Submitting..."
+              : "Submit Enquiry"
+            }
+
+            {!loading && (
+              <i className="fa-solid fa-paper-plane"></i>
+            )}
+
           </button>
+
+
+          {/* Status */}
+
+          {status && (
+
+            <p className="form-status">
+              {status}
+            </p>
+
+          )}
 
         </form>
 
       </section>
 
     </>
+
   );
+
 }
+
 
 export default Admissions;

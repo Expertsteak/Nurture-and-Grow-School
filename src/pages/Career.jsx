@@ -1,136 +1,114 @@
-import "./Career.css";
-
 import { useState } from "react";
-
-import { db, storage } from "./firebase";
-
-import {
-  collection,
-  addDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL,
-} from "firebase/storage";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
+import "./Career.css";
 
 function Career() {
 
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    qualification: "",
+    experience: "",
+    position: "",
+  });
 
   const [resume, setResume] = useState(null);
 
-  const [formData, setFormData] = useState({
+  const [loading, setLoading] = useState(false);
 
-    fullName: "",
+  const [message, setMessage] = useState("");
 
-    email: "",
-
-    phone: "",
-
-    qualification: "",
-
-    experience: "",
-
-    position: "",
-
-  });
+  // =========================
+  // HANDLE INPUT
+  // =========================
 
   const handleChange = (e) => {
 
+    const { name, value } = e.target;
+
     setFormData({
-
       ...formData,
-
-      [e.target.name]: e.target.value,
-
+      [name]: value,
     });
 
   };
+
+
+  // =========================
+  // HANDLE RESUME
+  // =========================
+
+  const handleResume = (e) => {
+
+    setResume(e.target.files[0]);
+
+  };
+
+
+  // =========================
+  // SUBMIT FORM
+  // =========================
 
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
-    if (!resume) {
-
-      alert("Please upload your resume.");
-
-      return;
-
-    }
+    setLoading(true);
+    setMessage("");
 
     try {
 
-      setLoading(true);
-
-      // Upload Resume
-
-      const storageRef = ref(
-
-        storage,
-
-        `career-resumes/${Date.now()}-${resume.name}`
-
-      );
-
-      await uploadBytes(storageRef, resume);
-
-      const resumeURL = await getDownloadURL(storageRef);
-
-      // Save Data
-
       await addDoc(
-
         collection(db, "careerApplications"),
-
         {
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          qualification: formData.qualification,
+          experience: formData.experience,
+          position: formData.position,
 
-          ...formData,
-
-          resumeURL,
+          // Resume will be connected to Storage later
+          resumeName: resume ? resume.name : "",
 
           createdAt: serverTimestamp(),
-
         }
-
       );
 
-      alert("Application Submitted Successfully ✅");
+      setMessage(
+        "Application submitted successfully! 🎉"
+      );
+
+      // Clear form
 
       setFormData({
-
         fullName: "",
-
         email: "",
-
         phone: "",
-
         qualification: "",
-
         experience: "",
-
         position: "",
-
       });
 
       setResume(null);
 
+      // Reset file input
       document.getElementById("resume").value = "";
 
-    }
+    } catch (error) {
 
-    catch (err) {
+      console.error(
+        "Error submitting application:",
+        error
+      );
 
-      console.log(err);
+      setMessage(
+        "Something went wrong. Please try again."
+      );
 
-      alert("Something went wrong.");
-
-    }
-
-    finally {
+    } finally {
 
       setLoading(false);
 
@@ -138,31 +116,40 @@ function Career() {
 
   };
 
+
   return (
 
     <>
 
-      {/* HERO */}
+      {/* =========================
+          HERO
+      ========================= */}
 
       <section className="career-hero">
 
         <div className="hero-content">
 
-          <h1>Join Our Team</h1>
+          <span>JOIN OUR TEAM</span>
+
+          <h1>
+            Build a
+            <strong> Brighter Future With Us</strong>
+          </h1>
 
           <p>
-
-            Inspire young minds and build a brighter future with
-
-            Nurture & Grow Primary School.
-
+            Join Nurture & Grow Primary School and become
+            part of a caring team dedicated to nurturing
+            young minds.
           </p>
 
         </div>
 
       </section>
 
-      {/* WHY WORK */}
+
+      {/* =========================
+          WHY WORK WITH US
+      ========================= */}
 
       <section className="why-work">
 
@@ -172,56 +159,55 @@ function Career() {
 
           <div className="why-card">
 
+            <i className="fa-solid fa-people-group"></i>
+
+            <h3>Supportive Environment</h3>
+
+            <p>
+              Work with a caring and supportive team
+              that values collaboration and respect.
+            </p>
+
+          </div>
+
+
+          <div className="why-card">
+
             <i className="fa-solid fa-graduation-cap"></i>
 
             <h3>Professional Growth</h3>
 
             <p>
-
-              Continuous learning and career development.
-
+              Opportunities to learn, develop new skills,
+              and grow professionally.
             </p>
 
           </div>
+
 
           <div className="why-card">
 
-            <i className="fa-solid fa-users"></i>
+            <i className="fa-solid fa-child-reaching"></i>
 
-            <h3>Friendly Environment</h3>
+            <h3>Make a Difference</h3>
 
             <p>
-
-              Work with supportive teachers and staff.
-
+              Help children learn, grow, and build
+              strong foundations for their future.
             </p>
 
           </div>
 
-          <div className="why-card">
-
-            <i className="fa-solid fa-book-open"></i>
-
-            <h3>Modern Teaching</h3>
-
-            <p>
-
-              Activity-based learning with quality education.
-
-            </p>
-
-          </div>
 
           <div className="why-card">
 
             <i className="fa-solid fa-heart"></i>
 
-            <h3>Respect & Values</h3>
+            <h3>Meaningful Work</h3>
 
             <p>
-
-              We believe in ethics, respect and teamwork.
-
+              Be part of an environment where education,
+              care, and values come together.
             </p>
 
           </div>
@@ -230,147 +216,225 @@ function Career() {
 
       </section>
 
-      {/* APPLICATION FORM */}
+
+      {/* =========================
+          APPLICATION FORM
+      ========================= */}
 
       <section className="career-form">
 
         <h2>Teaching Application Form</h2>
 
+        <p className="form-intro">
+          Interested in joining our team?
+          Fill out the application form below.
+        </p>
+
+
         <form onSubmit={handleSubmit}>
 
-          <input
+          {/* FULL NAME */}
 
-            type="text"
+          <div className="form-group">
 
-            name="fullName"
+            <label htmlFor="fullName">
+              Full Name
+            </label>
 
-            placeholder="Full Name"
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="Enter your full name"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+            />
 
-            value={formData.fullName}
+          </div>
 
-            onChange={handleChange}
 
-            required
+          {/* EMAIL */}
 
-          />
+          <div className="form-group">
 
-          <input
+            <label htmlFor="email">
+              Email Address
+            </label>
 
-            type="email"
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
 
-            name="email"
+          </div>
 
-            placeholder="Email Address"
 
-            value={formData.email}
+          {/* PHONE */}
 
-            onChange={handleChange}
+          <div className="form-group">
 
-            required
+            <label htmlFor="phone">
+              Phone Number
+            </label>
 
-          />
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Enter your phone number"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
 
-          <input
+          </div>
 
-            type="tel"
 
-            name="phone"
+          {/* QUALIFICATION */}
 
-            placeholder="Phone Number"
+          <div className="form-group">
 
-            value={formData.phone}
+            <label htmlFor="qualification">
+              Qualification
+            </label>
 
-            onChange={handleChange}
+            <input
+              type="text"
+              id="qualification"
+              name="qualification"
+              placeholder="e.g. B.Ed, M.Ed, M.A."
+              value={formData.qualification}
+              onChange={handleChange}
+              required
+            />
 
-            required
+          </div>
 
-          />
 
-          <input
+          {/* EXPERIENCE */}
 
-            type="text"
+          <div className="form-group">
 
-            name="qualification"
+            <label htmlFor="experience">
+              Experience
+            </label>
 
-            placeholder="Qualification"
+            <input
+              type="text"
+              id="experience"
+              name="experience"
+              placeholder="e.g. 2 years"
+              value={formData.experience}
+              onChange={handleChange}
+              required
+            />
 
-            value={formData.qualification}
+          </div>
 
-            onChange={handleChange}
 
-            required
+          {/* POSITION */}
 
-          />
+          <div className="form-group">
 
-          <input
+            <label htmlFor="position">
+              Position Applying For
+            </label>
 
-            type="text"
+            <select
+              id="position"
+              name="position"
+              value={formData.position}
+              onChange={handleChange}
+              required
+            >
 
-            name="experience"
+              <option value="">
+                Select a position
+              </option>
 
-            placeholder="Experience"
+              <option value="Primary Teacher">
+                Primary Teacher
+              </option>
 
-            value={formData.experience}
+              <option value="Pre-Primary Teacher">
+                Pre-Primary Teacher
+              </option>
 
-            onChange={handleChange}
+              <option value="Subject Teacher">
+                Subject Teacher
+              </option>
 
-            required
+              <option value="Art & Craft Teacher">
+                Art & Craft Teacher
+              </option>
 
-          />
+              <option value="Sports Teacher">
+                Sports Teacher
+              </option>
 
-          <input
+              <option value="Other">
+                Other
+              </option>
 
-            type="text"
+            </select>
 
-            name="position"
+          </div>
 
-            placeholder="Position Applying For"
 
-            value={formData.position}
+          {/* RESUME */}
 
-            onChange={handleChange}
+          <div className="form-group">
 
-            required
+            <label htmlFor="resume">
+              Resume
+            </label>
 
-          />
+            <input
+              type="file"
+              id="resume"
+              name="resume"
+              accept=".pdf,.doc,.docx"
+              onChange={handleResume}
+            />
 
-          <input
+            <small>
+              Resume upload will be connected to Firebase
+              Storage later.
+            </small>
 
-            id="resume"
+          </div>
 
-            type="file"
 
-            accept=".pdf,.doc,.docx"
-
-            onChange={(e) =>
-
-              setResume(e.target.files[0])
-
-            }
-
-            required
-
-          />
+          {/* SUBMIT */}
 
           <button
-
             type="submit"
-
             disabled={loading}
-
           >
 
-            {
-
-              loading
-
-                ? "Submitting..."
-
-                : "Submit Application"
-
+            {loading
+              ? "Submitting..."
+              : "Submit Application"
             }
 
           </button>
+
+
+          {/* MESSAGE */}
+
+          {message && (
+
+            <p className="form-message">
+              {message}
+            </p>
+
+          )}
 
         </form>
 
