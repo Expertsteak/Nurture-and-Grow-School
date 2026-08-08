@@ -15,7 +15,7 @@ function Academics() {
        
        {/* Cambridge Section */}
 
-      <section className="cambridge">
+<section className="cambridge">
 
         <div className="cambridge-image">
 
@@ -52,11 +52,11 @@ function Academics() {
 
         </div>
 
-      </section>
+</section>
 
       {/* Curriculum */}
 
-      <section className="curriculum">
+<section className="curriculum">
 
         <h2>Our Curriculum</h2>
 
@@ -67,11 +67,11 @@ function Academics() {
           classroom activities and practical experiences.
         </p>
 
-      </section>
+</section>
 
       {/* Subjects */}
 
-      <section className="subjects">
+<section className="subjects">
 
   <h2>Subjects We Teach</h2>
 
@@ -123,7 +123,7 @@ function Academics() {
 
       {/* Teaching */}
 
-        <section className="teaching">
+<section className="teaching">
 
   <h2>Our Teaching Approach</h2>
 
@@ -172,18 +172,14 @@ function Academics() {
       {/* CTA */}
 
       <section className="cta">
-
         <h2>Give Your Child the Best Start</h2>
-
         <p>
           Admissions are open from Nursery to Grade 5.
           Join Nurture & Grow Primary School today.
         </p>
-
         <Link to="/admissions" className="apply-btn">
          Apply Now
          </Link>
-
       </section>
     </>
   );

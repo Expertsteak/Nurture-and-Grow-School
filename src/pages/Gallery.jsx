@@ -2,7 +2,6 @@ import { useState } from "react";
 import Hero from "../components/hero";
 import "./Gallery.css";
 import { Link } from "react-router-dom";
-
 import hero from "../assets/gallery-hero.jpeg";
 
 // Images
@@ -34,158 +33,135 @@ import e6 from "../assets/gallery/videos/e6.mp4";
 
 
 function Gallery() {
-
 const [filter,setFilter]=useState("all");
 
 const gallery=[
-
 {
 id:1,
 type:"image",
 category:"color",
 src:color1
 },
-
 {
 id:2,
 type:"image",
 category:"color",
 src:color2
 },
-
 {
 id:3,
 type:"image",
 category:"color",
 src:color3
 },
-
 {
 id:4,
 type:"image",
 category:"color",
 src:color4
 },
-
 {
 id:5,
 type:"image",
 category:"color",
 src:color5
 },
-
 {
 id:6,
 type:"image",
 category:"color",
 src:color6
 },
-
 {
 id:7,
 type:"video",
 category:"color",
 src:colorv1
 },
-
 {
 id:8,
 type:"video",
 category:"color",
 src:colorv2
 },
-
 {
 id:9,
 type:"video",
 category:"competition",
 src:comp1
 },
-
 {
 id:10,
 type:"video",
 category:"competition",
 src:comp2
 },
-
 {
 id:11,
 type:"video",
 category:"competition",
 src:comp3
 },
-
 {
 id:12,
 type:"video",
 category:"competition",
 src:comp4
 },
-
 {
 id:13,
 type:"video",
 category:"competition",
 src:comp5
 },
-
 {
 id:14,
 type:"video",
 category:"events",
 src:e1
 },
-
 {
 id:15,
 type:"video",
 category:"events",
 src:e2
 },
-
 {
 id:16,
 type:"video",
 category:"events",
 src:e3
 },
-
 {
 id:17,
 type:"video",
 category:"events",
 src:e4
 },
-
 {
 id:18,
 type:"video",
 category:"events",
 src:e5
 },
-
 {
 id:19,
 type:"video",
 category:"events",
 src:e6
 },
-
 {
 id:20,
 type:"video",
 category:"color",
 src:colorv3
 },
-
 {
 id:21,
 type:"image",
 category:"competition",
 src:compp1
 }
-
 ];
 
 const filteredGallery=
@@ -197,7 +173,6 @@ filter==="photos"?gallery.filter(item=>item.type==="image")
 return(
 
 <>
-
 <Hero
 tag="GALLERY"
 title="Capturing Beautiful School Memories"
@@ -206,53 +181,53 @@ subtitle="Explore our celebrations, competitions, sports and classroom activitie
 
 <section className="gallery-filter">
 
-<button
-className={filter==="all"?"active":""}
-onClick={()=>setFilter("all")}
->
-All
-</button>
+ <button
+   className={filter==="all"?"active":""}
+   onClick={()=>setFilter("all")}
+   >
+   All
+ </button>
 
-<button
-className={filter==="photos"?"active":""}
-onClick={()=>setFilter("photos")}
->
-Photos
-</button>
+ <button
+   className={filter==="photos"?"active":""}
+   onClick={()=>setFilter("photos")}
+   >
+   Photos
+ </button>
 
-<button
-className={filter==="videos"?"active":""}
-onClick={()=>setFilter("videos")}
->
-Videos
-</button>
+ <button
+   className={filter==="videos"?"active":""}
+   onClick={()=>setFilter("videos")}
+   >
+   Videos
+ </button>
 
-<button
-className={filter==="color"?"active":""}
-onClick={()=>setFilter("color")}
->
-Color Day
-</button>
+ <button
+   className={filter==="color"?"active":""}
+   onClick={()=>setFilter("color")}
+   >
+   Color Day
+ </button>
 
-<button
-className={filter==="competition"?"active":""}
-onClick={()=>setFilter("competition")}
->
-Competitions
-</button>
+ <button
+   className={filter==="competition"?"active":""}
+   onClick={()=>setFilter("competition")}
+   >
+   Competitions
+ </button>
 
-<button
-className={filter==="events"?"active":""}
-onClick={()=>setFilter("events")}
->
-Events
-</button>
+ <button
+   className={filter==="events"?"active":""}
+   onClick={()=>setFilter("events")}
+   >
+   Events
+ </button>
 
 </section>
 
 <section className="gallery-grid">
-{
-filteredGallery.map((item)=>(
+ {
+ filteredGallery.map((item)=>(
   <div
   className="gallery-card"
   key={item.id}
@@ -275,24 +250,21 @@ filteredGallery.map((item)=>(
  ))
  }
  </section>
- {/* CTA */}
 
-      <section className="cta">
+{/* CTA */}
 
-        <h2>Give Your Child the Best Future</h2>
-
-        <p>
-          Admissions are open from Nursery to Grade 5.
-          Join Nurture & Grow Primary School today.
-        </p>
-
-        <Link to="/admissions" className="apply-btn">
-         Apply Now
-         </Link>
+  <section className="cta">
+    <h2>Give Your Child the Best Future</h2>
+    <p>
+      Admissions are open from Nursery to Grade 5.
+      Join Nurture & Grow Primary School today.
+    </p>
+    <Link to="/admissions" className="apply-btn">
+     Apply Now
+    </Link>
 
       </section>
 </>
 )
 }
-
 export default Gallery;

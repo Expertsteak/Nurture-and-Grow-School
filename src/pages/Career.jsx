@@ -2,6 +2,7 @@ import { useState } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import "./Career.css";
+import Hero from "../components/hero";
 
 function Career() {
 
@@ -20,46 +21,26 @@ function Career() {
 
   const [message, setMessage] = useState("");
 
-  // =========================
   // HANDLE INPUT
-  // =========================
-
   const handleChange = (e) => {
-
     const { name, value } = e.target;
-
     setFormData({
       ...formData,
       [name]: value,
     });
-
   };
 
-
-  // =========================
   // HANDLE RESUME
-  // =========================
-
   const handleResume = (e) => {
-
     setResume(e.target.files[0]);
-
   };
 
-
-  // =========================
   // SUBMIT FORM
-  // =========================
-
-  const handleSubmit = async (e) => {
-
+   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
     setMessage("");
-
     try {
-
       await addDoc(
         collection(db, "careerApplications"),
         {
@@ -70,19 +51,16 @@ function Career() {
           experience: formData.experience,
           position: formData.position,
 
-          // Resume will be connected to Storage later
+          // Resume will be connected to Storage later(need to ask about it)
           resumeName: resume ? resume.name : "",
-
           createdAt: serverTimestamp(),
         }
       );
-
       setMessage(
         "Application submitted successfully! 🎉"
       );
 
       // Clear form
-
       setFormData({
         fullName: "",
         email: "",
@@ -91,156 +69,90 @@ function Career() {
         experience: "",
         position: "",
       });
-
       setResume(null);
 
       // Reset file input
       document.getElementById("resume").value = "";
 
     } catch (error) {
-
       console.error(
         "Error submitting application:",
         error
       );
-
       setMessage(
         "Something went wrong. Please try again."
       );
-
     } finally {
-
       setLoading(false);
-
     }
-
   };
 
-
   return (
-
     <>
-
-      {/* =========================
-          HERO
-      ========================= */}
-
-      <section className="career-hero">
-
-        <div className="hero-content">
-
-          <span>JOIN OUR TEAM</span>
-
-          <h1>
-            Build a
-            <strong> Brighter Future With Us</strong>
-          </h1>
-
-          <p>
-            Join Nurture & Grow Primary School and become
-            part of a caring team dedicated to nurturing
-            young minds.
-          </p>
-
-        </div>
-
-      </section>
-
-
-      {/* =========================
-          WHY WORK WITH US
-      ========================= */}
+      <Hero
+       title="Career "
+       subtitle="We provide best career opportunities."
+       />
+      {/*WHY WORK WITH US */}
 
       <section className="why-work">
-
         <h2>Why Work With Us?</h2>
-
         <div className="why-grid">
 
           <div className="why-card">
-
             <i className="fa-solid fa-people-group"></i>
-
             <h3>Supportive Environment</h3>
-
             <p>
               Work with a caring and supportive team
               that values collaboration and respect.
             </p>
-
           </div>
 
-
           <div className="why-card">
-
             <i className="fa-solid fa-graduation-cap"></i>
-
             <h3>Professional Growth</h3>
-
             <p>
               Opportunities to learn, develop new skills,
               and grow professionally.
             </p>
-
           </div>
 
-
           <div className="why-card">
-
             <i className="fa-solid fa-child-reaching"></i>
-
             <h3>Make a Difference</h3>
-
             <p>
               Help children learn, grow, and build
               strong foundations for their future.
             </p>
-
           </div>
 
-
           <div className="why-card">
-
             <i className="fa-solid fa-heart"></i>
-
             <h3>Meaningful Work</h3>
-
             <p>
               Be part of an environment where education,
               care, and values come together.
             </p>
-
           </div>
 
         </div>
-
       </section>
 
-
-      {/* =========================
-          APPLICATION FORM
-      ========================= */}
+      {/*APPLICATION FORM*/}
 
       <section className="career-form">
 
         <h2>Teaching Application Form</h2>
-
         <p className="form-intro">
           Interested in joining our team?
           Fill out the application form below.
         </p>
 
-
         <form onSubmit={handleSubmit}>
 
           {/* FULL NAME */}
-
           <div className="form-group">
-
-            <label htmlFor="fullName">
-              Full Name
-            </label>
-
+            <label htmlFor="fullName">Full Name</label>
             <input
               type="text"
               id="fullName"
@@ -248,20 +160,12 @@ function Career() {
               placeholder="Enter your full name"
               value={formData.fullName}
               onChange={handleChange}
-              required
-            />
-
+              required/>
           </div>
 
-
           {/* EMAIL */}
-
           <div className="form-group">
-
-            <label htmlFor="email">
-              Email Address
-            </label>
-
+            <label htmlFor="email">Email Address</label>
             <input
               type="email"
               id="email"
@@ -269,20 +173,12 @@ function Career() {
               placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
-              required
-            />
-
+              required/>
           </div>
 
-
           {/* PHONE */}
-
           <div className="form-group">
-
-            <label htmlFor="phone">
-              Phone Number
-            </label>
-
+            <label htmlFor="phone">Phone Number</label>
             <input
               type="tel"
               id="phone"
@@ -290,20 +186,12 @@ function Career() {
               placeholder="Enter your phone number"
               value={formData.phone}
               onChange={handleChange}
-              required
-            />
-
+              required/>
           </div>
 
-
           {/* QUALIFICATION */}
-
           <div className="form-group">
-
-            <label htmlFor="qualification">
-              Qualification
-            </label>
-
+            <label htmlFor="qualification">Qualification</label>
             <input
               type="text"
               id="qualification"
@@ -311,20 +199,12 @@ function Career() {
               placeholder="e.g. B.Ed, M.Ed, M.A."
               value={formData.qualification}
               onChange={handleChange}
-              required
-            />
-
+              required/>
           </div>
 
-
           {/* EXPERIENCE */}
-
           <div className="form-group">
-
-            <label htmlFor="experience">
-              Experience
-            </label>
-
+            <label htmlFor="experience">Experience</label>
             <input
               type="text"
               id="experience"
@@ -332,118 +212,59 @@ function Career() {
               placeholder="e.g. 2 years"
               value={formData.experience}
               onChange={handleChange}
-              required
-            />
-
+              required/>
           </div>
 
-
           {/* POSITION */}
-
           <div className="form-group">
-
-            <label htmlFor="position">
-              Position Applying For
-            </label>
-
+            <label htmlFor="position">Position Applying For</label>
             <select
               id="position"
               name="position"
               value={formData.position}
               onChange={handleChange}
-              required
-            >
-
-              <option value="">
-                Select a position
-              </option>
-
-              <option value="Primary Teacher">
-                Primary Teacher
-              </option>
-
-              <option value="Pre-Primary Teacher">
-                Pre-Primary Teacher
-              </option>
-
-              <option value="Subject Teacher">
-                Subject Teacher
-              </option>
-
-              <option value="Art & Craft Teacher">
-                Art & Craft Teacher
-              </option>
-
-              <option value="Sports Teacher">
-                Sports Teacher
-              </option>
-
-              <option value="Other">
-                Other
-              </option>
-
+              required>
+              <option value="">Select a position</option>
+              <option value="Primary Teacher">Primary Teacher</option>
+              <option value="Pre-Primary Teacher">Pre-Primary Teacher</option>
+              <option value="Subject Teacher">Subject Teacher</option>
+              <option value="Art & Craft Teacher">Art & Craft Teacher</option>
+              <option value="Sports Teacher">Sports Teacher</option>
+              <option value="Other">Other</option>
             </select>
-
           </div>
 
-
           {/* RESUME */}
-
           <div className="form-group">
-
-            <label htmlFor="resume">
-              Resume
-            </label>
-
+            <label htmlFor="resume">Resume</label>
             <input
               type="file"
               id="resume"
               name="resume"
               accept=".pdf,.doc,.docx"
-              onChange={handleResume}
-            />
-
-            <small>
-              Resume upload will be connected to Firebase
-              Storage later.
-            </small>
-
+              onChange={handleResume}/>
+           {/*We'll see to it later */}
           </div>
 
-
           {/* SUBMIT */}
-
           <button
             type="submit"
             disabled={loading}
           >
-
-            {loading
-              ? "Submitting..."
-              : "Submit Application"
+            {loading?
+             "Submitting..." : "Submit Application"
             }
-
           </button>
 
-
           {/* MESSAGE */}
-
           {message && (
-
             <p className="form-message">
               {message}
             </p>
-
           )}
-
         </form>
-
       </section>
-
     </>
-
   );
-
 }
-
 export default Career;
