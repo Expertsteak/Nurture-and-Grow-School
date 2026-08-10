@@ -8,10 +8,7 @@ import { db } from "../firebase";
 
 function Admissions() {
 
-  // =========================
   // FORM STATE
-  // =========================
-
   const [formData, setFormData] = useState({
     parentName: "",
     studentName: "",
@@ -26,11 +23,7 @@ function Admissions() {
 
   const [status, setStatus] = useState("");
 
-
-  // =========================
   // HANDLE INPUT
-  // =========================
-
   const handleChange = (e) => {
 
     const { name, value } = e.target;
@@ -42,21 +35,12 @@ function Admissions() {
 
   };
 
-
-  // =========================
   // SUBMIT FORM
-  // =========================
-
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-
     setLoading(true);
     setStatus("");
-
-
     try {
-
       await addDoc(
         collection(db, "admissionEnquiries"),
         {
@@ -66,21 +50,16 @@ function Admissions() {
           phone: formData.phone,
           class: formData.class,
           message: formData.message,
-
           createdAt: serverTimestamp(),
         }
       );
 
-
       // SUCCESS
-
       setStatus(
         "Admission enquiry submitted successfully! 🎉"
       );
 
-
       // CLEAR FORM
-
       setFormData({
         parentName: "",
         studentName: "",
@@ -89,35 +68,23 @@ function Admissions() {
         class: "",
         message: "",
       });
-
-
     } catch (error) {
-
       console.error(
         "Error submitting admission enquiry:",
         error
       );
-
       setStatus(
         "Something went wrong. Please try again."
       );
-
     } finally {
-
       setLoading(false);
-
     }
-
   };
-
 
   return (
 
     <>
-
-      {/* =========================
-          HERO
-      ========================= */}
+      {/* HERO */}
 
       <Hero
         tag="ADMISSIONS"
@@ -125,10 +92,7 @@ function Admissions() {
         subtitle="Join Nurture & Grow Primary School and shape your child's future."
       />
 
-
-      {/* =========================
-          ELIGIBILITY
-      ========================= */}
+      {/* ELIGIBILITY*/}
 
       <section className="eligibility">
 
@@ -197,9 +161,7 @@ function Admissions() {
       </section>
 
 
-      {/* =========================
-          DOCUMENTS
-      ========================= */}
+      {/*DOCUMENTS*/}
 
       <section className="documents">
 
@@ -257,9 +219,7 @@ function Admissions() {
       </section>
 
 
-      {/* =========================
-          ADMISSION PROCESS
-      ========================= */}
+      {/* ADMISSION PROCESS*/}
 
       <section
         className="admission-process"
@@ -355,9 +315,7 @@ function Admissions() {
       </section>
 
 
-      {/* =========================
-          ENQUIRY FORM
-      ========================= */}
+      {/* ENQUIRY FORM */}
 
       <section
         className="enquiry"
@@ -383,17 +341,13 @@ function Admissions() {
         </div>
 
 
-        {/* =========================
-            FORM
-        ========================= */}
-
+        {/*FORM*/}
         <form
           className="admission-form"
           onSubmit={handleSubmit}
         >
 
           {/* Parent Name */}
-
           <input
             type="text"
             name="parentName"
@@ -405,7 +359,6 @@ function Admissions() {
 
 
           {/* Student Name */}
-
           <input
             type="text"
             name="studentName"
@@ -417,7 +370,6 @@ function Admissions() {
 
 
           {/* Email */}
-
           <input
             type="email"
             name="email"
@@ -429,7 +381,6 @@ function Admissions() {
 
 
           {/* Phone */}
-
           <input
             type="tel"
             name="phone"
@@ -441,7 +392,6 @@ function Admissions() {
 
 
           {/* Class */}
-
           <select
             name="class"
             value={formData.class}
@@ -489,7 +439,6 @@ function Admissions() {
 
 
           {/* Message */}
-
           <textarea
             name="message"
             rows="5"
@@ -500,7 +449,6 @@ function Admissions() {
 
 
           {/* Submit */}
-
           <button
             type="submit"
             disabled={loading}
@@ -519,7 +467,6 @@ function Admissions() {
 
 
           {/* Status */}
-
           {status && (
 
             <p className="form-status">

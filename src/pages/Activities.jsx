@@ -1,8 +1,9 @@
 import Hero from "../components/hero";
 import "./Activities.css";
-import plantation from "../assets/plantation.jpeg"
-import art from "../assets/art&craft.jpeg"
-import sports from "../assets/sports.jpeg"
+import plantation from "../assets/plantation.jpeg";
+import art from "../assets/art&craft.jpeg";
+import sports from "../assets/sports.jpeg";
+// import yoga from "../assets/yoga.jpeg";
 import { Link } from "react-router-dom";
 
 function Activities() {

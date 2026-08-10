@@ -8,10 +8,7 @@ import { db } from "../firebase";
 
 function Contact() {
 
-  // =========================
   // FORM STATE
-  // =========================
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,10 +23,8 @@ function Contact() {
   const [status, setStatus] = useState("");
 
 
-  // =========================
-  // HANDLE INPUT
-  // =========================
 
+  // HANDLE INPUT
   const handleChange = (e) => {
 
     const { name, value } = e.target;
@@ -42,23 +37,15 @@ function Contact() {
   };
 
 
-  // =========================
+
   // SUBMIT FORM
-  // =========================
-
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-
     setLoading(true);
-
     setStatus("");
 
-
     try {
-
       // Save message to Firestore
-
       await addDoc(
         collection(db, "contactMessages"),
         {
@@ -67,21 +54,16 @@ function Contact() {
           phone: formData.phone,
           subject: formData.subject,
           message: formData.message,
-
           createdAt: serverTimestamp(),
         }
       );
 
-
       // Success message
-
       setStatus(
         "Your message has been sent successfully! 🎉"
       );
 
-
       // Clear form
-
       setFormData({
         name: "",
         email: "",
@@ -89,25 +71,17 @@ function Contact() {
         subject: "",
         message: "",
       });
-
-
     } catch (error) {
-
       console.error(
         "Error sending message:",
         error
       );
-
       setStatus(
         "Something went wrong. Please try again."
       );
-
     } finally {
-
       setLoading(false);
-
     }
-
   };
 
 
@@ -115,19 +89,14 @@ function Contact() {
 
     <>
 
-      {/* =========================
-          HERO
-      ========================= */}
+      {/*HERO*/}
 
       <Hero
         title="Contact Us"
         subtitle="We'd Love to Hear From You"
       />
 
-
-      {/* =========================
-          CONTACT INFORMATION
-      ========================= */}
+      {/* CONTACT INFORMATION */}
 
       <section className="contact-info">
 
@@ -237,9 +206,7 @@ function Contact() {
       </section>
 
 
-      {/* =========================
-          CONTACT FORM
-      ========================= */}
+      {/*CONTACT FORM*/}
 
       <section className="contact-section">
 
@@ -282,9 +249,7 @@ function Contact() {
         </div>
 
 
-        {/* =========================
-            FORM
-        ========================= */}
+        {/*FORM*/}
 
         <form
           className="contact-form"
@@ -433,19 +398,10 @@ function Contact() {
 
       </section>
 
+      {/*LOCATION*/}
 
-      {/* =========================
-          LOCATION
-      ========================= */}
-
-      {/* Your existing location/map section
-          can continue here */}
-
+      {/* gotta add the  location */}
     </>
-
   );
-
 }
-
-
 export default Contact;

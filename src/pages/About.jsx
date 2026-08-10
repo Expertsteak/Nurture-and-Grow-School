@@ -65,9 +65,7 @@ function About() {
       </section>
 
 
-      {/* =========================
-          MISSION & VISION
-      ========================= */}
+      {/*MISSION & VISION*/}
 
       <section className="mission-vision">
 
@@ -141,9 +139,7 @@ function About() {
       </section>
 
 
-      {/* =========================
-          CORE VALUES
-      ========================= */}
+      {/*CORE VALUES*/}
 
       <section className="core-values">
 
@@ -266,9 +262,7 @@ function About() {
       </section>
 
 
-      {/* =========================
-          PRINCIPAL MESSAGE
-      ========================= */}
+      {/*PRINCIPAL MESSAGE*/}
 
       <section className="principal">
 
@@ -328,9 +322,7 @@ function About() {
       </section>
 
 
-      {/* =========================
-          PARENTS TESTIMONIALS
-      ========================= */}
+      {/*PARENTS TESTIMONIALS*/}
 
       <section className="about-testimonials">
 
@@ -434,9 +426,7 @@ function About() {
       </section>
 
 
-      {/* =========================
-          BOTTOM CTA
-      ========================= */}
+      {/*BOTTOM CTA */}
 
       <section className="about-cta">
 

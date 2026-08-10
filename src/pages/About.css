@@ -1,965 +1,526 @@
-/* =========================
-   ABOUT PAGE
-========================= */
-
+/* ABOUT PAGE*/
 .about-page {
     overflow: hidden;
     background: #f8fff9;
 }
-
-/* =========================
-   COMMON HEADING
-========================= */
-
+/* COMMON HEADING*/
 .section-heading {
     text-align: center;
-
     max-width: 750px;
-
     margin: 0 auto 50px;
 }
-
-
 .section-heading > span,
 .section-label {
     color: #16a34a;
-
     font-size: 13px;
-
     font-weight: 700;
-
     letter-spacing: 3px;
 }
-
-
 .section-heading h2 {
     color: #14532d;
-
     font-size: 42px;
-
     line-height: 1.2;
-
     margin: 12px 0 15px;
 }
-
-
 .section-heading h2 strong {
     color: #16a34a;
 }
-
-
 .section-heading p {
     color: #666;
-
     line-height: 1.8;
 }
-
-
-/* =========================
-SCHOOL INTRODUCTION
-========================= */
-
+/* SCHOOL INTRODUCTION*/
 .school-introduction{
-
     width:100%;
     max-width:1500px;
-
     margin:90px auto;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:70px;
-
 }
-
 /* IMAGE */
-
 .about-school-image{
-
     flex:1;
-
     position:relative;
-
     overflow:hidden;
-
     border-radius:20px;
-
     box-shadow:0 20px 40px rgba(0,0,0,.15);
-
 }
-
 .about-school-image img{
-
     width:100%;
-
     height:300px;
-
     display:block;
-
     object-fit:cover;
-
     transition:.6s ease;
-
 }
-
 /* Hover Zoom */
-
 .about-school-image:hover img{
-
     transform:scale(1.08);
-
 }
-
 /* Overlay */
-
 .about-school-image::after{
-
     content:"";
-
     position:absolute;
-
     inset:0;
-
     background:linear-gradient(to top,
         rgba(0,0,0,.2),
         transparent);
-
     opacity:0;
-
     transition:.4s;
-
 }
-
 .about-school-image:hover::after{
-
     opacity:1;
-
 }
-
 /* CONTENT */
-
 .introduction-content{
-
     flex:1;
-
 }
-
 .section-label{
-
     color:#16a34a;
-
     font-size:14px;
-
     font-weight:700;
-
     letter-spacing:4px;
-
 }
-
 .introduction-content h2{
-
     font-size:52px;
-
     color:#14532d;
-
     line-height:1.2;
-
     margin:18px 0 25px;
-
 }
-
 .introduction-content h2 strong{
-
     color:#16a34a;
-
 }
-
 .introduction-content p{
-
     font-size:18px;
-
     color:#555;
-
     line-height:1.9;
-
     margin-bottom:20px;
-
 }
-
 /* Responsive */
-
 @media(max-width:992px){
-
     .school-introduction{
-
         flex-direction:column;
-
         text-align:center;
-
     }
-
     .about-school-image{
-
         width:100%;
-
     }
-
     .about-school-image img{
-
         height:350px;
-
     }
-
     .introduction-content h2{
-
         font-size:38px;
-
     }
-
 }
-
-/* =========================
-   BUTTON
-========================= */
-
+/* BUTTON*/
 .btn {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     gap: 10px;
-
     padding: 14px 28px;
-
     margin-top: 15px;
-
     background: #16a34a;
-
     color: white;
-
     text-decoration: none;
-
     border-radius: 8px;
-
     font-weight: 600;
-
     position: relative;
-
     overflow: hidden;
-
     transition: 0.4s;
 }
-
-
 .btn::before {
     content: "";
-
     position: absolute;
-
     width: 0;
     height: 100%;
-
     left: 0;
     top: 0;
-
     background: rgba(255,255,255,0.15);
-
     transition: 0.4s;
 }
-
-
 .btn:hover::before {
     width: 100%;
 }
-
-
 .btn:hover {
     background: #14532d;
-
     transform: translateY(-5px);
-
     box-shadow: 0 12px 25px rgba(20,92,56,0.25);
 }
-
-
 .btn i {
     transition: 0.3s;
 }
-
-
 .btn:hover i {
     transform: translateX(5px);
 }
-
-
-/* =========================
-   MISSION & VISION
-========================= */
-
+/* MISSION & VISION*/
 .mission-vision {
     padding: 90px 8%;
-
     background: #f5faf7;
 }
-
-
 .mission-vision-grid {
     max-width: 1100px;
-
     margin: auto;
-
     display: grid;
-
     grid-template-columns: repeat(2, 1fr);
-
     gap: 30px;
 }
-
-
 .purpose-card {
     background: white;
-
     padding: 45px 35px;
-
     text-align: center;
-
     border-radius: 20px;
-
     box-shadow: 0 10px 35px rgba(0,0,0,0.07);
-
     position: relative;
-
     overflow: hidden;
-
     transition: 0.5s;
 }
-
-
 .purpose-card::before {
     content: "";
-
     position: absolute;
-
     width: 100%;
     height: 5px;
-
     left: 0;
     top: 0;
-
     background: #16a34a;
-
     transform: scaleX(0);
-
     transform-origin: left;
-
     transition: 0.5s;
 }
-
-
 .purpose-card:hover::before {
     transform: scaleX(1);
 }
-
-
 .purpose-card:hover {
     transform: translateY(-12px);
-
     box-shadow: 0 20px 45px rgba(0,0,0,0.12);
 }
-
-
 .purpose-icon {
     width: 85px;
     height: 85px;
-
     margin: 0 auto 25px;
-
     border-radius: 50%;
-
     display: flex;
-
     justify-content: center;
     align-items: center;
-
     background: #e8f7ed;
-
     transition: 0.5s;
 }
-
-
 .purpose-icon i {
     color: #16a34a;
-
     font-size: 35px;
-
     transition: 0.5s;
 }
-
-
 .purpose-card:hover .purpose-icon {
     background: #16a34a;
-
     transform: rotate(8deg) scale(1.1);
 }
-
-
 .purpose-card:hover .purpose-icon i {
     color: white;
-
     transform: scale(1.15);
 }
-
-
 .purpose-card > span {
     color: #16a34a;
-
     font-size: 12px;
-
     font-weight: 700;
-
     letter-spacing: 2px;
 }
-
-
 .purpose-card h3 {
     color: #14532d;
-
     font-size: 25px;
-
     margin: 12px 0 15px;
 }
-
-
 .purpose-card p {
     color: #666;
-
     line-height: 1.8;
 }
-
-
-/* =========================
-   CORE VALUES
-========================= */
-
+/* CORE VALUES*/
 .core-values {
     padding: 90px 8%;
-
     background: white;
 }
-
-
 .values-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns:repeat(3, 1fr);
     gap: 25px;
-
     max-width: 1100px;
-
     margin: auto;
 }
-
-
 .value-card {
     background: #f8fff9;
-
     padding: 35px 25px;
-
     text-align: center;
-
     border-radius: 16px;
-
     border: 1px solid #e4f1e8;
-
     transition: 0.4s;
-
     position: relative;
 }
-
-
 .value-card:hover {
     transform: translateY(-10px);
-
     background: white;
-
     box-shadow: 0 15px 35px rgba(0,0,0,0.09);
 }
-
-
 .value-icon {
     width: 65px;
     height: 65px;
-
     margin: auto auto 20px;
-
     display: flex;
-
     justify-content: center;
     align-items: center;
-
     border-radius: 50%;
-
     background: #e5f7eb;
-
     transition: 0.4s;
 }
-
-
 .value-icon i {
     color: #16a34a;
-
     font-size: 27px;
-
     transition: 0.4s;
 }
-
-
 .value-card:hover .value-icon {
     background: #16a34a;
-
     transform: rotate(-8deg);
 }
-
-
 .value-card:hover .value-icon i {
     color: white;
 }
-
-
 .value-card h3 {
     color: #14532d;
-
     margin-bottom: 10px;
 }
-
-
 .value-card p {
     color: #666;
-
     line-height: 1.7;
-
     font-size: 14px;
 }
-
-
-/* =========================
-   PRINCIPAL
-========================= */
-
+/*PRINCIPAL*/
 .principal {
     padding: 90px 8%;
-
     background: #f5faf7;
 }
-
-
 .principal-box {
     max-width: 1100px;
-
     margin: auto;
-
     background: white;
-
     padding: 55px;
-
     border-radius: 25px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     box-shadow: 0 15px 40px rgba(0,0,0,0.08);
 }
-
-
-/* Image intentionally not required */
-
+/* Image intentionally not required  or added yet */
 .principal-content {
     max-width: 850px;
 }
-
-
 .principal-content h2 {
     color: #14532d;
-
     font-size: 40px;
-
     line-height: 1.2;
-
     margin: 12px 0 20px;
 }
-
-
 .principal-content h2 strong {
     color: #16a34a;
 }
-
-
 .principal-content p {
     color: #555;
-
     line-height: 1.8;
-
     margin-bottom: 18px;
 }
-
-
 .principal-signature {
     margin-top: 25px;
-
     padding-left: 18px;
-
     border-left: 4px solid #16a34a;
-
     display: flex;
-
     flex-direction: column;
 }
-
-
 .principal-signature strong {
     color: #14532d;
-
     font-size: 18px;
 }
-
-
 .principal-signature span {
     color: #777;
-
     font-size: 13px;
 }
-
-
-/* =========================
-   TESTIMONIALS
-========================= */
-
+/*TESTIMONIALS */
 .about-testimonials {
     padding: 90px 8%;
-
     background: white;
 }
-
-
 .testimonial-grid {
     max-width: 1100px;
-
     margin: auto;
-
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
+    grid-template-columns:repeat(3, 1fr);
     gap: 25px;
 }
-
-
 .testimonial {
     background: #f7fcf8;
-
     padding: 35px 28px;
-
     border-radius: 18px;
-
     border: 1px solid #e3f0e7;
-
     transition: 0.4s;
 }
-
-
 .testimonial:hover {
     transform: translateY(-10px);
-
     background: white;
-
     box-shadow: 0 15px 35px rgba(0,0,0,0.08);
 }
-
-
 .quote-icon {
     color: #16a34a;
-
     font-size: 28px;
-
     margin-bottom: 18px;
 }
-
-
 .testimonial > p {
     color: #555;
-
     font-style: italic;
-
     line-height: 1.8;
-
     margin-bottom: 25px;
 }
-
-
 .parent-info {
     display: flex;
-
     align-items: center;
-
     gap: 12px;
 }
-
-
 .parent-icon {
     width: 45px;
     height: 45px;
-
     border-radius: 50%;
-
     background: #e2f5e8;
-
     display: flex;
-
     justify-content: center;
     align-items: center;
 }
-
-
 .parent-icon i {
     color: #16a34a;
 }
-
-
 .parent-info h3 {
     color: #14532d;
-
     font-size: 15px;
 }
-
-
 .parent-info span {
     color: #777;
-
-    font-size: 12px;
+   font-size: 12px;
 }
-
-
-/* =========================
-   BOTTOM CTA
-========================= */
-
+/* BOTTOM CTA */
 .about-cta {
     padding: 90px 8%;
-
     text-align: center;
-
     position: relative;
-
     overflow: hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            #14532d,
-            #166534
-        );
+    background:linear-gradient(135deg, #14532d,#166534);
 }
-
-
 .about-cta::before {
     content: "";
-
     position: absolute;
-
     width: 300px;
     height: 300px;
-
     border-radius: 50%;
-
     border: 2px solid rgba(255,255,255,0.1);
-
     left: -100px;
     top: -150px;
-
     animation: aboutRotate 15s linear infinite;
 }
-
-
 .about-cta-content {
     position: relative;
-
     z-index: 2;
 }
-
-
 .about-cta-content > span {
     color: #7CFC00;
-
     font-size: 13px;
-
     font-weight: 700;
-
     letter-spacing: 3px;
 }
-
-
 .about-cta h2 {
     color: white;
-
     font-size: 45px;
-
     margin: 15px 0;
-
 }
-
-
 .about-cta h2 strong {
     color: #7CFC00;
 }
-
-
 .about-cta p {
     color: #e8f5ed;
-
     max-width: 650px;
-
     margin: auto;
-
     line-height: 1.8;
 }
-
-
 .about-cta .btn {
     background: white;
-
     color: #14532d;
-
     margin-top: 25px;
 }
-
-
 .about-cta .btn:hover {
     background: #7CFC00;
 }
-
-
-/* =========================
-   ANIMATIONS
-========================= */
-
+/*ANIMATIONS*/
 @keyframes aboutHeroIn {
-
     from {
         opacity: 0;
         transform: translateY(50px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
-
 }
-
-
 @keyframes fadeLeft {
-
     from {
         opacity: 0;
         transform: translateX(-60px);
     }
-
     to {
         opacity: 1;
         transform: translateX(0);
     }
-
 }
-
-
 @keyframes aboutFloat {
-
     0%, 100% {
         transform: translate(0, 0);
     }
-
     50% {
         transform: translate(20px, -20px);
     }
-
 }
-
-
 @keyframes aboutRotate {
-
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
-
 }
-
-
-/* =========================
-   TABLET
-========================= */
+/*TABLET*/
 
 @media (max-width: 992px) {
-
     .about-hero h1 {
         font-size: 45px;
     }
-
     .mission-vision-grid {
         grid-template-columns: 1fr;
     }
-
     .values-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-
     .testimonial-grid {
         grid-template-columns: 1fr;
     }
-
 }
-
-
-/* =========================
-   MOBILE
-========================= */
-
+/*MOBILE */
 @media (max-width: 576px) {
-
     .about-hero {
         min-height: 60vh;
-
         padding: 60px 5%;
     }
-
     .about-hero h1 {
         font-size: 34px;
     }
-
     .about-hero p {
         font-size: 15px;
     }
-
     .about-hero-content span {
         font-size: 10px;
-
         letter-spacing: 2px;
     }
-
     .school-introduction,
     .mission-vision,
     .core-values,
@@ -968,33 +529,25 @@ SCHOOL INTRODUCTION
     .about-cta {
         padding: 65px 5%;
     }
-
     .introduction-content h2 {
         font-size: 34px;
     }
-
     .section-heading h2 {
         font-size: 32px;
     }
-
     .values-grid {
         grid-template-columns: 1fr;
     }
-
     .principal-box {
         padding: 30px 20px;
     }
-
     .principal-content h2 {
         font-size: 32px;
     }
-
     .about-cta h2 {
         font-size: 34px;
     }
-
     .btn {
         width: 220px;
     }
-
 }
