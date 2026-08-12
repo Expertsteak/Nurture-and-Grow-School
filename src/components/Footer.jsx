@@ -54,6 +54,9 @@ function Footer() {
             <a href="#">
               <FaWhatsapp />
             </a>
+            <a href="mailto:nurtureandgrow.alkapoor@gmail.com">
+             <FaEnvelope />
+            </a>
           </div>
         </div>
 

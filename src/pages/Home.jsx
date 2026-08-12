@@ -28,7 +28,7 @@ function Home() {
 
           <p>
             Empowering young minds through quality English medium
-            education from Nursery to Grade 5 in Hyderabad.
+            education from Nursery to Grade 7 in Hyderabad.
           </p>
 
           <div className="hero-buttons">
@@ -282,7 +282,7 @@ function Home() {
 
         <div className="fact">
           <i className="fa-solid fa-graduation-cap"></i>
-          <h2>Grade 5</h2>
+          <h2>Grade 7</h2>
           <p>Highest Class</p>
         </div>
 
@@ -331,7 +331,7 @@ function Home() {
 
       <p>
         We offer quality English medium education from
-        Nursery to Grade 5.
+        Nursery to Grade 7.
       </p>
     </details>
 

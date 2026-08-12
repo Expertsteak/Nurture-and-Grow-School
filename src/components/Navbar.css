@@ -141,58 +141,44 @@ nav ul li a.active{
     background:#ffe082;
 
 }
+/* ================= MORE BUTTON ================= */
 
-/* Mobile */
-
-@media(max-width:992px){
-
-.header{
-
-flex-direction:column;
-height:auto;
-padding:20px;
-
-}
-
-nav ul{
-
-flex-wrap:wrap;
-justify-content:center;
-gap:18px;
-margin:20px 0;
-
-}
-
-.apply-btn{
-
-margin-bottom:10px;
-
-}
-
-}
-.dropdown{
+.dropdown {
     position: relative;
 }
 
-.drop-btn{
+.drop-btn {
     background: none;
     border: none;
+
     color: white;
+
     font-size: 16px;
     font-weight: 500;
-    cursor: pointer;
+
     font-family: inherit;
+
+    cursor: pointer;
+
+    padding: 0;
+
+    transition: 0.3s;
 }
 
-.drop-btn i{
+.drop-btn:hover {
+    color: #ffe082;
+}
+
+.drop-btn i {
     margin-left: 5px;
+    transition: transform 0.3s ease;
 }
+/* ================= DROPDOWN ================= */
 
-.dropdown-content{
-
+.dropdown-content {
     position: absolute;
 
-    top: 45px;
+    top: 40px;
     left: 0;
 
     width: 180px;
@@ -201,14 +187,14 @@ margin-bottom:10px;
 
     border-radius: 10px;
 
-    box-shadow: 0 10px 20px rgba(0,0,0,.15);
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
 
     overflow: hidden;
 
+    z-index: 1000;
 }
 
-.dropdown-content a{
-
+.dropdown-content a {
     display: block;
 
     padding: 12px 18px;
@@ -217,120 +203,184 @@ margin-bottom:10px;
 
     color: #333;
 
-    transition: .3s;
-
+    transition: 0.3s;
 }
 
-.dropdown-content a:hover{
-
+.dropdown-content a:hover {
     background: #17b978;
 
     color: white;
-
 }
+
 
 /* ================= MENU ICON ================= */
 
-.menu-icon{
-
-display:none;
-
-font-size:30px;
-
-color:white;
-
-cursor:pointer;
-
+.menu-icon {
+    display: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
 }
+
 
 /* ================= MOBILE ================= */
 
 @media(max-width:992px){
 
-.menu-icon{
+    .header {
+        height: 90px;
+        flex-direction: row;
+        padding: 0 5%;
+    }
 
-display:block;
+    .menu-icon {
+        display: block;
+    }
 
+    .nav {
+        position: absolute;
+        top: 90px;
+        left: 0;
+
+        width: 100%;
+
+        background: #14532d;
+
+        display: none;
+
+        padding: 20px 0;
+
+        box-shadow: 0 10px 20px rgba(0,0,0,.15);
+    }
+
+    .nav.active {
+        display: block;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* APPLY NOW HIDDEN ON MOBILE */
+    .header > .apply-btn {
+        display: none;
+    }
+
+    .dropdown {
+        text-align: center;
+    }
+
+    .dropdown-content {
+        position: static;
+
+        margin-top: 10px;
+
+        width: 100%;
+
+        box-shadow: none;
+
+        background: #1b6b3d;
+    }
+
+    .dropdown-content a {
+        color: white;
+    }
+
+    .dropdown-content a:hover {
+        background: #17b978;
+    }
+    /* MORE BUTTON ON MOBILE */
+
+.drop-btn {
+    color: white;
+
+    font-size: 16px;
+
+    padding: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
 }
 
-.header{
-
-height:90px;
-
-flex-direction:row;
-
+.drop-btn:hover {
+    color: #ffe082;
 }
 
-.nav{
 
-position:absolute;
+/* DROPDOWN ON MOBILE */
 
-top:90px;
+.dropdown-content {
+    position: static;
 
-left:0;
+    width: 100%;
 
-width:100%;
+    margin-top: 12px;
 
-background:#14532d;
+    background: #1b6b3d;
 
-display:none;
+    box-shadow: none;
 
-padding:20px 0;
-
-box-shadow:0 10px 20px rgba(0,0,0,.15);
-
+    border-radius: 8px;
 }
 
-.nav.active{
+.dropdown-content a {
+    color: white;
 
-display:block;
+    padding: 12px 20px;
 
+    text-align: center;
 }
 
-.nav ul{
+.dropdown-content a:hover {
+    background: #17b978;
 
-flex-direction:column;
+    color: white;
+}
+@media (max-width: 992px) {
 
-gap:20px;
+    /* Smaller logo on phone */
+    .logo img {
+        width: 42px;
+        height: 42px;
+    }
+
+    /* Smaller school name on phone */
+    .logo-text h2 {
+        font-size: 17px;
+    }
+
+    .logo-text p {
+        font-size: 10px;
+    }
+
+    /* Smaller logo spacing */
+    .logo {
+        gap: 7px;
+    }
 
 }
-
-.apply-btn{
-
-display:none;
-
 }
+@media (max-width: 600px) {
 
-.dropdown{
+    .logo img {
+        width: 42px;
+        height: 42px;
+    }
 
-text-align:center;
+    .logo-text h2 {
+        font-size: 17px;
+    }
 
-}
+    .logo-text p {
+        font-size: 10px;
+    }
 
-.dropdown-content{
-
-position:static;
-
-margin-top:10px;
-
-width:100%;
-
-box-shadow:none;
-
-background:#1b6b3d;
-
-}
-
-.dropdown-content a{
-
-color:white;
-
-}
-
-.dropdown-content a:hover{
-
-background:#17b978;
-
-}
+    .logo {
+        gap: 7px;
+    }
 
 }

@@ -50,7 +50,7 @@ function About() {
           </p>
 
           <p>
-            From Nursery to Grade 5, we focus on academic learning,
+            From Nursery to Grade 7, we focus on academic learning,
             creativity, discipline, communication skills and
             overall personality development.
           </p>

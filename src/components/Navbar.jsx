@@ -127,7 +127,12 @@ function Navbar() {
           </li>
 
           <li>
-            <NavLink to="/contact">Contact</NavLink>
+            <NavLink
+             to="/contact"
+             onClick={() => setMenuOpen(false)}
+             >
+             Contact
+           </NavLink>
           </li>
 
         </ul>

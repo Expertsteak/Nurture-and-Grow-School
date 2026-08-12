@@ -256,7 +256,7 @@ subtitle="Explore our celebrations, competitions, sports and classroom activitie
   <section className="cta">
     <h2>Give Your Child the Best Future</h2>
     <p>
-      Admissions are open from Nursery to Grade 5.
+      Admissions are open from Nursery to Grade 7.
       Join Nurture & Grow Primary School today.
     </p>
     <Link to="/admissions" className="apply-btn">

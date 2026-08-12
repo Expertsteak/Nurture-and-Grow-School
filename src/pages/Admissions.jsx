@@ -107,7 +107,7 @@ function Admissions() {
 
           <p>
             Admissions are available for children from Nursery
-            to Grade 5 according to the applicable age and class
+            to Grade 7 according to the applicable age and class
             requirements.
           </p>
 
@@ -137,7 +137,7 @@ function Admissions() {
             <h3>Primary Classes</h3>
 
             <p>
-              Admissions available from Grade 1 to Grade 5.
+              Admissions available from Grade 1 to Grade 7.
             </p>
 
           </div>
@@ -433,6 +433,14 @@ function Admissions() {
 
             <option value="Grade 5">
               Grade 5
+            </option>
+
+            <option value="Grade 5">
+              Grade 6
+            </option>
+
+            <option value="Grade 5">
+              Grade 7
             </option>
 
           </select>
