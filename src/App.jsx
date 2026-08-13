@@ -11,11 +11,13 @@ import Admissions from "./pages/Admissions";
 import Contact from "./pages/Contact";
 import Career from "./pages/Career";
 import Activities from "./pages/Activities";
+import ScrollToTop from "./components/scrolltotop";
 
 function App() {
   return (
     <>
       <Navbar />
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
