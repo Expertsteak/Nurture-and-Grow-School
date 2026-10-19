@@ -1,9 +1,13 @@
 import { useState } from "react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import emailjs from "@emailjs/browser";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import "./Career.css";
 import Hero from "../components/hero";
-
 function Career() {
 
   const [formData, setFormData] = useState({
@@ -36,56 +40,126 @@ function Career() {
   };
 
   // SUBMIT FORM
-   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage("");
-    try {
-      await addDoc(
-        collection(db, "careerApplications"),
-        {
-          fullName: formData.fullName,
-          email: formData.email,
-          phone: formData.phone,
-          qualification: formData.qualification,
-          experience: formData.experience,
-          position: formData.position,
+   
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-          // Resume will be connected to Storage later(need to ask about it)
-          resumeName: resume ? resume.name : "",
-          createdAt: serverTimestamp(),
-        }
-      );
-      setMessage(
-        "Application submitted successfully! 🎉"
-      );
+  if (!resume) {
+    setMessage("Please upload your resume.");
+    return;
+  }
 
-      // Clear form
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        qualification: "",
-        experience: "",
-        position: "",
-      });
-      setResume(null);
+  setLoading(true);
+  setMessage("");
 
-      // Reset file input
-      document.getElementById("resume").value = "";
+  let applicationSaved = false;
 
-    } catch (error) {
-      console.error(
-        "Error submitting application:",
-        error
+  try {
+    // STEP 1: Upload resume to Cloudinary
+    const data = new FormData();
+
+    data.append("file", resume);
+    data.append("upload_preset", "resume_preset");
+
+    const uploadResponse = await fetch(
+      "https://api.cloudinary.com/v1_1/swmylim4/raw/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const uploadResult = await uploadResponse.json();
+
+    if (!uploadResponse.ok) {
+      throw new Error(
+        uploadResult.error?.message ||
+          "Resume upload failed."
       );
-      setMessage(
-        "Something went wrong. Please try again."
-      );
-    } finally {
-      setLoading(false);
     }
-  };
+
+    const resumeUrl = uploadResult.secure_url;
+
+    // STEP 2: Save application in Firebase
+    await addDoc(
+      collection(db, "careerApplications"),
+      {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        qualification: formData.qualification,
+        experience: formData.experience,
+        position: formData.position,
+        resumeName: resume.name,
+        resumeUrl: resumeUrl,
+        createdAt: serverTimestamp(),
+      }
+    );
+
+    applicationSaved = true;
+
+    // STEP 3: Send email using EmailJS
+    const templateParams = {
+      to_email: "YOUR_GMAIL@gmail.com",
+      full_name: formData.fullName,
+      applicant_email: formData.email,
+      phone: formData.phone,
+      qualification: formData.qualification,
+      experience: formData.experience,
+      position: formData.position,
+      resume_name: resume.name,
+      resume_url: resumeUrl,
+    };
+
+    await emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      templateParams,
+      {
+        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      }
+    );
+
+    // STEP 4: Show success and clear form
+    setMessage(
+      "Application submitted successfully! 🎉"
+    );
+
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      qualification: "",
+      experience: "",
+      position: "",
+    });
+
+    setResume(null);
+
+    const fileInput = document.getElementById("resume");
+
+    if (fileInput) {
+      fileInput.value = "";
+    }
+
+  } catch (error) {
+    console.error("Application submission error:", error);
+
+    if (applicationSaved) {
+      setMessage(
+        "Application saved, but email failed to send. Please contact the administrator."
+      );
+    } else {
+      setMessage(
+        error.message ||
+          "Something went wrong. Please try again."
+      );
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <>
@@ -238,11 +312,13 @@ function Career() {
           <div className="form-group">
             <label htmlFor="resume">Resume</label>
             <input
-              type="file"
-              id="resume"
-              name="resume"
-              accept=".pdf,.doc,.docx"
-              onChange={handleResume}/>
+  type="file"
+  id="resume"
+  name="resume"
+  accept=".pdf,.doc,.docx"
+  onChange={handleResume}
+  required
+/>
            {/*We'll see to it later */}
           </div>
 
