@@ -43,44 +43,12 @@ function Career() {
    
 const handleSubmit = async (e) => {
   e.preventDefault();
-
-  if (!resume) {
-    setMessage("Please upload your resume.");
-    return;
-  }
-
   setLoading(true);
-  setMessage("");
 
   let applicationSaved = false;
 
   try {
-    // STEP 1: Upload resume to Cloudinary
-    const data = new FormData();
-
-    data.append("file", resume);
-    data.append("upload_preset", "resume_preset");
-
-    const uploadResponse = await fetch(
-      "https://api.cloudinary.com/v1_1/swmylim4/raw/upload",
-      {
-        method: "POST",
-        body: data,
-      }
-    );
-
-    const uploadResult = await uploadResponse.json();
-
-    if (!uploadResponse.ok) {
-      throw new Error(
-        uploadResult.error?.message ||
-          "Resume upload failed."
-      );
-    }
-
-    const resumeUrl = uploadResult.secure_url;
-
-    // STEP 2: Save application in Firebase
+    // STEP 1: Save application in Firebase
     await addDoc(
       collection(db, "careerApplications"),
       {
@@ -90,15 +58,13 @@ const handleSubmit = async (e) => {
         qualification: formData.qualification,
         experience: formData.experience,
         position: formData.position,
-        resumeName: resume.name,
-        resumeUrl: resumeUrl,
         createdAt: serverTimestamp(),
       }
     );
 
     applicationSaved = true;
 
-    // STEP 3: Send email using EmailJS
+    // STEP 2: Send email using EmailJS
     const templateParams = {
       to_email: "YOUR_GMAIL@gmail.com",
       full_name: formData.fullName,
@@ -107,8 +73,6 @@ const handleSubmit = async (e) => {
       qualification: formData.qualification,
       experience: formData.experience,
       position: formData.position,
-      resume_name: resume.name,
-      resume_url: resumeUrl,
     };
 
     await emailjs.send(
@@ -120,10 +84,8 @@ const handleSubmit = async (e) => {
       }
     );
 
-    // STEP 4: Show success and clear form
-    setMessage(
-      "Application submitted successfully! 🎉"
-    );
+    // STEP 3: Show success and clear form
+    setMessage("Application submitted successfully! 🎉");
 
     setFormData({
       fullName: "",
@@ -134,14 +96,6 @@ const handleSubmit = async (e) => {
       position: "",
     });
 
-    setResume(null);
-
-    const fileInput = document.getElementById("resume");
-
-    if (fileInput) {
-      fileInput.value = "";
-    }
-
   } catch (error) {
     console.error("Application submission error:", error);
 
@@ -151,8 +105,7 @@ const handleSubmit = async (e) => {
       );
     } else {
       setMessage(
-        error.message ||
-          "Something went wrong. Please try again."
+        error.message || "Something went wrong. Please try again."
       );
     }
   } finally {
