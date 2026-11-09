@@ -308,20 +308,6 @@ const handleSubmit = async (e) => {
             </select>
           </div>
 
-          {/* RESUME */}
-          <div className="form-group">
-            <label htmlFor="resume">Resume</label>
-            <input
-  type="file"
-  id="resume"
-  name="resume"
-  accept=".pdf,.doc,.docx"
-  onChange={handleResume}
-  required
-/>
-           {/*We'll see to it later */}
-          </div>
-
           {/* SUBMIT */}
           <button
             type="submit"
