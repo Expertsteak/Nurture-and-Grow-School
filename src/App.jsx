@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Career from "./pages/Career";
 import Activities from "./pages/Activities";
 import ScrollToTop from "./components/scrolltotop";
+import AdminLogin from "./pages/AdminLogin";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/Academics" element={<Academics />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/admin" element={<AdminLogin />} />
         <Route path="/admissions" element={<Admissions />} />
         <Route path="/career" element={<Career />} />
         <Route path="/activities" element={<Activities/>} />
