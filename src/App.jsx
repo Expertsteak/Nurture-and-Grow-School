@@ -13,6 +13,8 @@ import Career from "./pages/Career";
 import Activities from "./pages/Activities";
 import ScrollToTop from "./components/scrolltotop";
 import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -25,6 +27,13 @@ function App() {
         <Route path="/Academics" element={<Academics />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard"
+          element={
+          <ProtectedRoute>
+          <AdminDashboard />
+          </ProtectedRoute>
+          }
+         />
         <Route path="/admissions" element={<Admissions />} />
         <Route path="/career" element={<Career />} />
         <Route path="/activities" element={<Activities/>} />
