@@ -53,12 +53,13 @@ function Gallery() {
   }
 
   return (
-    <div className="school-gallery">
+    <>
     <Hero
   tag="OUR MEMORIES"
   title="Explore Our School Gallery"
   subtitle="Discover the beautiful moments, creative activities, celebrations and unforgettable memories of our school."
-     />
+/>
+    <div className="school-gallery">
       {/* HEADING */}
       <div className="gallery-heading">
         <h1>Our School Gallery</h1>
@@ -139,7 +140,8 @@ function Gallery() {
       )}
 
     </div>
+    </>
   );
 }
-
+ 
 export default Gallery;
