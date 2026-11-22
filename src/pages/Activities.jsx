@@ -241,7 +241,7 @@ function Activities() {
 {/* UPCOMING EVENTS*/}
 
 <section className="upcoming-events">
-    <h2>Upcoming Events</h2>
+    <h2>Events </h2>
     <div className="event-grid">
         <div className="event-card">
             <span>15 Aug</span>
@@ -254,14 +254,29 @@ function Activities() {
             <p>Celebrating our respected teachers.</p>
         </div>
         <div className="event-card">
+            <span>Oct</span>
+            <h3>Spell Bee Competition</h3>
+            <p>Spelling the hardest & longest words.</p>
+        </div>
+        <div className="event-card">
             <span>14 Nov</span>
             <h3>Children's Day</h3>
             <p>Games, Fun Activities & Performances.</p>
         </div>
         <div className="event-card">
-            <span>20 Dec</span>
-            <h3>Annual Day</h3>
-            <p>Dance, Drama, Awards & Cultural Events.</p>
+            <span>22 Dec</span>
+            <h3>Mathematics Day</h3>
+            <p>Adding, Calculating and competitions.</p>
+        </div>
+        <div className="event-card">
+            <span>26 Jan</span>
+            <h3>Republic Day</h3>
+            <p>Celebrating the republic of India.</p>
+        </div>
+        <div className="event-card">
+            <span>28 Feb</span>
+            <h3>Science Day</h3>
+            <p>Experimenting & Exploring the nature.</p>
         </div>
     </div>
 </section>

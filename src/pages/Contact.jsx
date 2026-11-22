@@ -13,7 +13,6 @@ function Contact() {
     name: "",
     email: "",
     phone: "",
-    subject: "",
     message: "",
   });
 
@@ -53,7 +52,6 @@ function Contact() {
           email: formData.email,
           phone: formData.phone,
           subject: formData.subject,
-          message: formData.message,
           createdAt: serverTimestamp(),
         }
       );
@@ -68,7 +66,6 @@ function Contact() {
         name: "",
         email: "",
         phone: "",
-        subject: "",
         message: "",
       });
     } catch (error) {
@@ -196,7 +193,7 @@ function Contact() {
             <p>
               Monday - Saturday
               <br />
-              7:00 AM - 2:30 PM
+              7:45 AM - 2:30 PM
             </p>
 
           </div>
@@ -321,28 +318,6 @@ function Contact() {
             />
 
           </div>
-
-
-          {/* SUBJECT */}
-
-          <div className="form-group">
-
-            <label htmlFor="subject">
-              Subject
-            </label>
-
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              placeholder="Enter subject"
-              value={formData.subject}
-              onChange={handleChange}
-              required
-            />
-
-          </div>
-
 
           {/* MESSAGE */}
 
