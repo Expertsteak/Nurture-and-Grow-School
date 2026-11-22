@@ -1,22 +1,37 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>https://nurture-and-grow-school.onrender.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://nurture-and-grow-school.onrender.com/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://nurture-and-grow-school.onrender.com/Academics</loc>
+  </url>
+
+  <url>
+    <loc>https://nurture-and-grow-school.onrender.com/gallery</loc>
+  </url>
+
+  <url>
+    <loc>https://nurture-and-grow-school.onrender.com/admissions</loc>
+  </url>
+
+  <url>
+    <loc>https://nurture-and-grow-school.onrender.com/career</loc>
+  </url>
+
+  <url>
+    <loc>https://nurture-and-grow-school.onrender.com/activities</loc>
   </url>
 
   <url>
     <loc>https://nurture-and-grow-school.onrender.com/contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
 
 </urlset>
