@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import aboutImage from "../assets/school.webp";
 
-function Home() {
   function Home() {
   const [galleryImages, setGalleryImages] = useState([]);
 
@@ -421,5 +420,5 @@ function Home() {
     </>
   );
 }
-}
+
 export default Home;
