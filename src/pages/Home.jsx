@@ -1,14 +1,34 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import color1 from "../assets/gallery/images/color1.jpeg"
-import color2 from "../assets/gallery/images/color2.jpeg"
-import color3 from "../assets/gallery/images/color3.jpeg"
-import color4 from "../assets/gallery/images/color4.jpeg"
-import color5 from "../assets/gallery/images/color5.jpeg"
-import color6 from "../assets/gallery/images/color6.jpeg"
 import aboutImage from "../assets/school.webp";
 
 function Home() {
+  function Home() {
+  const [galleryImages, setGalleryImages] = useState([]);
+
+  useEffect(() => {
+    const fetchGalleryImages = async () => {
+      try {
+        const response = await fetch(
+          "https://nurture-grow-backend.onrender.com/api/media"
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to load gallery");
+        }
+
+        const data = await response.json();
+
+        setGalleryImages(data.slice(0, 6));
+
+      } catch (error) {
+        console.error("Gallery error:", error);
+      }
+    };
+
+    fetchGalleryImages();
+  }, []);
   return (
     <>
       {/* HERO SECTION */}
@@ -183,7 +203,8 @@ function Home() {
 
       </section>
 
-      {/* GALLERY */}
+
+{/* GALLERY */}
 
 <section className="home-gallery">
 
@@ -203,64 +224,41 @@ function Home() {
 
   </div>
 
+  <div className="home-gallery-grid">
 
-  <div className="gallery-grid">
+    {galleryImages.length === 0 ? (
 
-    <div className="gallery-item">
-      <img src={color1} alt="School Activity" />
-      <div className="gallery-placeholder">
-        <i className="fa-solid fa-image"></i>
-        <span>School Activity</span>
-      </div>
-    </div>
+      <p className="home-gallery-empty">
+        Gallery images will be displayed here soon.
+      </p>
 
+    ) : (
 
-    <div className="gallery-item">
-      <img src={color2} alt="Classroom" />
-      <div className="gallery-placeholder">
-        <i className="fa-solid fa-image"></i>
-        <span>Classroom</span>
-      </div>
-    </div>
+      galleryImages.map((item) => (
 
+        <div className="home-gallery-item" key={item._id}>
 
-    <div className="gallery-item">
-      <img src={color3} alt="Sports Activity" />
-      <div className="gallery-placeholder">
-        <i className="fa-solid fa-image"></i>
-        <span>Sports Activity</span>
-      </div>
-    </div>
+          <img
+            src={item.imageUrl}
+            alt={item.title}
+            loading="lazy"
+          />
 
+          <div className="home-gallery-placeholder">
 
-    <div className="gallery-item">
-      <img src={color4} alt="Art and Craft" />
-      <div className="gallery-placeholder">
-        <i className="fa-solid fa-image"></i>
-        <span>Art & Craft</span>
-      </div>
-    </div>
+            <i className="fa-solid fa-image"></i>
 
+            <span>{item.title}</span>
 
-    <div className="gallery-item">
-      <img src={color5} alt="Celebration" />
-      <div className="gallery-placeholder">
-        <i className="fa-solid fa-image"></i>
-        <span>Celebration</span>
-      </div>
-    </div>
+          </div>
 
+        </div>
 
-    <div className="gallery-item">
-      <img src={color6} alt="School Event" />
-      <div className="gallery-placeholder">
-        <i className="fa-solid fa-image"></i>
-        <span>School Event</span>
-      </div>
-    </div>
+      ))
+
+    )}
 
   </div>
-
 
   <Link to="/gallery" className="btn gallery-btn">
     View Full Gallery
@@ -268,6 +266,7 @@ function Home() {
   </Link>
 
 </section>
+
 
 
       {/* FACTS */}
@@ -422,5 +421,5 @@ function Home() {
     </>
   );
 }
-
+}
 export default Home;

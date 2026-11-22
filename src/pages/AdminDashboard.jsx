@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 const API_URL = "https://nurture-grow-backend.onrender.com/api/media";
