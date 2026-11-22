@@ -12,7 +12,7 @@ function Gallery() {
     const fetchImages = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/media"
+          "https://nurture-grow-backend.onrender.com/api/media"
         );
 
         if (!response.ok) {

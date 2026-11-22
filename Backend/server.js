@@ -11,7 +11,9 @@ import mediaRoutes from "./routes/mediaRoutes.js";
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://nurture-and-grow-school.onrender.com"
+}));
 app.use(express.json());
 
 connectDB();

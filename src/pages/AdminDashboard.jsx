@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:5000/api/media";
+const API_URL = "https://nurture-grow-backend.onrender.com/api/media";
 
 function AdminDashboard() {
   const [title, setTitle] = useState("");
