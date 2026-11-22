@@ -1,270 +1,261 @@
-import { useState } from "react";
-import Hero from "../components/hero";
-import "./Gallery.css";
-import { Link } from "react-router-dom";
-import hero from "../assets/gallery-hero.jpeg";
 
-// Images
-import color1 from "../assets/gallery/images/color1.jpeg"
-import color2 from "../assets/gallery/images/color2.jpeg"
-import color3 from "../assets/gallery/images/color3.jpeg"
-import color4 from "../assets/gallery/images/color4.jpeg"
-import color5 from "../assets/gallery/images/color5.jpeg"
-import color6 from "../assets/gallery/images/color6.jpeg"
-import compp1 from "../assets/gallery/images/compp1.jpeg";
-
-
-// // Videos
-import colorv1 from "../assets/gallery/videos/colorv1.mp4";
-import colorv2 from "../assets/gallery/videos/colorv2.mp4";
-import colorv3 from "../assets/gallery/videos/colorv3.mp4";
-import comp1 from "../assets/gallery/videos/comp1.mp4";
-import comp2 from "../assets/gallery/videos/comp2.mp4";
-import comp3 from "../assets/gallery/videos/comp3.mp4";
-import comp4 from "../assets/gallery/videos/comp4.mp4";
-import comp5 from "../assets/gallery/videos/comp5.mp4";
-import e1 from "../assets/gallery/videos/e1.mp4";
-import e2 from "../assets/gallery/videos/e2.mp4";
-import e3 from "../assets/gallery/videos/e3.mp4";
-import e4 from "../assets/gallery/videos/e4.mp4";
-import e5 from "../assets/gallery/videos/e5.mp4";
-import e6 from "../assets/gallery/videos/e6.mp4";
-
-
+import { useEffect, useState } from "react";
 
 function Gallery() {
-const [filter,setFilter]=useState("all");
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedImage, setSelectedImage] = useState(null);
 
-const gallery=[
-{
-id:1,
-type:"image",
-category:"color",
-src:color1
-},
-{
-id:2,
-type:"image",
-category:"color",
-src:color2
-},
-{
-id:3,
-type:"image",
-category:"color",
-src:color3
-},
-{
-id:4,
-type:"image",
-category:"color",
-src:color4
-},
-{
-id:5,
-type:"image",
-category:"color",
-src:color5
-},
-{
-id:6,
-type:"image",
-category:"color",
-src:color6
-},
-{
-id:7,
-type:"video",
-category:"color",
-src:colorv1
-},
-{
-id:8,
-type:"video",
-category:"color",
-src:colorv2
-},
-{
-id:9,
-type:"video",
-category:"competition",
-src:comp1
-},
-{
-id:10,
-type:"video",
-category:"competition",
-src:comp2
-},
-{
-id:11,
-type:"video",
-category:"competition",
-src:comp3
-},
-{
-id:12,
-type:"video",
-category:"competition",
-src:comp4
-},
-{
-id:13,
-type:"video",
-category:"competition",
-src:comp5
-},
-{
-id:14,
-type:"video",
-category:"events",
-src:e1
-},
-{
-id:15,
-type:"video",
-category:"events",
-src:e2
-},
-{
-id:16,
-type:"video",
-category:"events",
-src:e3
-},
-{
-id:17,
-type:"video",
-category:"events",
-src:e4
-},
-{
-id:18,
-type:"video",
-category:"events",
-src:e5
-},
-{
-id:19,
-type:"video",
-category:"events",
-src:e6
-},
-{
-id:20,
-type:"video",
-category:"color",
-src:colorv3
-},
-{
-id:21,
-type:"image",
-category:"competition",
-src:compp1
-}
-];
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/media"
+        );
 
-const filteredGallery=
-filter==="all"?gallery:
-filter==="photos"?gallery.filter(item=>item.type==="image")
-:filter==="videos"?gallery.filter(item=>item.type==="video")
-:gallery.filter(item=>item.category===filter);
+        if (!response.ok) {
+          throw new Error("Failed to load gallery images");
+        }
 
-return(
+        const data = await response.json();
+        setImages(data);
 
-<>
-<Hero
-tag="GALLERY"
-title="Capturing Beautiful School Memories"
-subtitle="Explore our celebrations, competitions, sports and classroom activities."
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  // Get unique categories dynamically
+  const categories = [
+    "All",
+    ...new Set(images.map((item) => item.category))
+  ];
+
+  // Filter images
+  const filteredImages =
+    selectedCategory === "All"
+      ? images
+      : images.filter(
+          (item) => item.category === selectedCategory
+        );
+
+  if (loading) {
+    return <h3 style={{ textAlign: "center", padding: "50px" }}>
+      Loading gallery...
+    </h3>;
+  }
+
+  if (error) {
+    return <p style={{ textAlign: "center" }}>{error}</p>;
+  }
+
+  return (
+    <div
+      style={{
+        padding: "50px 5%",
+        backgroundColor: "#f8fafc",
+        minHeight: "80vh"
+      }}
+    >
+      {/* Heading */}
+      <div style={{ textAlign: "center", marginBottom: "35px" }}>
+        <h1
+          style={{
+            color: "#174873",
+            fontSize: "36px",
+            marginBottom: "10px"
+          }}
+        >
+          Our School Gallery
+        </h1>
+
+        <p style={{ color: "#666", fontSize: "16px" }}>
+          Explore the beautiful moments and activities of our school.
+        </p>
+      </div>
+
+      {/* Category Filters */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: "12px",
+          marginBottom: "40px"
+        }}
+      >
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            style={{
+              padding: "10px 22px",
+              borderRadius: "25px",
+              border: "none",
+              cursor: "pointer",
+              fontWeight: "600",
+              backgroundColor:
+                selectedCategory === category
+                  ? "#174873"
+                  : "#e2e8f0",
+              color:
+                selectedCategory === category
+                  ? "white"
+                  : "#333",
+              transition: "0.3s"
+            }}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      {/* Gallery Images */}
+      {filteredImages.length === 0 ? (
+        <p style={{ textAlign: "center", color: "#666" }}>
+          No images available in this category.
+        </p>
+      ) : (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(250px, 1fr))",
+            gap: "25px"
+          }}
+        >
+          {filteredImages.map((item) => (
+            <div
+              key={item._id}
+              style={{
+                backgroundColor: "white",
+                borderRadius: "14px",
+                overflow: "hidden",
+                boxShadow: "0 4px 15px rgba(0,0,0,0.08)",
+                transition: "transform 0.3s"
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-5px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              <img
+  src={item.imageUrl}
+  alt={item.title}
+  loading="lazy"
+  onClick={() => setSelectedImage(item)}
+  style={{
+    width: "100%",
+    height: "230px",
+    objectFit: "cover",
+    display: "block",
+    cursor: "pointer"
+  }}
 />
 
-<section className="gallery-filter">
+              <div style={{ padding: "18px" }}>
+                <h3
+                  style={{
+                    color: "#174873",
+                    margin: "0 0 8px"
+                  }}
+                >
+                  {item.title}
+                </h3>
 
- <button
-   className={filter==="all"?"active":""}
-   onClick={()=>setFilter("all")}
-   >
-   All
- </button>
+                <span
+                  style={{
+                    backgroundColor: "#e0f2fe",
+                    color: "#075985",
+                    padding: "6px 12px",
+                    borderRadius: "20px",
+                    fontSize: "13px"
+                  }}
+                >
+                  {item.category}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
- <button
-   className={filter==="photos"?"active":""}
-   onClick={()=>setFilter("photos")}
-   >
-   Photos
- </button>
-
- <button
-   className={filter==="videos"?"active":""}
-   onClick={()=>setFilter("videos")}
-   >
-   Videos
- </button>
-
- <button
-   className={filter==="color"?"active":""}
-   onClick={()=>setFilter("color")}
-   >
-   Color Day
- </button>
-
- <button
-   className={filter==="competition"?"active":""}
-   onClick={()=>setFilter("competition")}
-   >
-   Competitions
- </button>
-
- <button
-   className={filter==="events"?"active":""}
-   onClick={()=>setFilter("events")}
-   >
-   Events
- </button>
-
-</section>
-
-<section className="gallery-grid">
- {
- filteredGallery.map((item)=>(
+{selectedImage && (
   <div
-  className="gallery-card"
-  key={item.id}
- >
- {
-  item.type==="image"?
- <img
- src={item.src}
- alt=""
- />
- :
- <video controls>
- <source
- src={item.src}
- type="video/mp4"
- />
- </video>
- }
- </div>
- ))
- }
- </section>
+    onClick={() => setSelectedImage(null)}
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0,0,0,0.9)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 9999,
+      padding: "20px",
+      boxSizing: "border-box"
+    }}
+  >
+    <button
+      onClick={() => setSelectedImage(null)}
+      aria-label="Close image preview"
+      style={{
+        position: "absolute",
+        top: "20px",
+        right: "30px",
+        color: "white",
+        background: "transparent",
+        border: "none",
+        fontSize: "35px",
+        cursor: "pointer"
+      }}
+    >
+      &times;
+    </button>
 
-{/* CTA */}
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        textAlign: "center",
+        maxWidth: "900px",
+        width: "100%"
+      }}
+    >
+      <img
+        src={selectedImage.imageUrl}
+        alt={selectedImage.title}
+        style={{
+          maxWidth: "100%",
+          maxHeight: "75vh",
+          objectFit: "contain",
+          borderRadius: "10px"
+        }}
+      />
 
-  <section className="cta">
-    <h2>Give Your Child the Best Future</h2>
-    <p>
-      Admissions are open from Nursery to Grade 7.
-      Join Nurture & Grow Primary School today.
-    </p>
-    <Link to="/admissions" className="apply-btn">
-     Apply Now
-    </Link>
+      <h2 style={{ color: "white" }}>
+        {selectedImage.title}
+      </h2>
 
-      </section>
-</>
-)
+      <p style={{ color: "#ddd" }}>
+        {selectedImage.category}
+      </p>
+    </div>
+  </div>
+)}
+
+    </div>
+  );
 }
+
 export default Gallery;
