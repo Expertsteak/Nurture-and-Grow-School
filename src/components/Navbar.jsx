@@ -23,6 +23,7 @@ function Navbar() {
           <h2>Nurture & Grow</h2>
 
           <p>Primary School</p>
+          <p>Recognised by Govt. of Telengana</p>
 
         </div>
 
