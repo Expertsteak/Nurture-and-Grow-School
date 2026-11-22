@@ -1,4 +1,4 @@
-
+import Hero from "../components/hero";
 import { useEffect, useState } from "react";
 import "./Gallery.css";
 
@@ -54,7 +54,11 @@ function Gallery() {
 
   return (
     <div className="school-gallery">
-
+    <Hero
+  tag="OUR MEMORIES"
+  title="Explore Our School Gallery"
+  subtitle="Discover the beautiful moments, creative activities, celebrations and unforgettable memories of our school."
+     />
       {/* HEADING */}
       <div className="gallery-heading">
         <h1>Our School Gallery</h1>
