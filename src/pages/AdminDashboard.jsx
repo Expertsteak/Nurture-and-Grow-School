@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ManageEvents from "../components/ManageEvents";
 import "./AdminDashboard.css";
+import ManageNotices from "../components/ManageNotices";
 
 const API_URL = "https://nurture-grow-backend.onrender.com/api/media";
 
@@ -127,6 +128,9 @@ function AdminDashboard() {
 
       {/* EVENTS MANAGEMENT */}
       <ManageEvents />
+
+      {/* NOTICE BOARD MANAGEMENT */}
+      <ManageNotices />
 
       {/* GALLERY UPLOAD */}
       <section className="admin-upload-section">

@@ -1,0 +1,203 @@
+.manage-notices {
+  margin: 50px 0;
+  padding: 30px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 15px;
+}
+
+.manage-notices-heading {
+  margin-bottom: 25px;
+}
+
+.manage-notices-heading h3,
+.notice-admin-list > h4 {
+  color: #14532d;
+  font-size: 23px;
+  margin-bottom: 10px;
+}
+
+.manage-notices-heading p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.notice-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 25px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.notice-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.notice-form-group label {
+  color: #374151;
+  font-weight: 600;
+}
+
+.notice-form-group input,
+.notice-form-group select,
+.notice-form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font: inherit;
+  outline: none;
+}
+
+.notice-form-group input:focus,
+.notice-form-group select:focus,
+.notice-form-group textarea:focus {
+  border-color: #17b978;
+  box-shadow: 0 0 0 3px rgba(23, 185, 120, 0.12);
+}
+
+.notice-form-group textarea {
+  resize: vertical;
+}
+
+.notice-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.notice-form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.notice-form-actions button,
+.notice-admin-buttons button {
+  padding: 11px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #17b978;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.notice-form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.notice-form-actions .notice-cancel-btn {
+  background: #64748b;
+}
+
+.notice-admin-message {
+  margin: 18px 0;
+  padding: 12px;
+  text-align: center;
+  color: #14532d;
+  background: #ecfdf5;
+  border-radius: 8px;
+}
+
+.notice-admin-list {
+  margin-top: 40px;
+}
+
+.notice-admin-list > h4 {
+  margin-bottom: 20px;
+}
+
+.notice-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.notice-admin-card {
+  min-width: 0;
+  padding: 22px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow-wrap: anywhere;
+}
+
+.notice-admin-category {
+  display: inline-block;
+  padding: 6px 11px;
+  background: #ecfdf5;
+  color: #14532d;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.notice-admin-card h4 {
+  margin: 14px 0;
+  color: #14532d;
+  font-size: 19px;
+}
+
+.notice-admin-description {
+  color: #64748b;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.notice-admin-card > p:not(.notice-admin-description) {
+  color: #475569;
+  font-size: 14px;
+}
+
+.notice-admin-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.notice-admin-buttons button {
+  flex: 1;
+}
+
+.notice-admin-buttons .notice-admin-delete {
+  background: #dc2626;
+}
+
+.notice-admin-empty {
+  padding: 25px;
+  text-align: center;
+  color: #64748b;
+  background: white;
+  border-radius: 10px;
+}
+
+@media (max-width: 650px) {
+  .manage-notices {
+    padding: 18px;
+  }
+
+  .notice-form {
+    padding: 18px;
+  }
+
+  .notice-form-row,
+  .notice-admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .notice-form-actions {
+    flex-direction: column;
+  }
+
+  .notice-form-actions button {
+    width: 100%;
+  }
+}
