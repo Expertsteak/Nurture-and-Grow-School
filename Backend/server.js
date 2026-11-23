@@ -7,12 +7,16 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import authMiddleware from "./middleware/authMiddleware.js";
 import mediaRoutes from "./routes/mediaRoutes.js";
+import eventRoutes from "./routes/eventRoutes.js";
 
 
 const app = express();
 
 app.use(cors({
-  origin: "https://nurture-and-grow-school.onrender.com"
+  origin: [
+    "https://nurture-and-grow-school.onrender.com",
+    "http://localhost:5173"
+  ]
 }));
 app.use(express.json());
 
@@ -24,6 +28,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/media", mediaRoutes);
+app.use("/api/events", eventRoutes);
 
 app.get("/api/admin/check", authMiddleware, (req, res) => {
   res.status(200).json({

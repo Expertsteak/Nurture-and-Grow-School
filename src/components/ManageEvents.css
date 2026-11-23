@@ -1,0 +1,166 @@
+
+.manage-events {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.manage-events h2 {
+  text-align: center;
+  color: #14532d;
+  margin-bottom: 30px;
+}
+
+.event-form {
+  background: #f8fafc;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.event-form h3 {
+  color: #14532d;
+}
+
+.event-form input,
+.event-form textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.event-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.event-form label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.event-form button {
+  padding: 13px;
+  background: #17b978;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.event-form button:hover {
+  background: #14532d;
+}
+
+.event-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.event-form .event-cancel-btn {
+  background: #64748b;
+}
+
+.event-message {
+  text-align: center;
+  font-weight: 600;
+}
+
+.admin-events-list {
+  margin-top: 40px;
+}
+
+.admin-events-list > h3 {
+  color: #14532d;
+  margin-bottom: 20px;
+}
+
+.admin-event-card {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+.admin-event-card > img {
+  width: 220px;
+  min-height: 180px;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.admin-event-info {
+  flex: 1;
+}
+
+.admin-event-info h4 {
+  color: #14532d;
+  margin-top: 0;
+}
+
+.admin-event-info p {
+  line-height: 1.6;
+  color: #555;
+}
+
+.admin-event-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.admin-event-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+}
+
+.event-edit-btn {
+  background: #17b978;
+}
+
+.event-edit-btn:hover {
+  background: #14532d;
+}
+
+.event-delete-btn {
+  background: #dc2626;
+}
+
+.event-delete-btn:hover {
+  background: #991b1b;
+}
+
+@media (max-width: 650px) {
+  .admin-event-card {
+    flex-direction: column;
+  }
+
+  .admin-event-card > img {
+    width: 100%;
+    max-height: 250px;
+  }
+
+  .admin-event-actions {
+    flex-wrap: wrap;
+  }
+
+  .manage-events {
+    padding: 12px;
+  }
+}
