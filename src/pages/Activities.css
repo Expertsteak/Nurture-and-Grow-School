@@ -226,3 +226,146 @@
     font-size: 21px;
   }
 }
+
+/* NOTICE BOARD SECTION */
+
+.notice-board-section {
+  max-width: 1100px;
+  margin: 70px auto;
+  padding: 0 25px;
+}
+
+.notice-board-heading {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.notice-board-heading span {
+  color: #17b978;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+
+.notice-board-heading h2 {
+  color: #14532d;
+  font-size: 35px;
+  margin: 15px 0;
+}
+
+.notice-board-heading p {
+  color: #64748b;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.notice-board-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.public-notice-card {
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 14px;
+  border-left: 5px solid #17b978;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+  transition: 0.3s ease;
+}
+
+.public-notice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+}
+
+.public-notice-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.public-notice-category {
+  display: inline-block;
+  background: #dcfce7;
+  color: #166534;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.public-notice-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.public-notice-date i {
+  color: #17b978;
+}
+
+.public-notice-card h3 {
+  color: #14532d;
+  font-size: 22px;
+  margin-bottom: 12px;
+  overflow-wrap: anywhere;
+}
+
+.public-notice-description {
+  color: #475569;
+  font-size: 15px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.public-notice-expiry {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.notice-board-status {
+  text-align: center;
+  padding: 35px 20px;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.notice-board-error {
+  color: #dc2626;
+}
+
+/* NOTICE BOARD RESPONSIVE */
+
+@media (max-width: 600px) {
+  .notice-board-section {
+    margin: 45px auto;
+    padding: 0 15px;
+  }
+
+  .notice-board-heading h2 {
+    font-size: 28px;
+  }
+
+  .public-notice-card {
+    padding: 20px;
+  }
+
+  .public-notice-card h3 {
+    font-size: 20px;
+  }
+
+  .public-notice-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
