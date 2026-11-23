@@ -1,13 +1,13 @@
-
 import "./Admissions.css";
 import Hero from "../components/hero";
 import { useState } from "react";
 
-const API_URL = "http://localhost:5000/api/submissions";
+// Automatically use local or deployed backend
+const API_URL = import.meta.env.DEV
+  ? "http://localhost:5000/api/submissions"
+  : "https://nurture-grow-backend.onrender.com/api/submissions";
 
 function Admissions() {
-
-  // FORM STATE
   const [formData, setFormData] = useState({
     parentName: "",
     studentName: "",
@@ -19,6 +19,7 @@ function Admissions() {
 
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
+  const [statusType, setStatusType] = useState("");
 
   // HANDLE INPUT
   const handleChange = (e) => {
@@ -37,6 +38,7 @@ function Admissions() {
     try {
       setLoading(true);
       setStatus("");
+      setStatusType("");
 
       const response = await fetch(
         `${API_URL}/admission-enquiries`,
@@ -49,15 +51,34 @@ function Admissions() {
         }
       );
 
+      const contentType =
+        response.headers.get("content-type") || "";
+
+      if (!contentType.includes("application/json")) {
+        const responseText = await response.text();
+
+        console.error(
+          "Non-JSON backend response:",
+          responseText.slice(0, 300)
+        );
+
+        throw new Error(
+          "Backend API error. Please check the backend route."
+        );
+      }
+
       const data = await response.json();
 
       if (!response.ok) {
         throw new Error(
-          data.message || "Submission failed"
+          data.message || "Submission failed."
         );
       }
 
-      setStatus("Admission enquiry submitted successfully!");
+      setStatus(
+        "Admission enquiry submitted successfully!"
+      );
+      setStatusType("success");
 
       setFormData({
         parentName: "",
@@ -70,7 +91,14 @@ function Admissions() {
 
     } catch (error) {
       console.error("Admission submission error:", error);
-      setStatus(error.message || "Something went wrong. Please try again.");
+
+      setStatus(
+        error.message ||
+        "Something went wrong. Please try again."
+      );
+
+      setStatusType("error");
+
     } finally {
       setLoading(false);
     }
@@ -242,12 +270,10 @@ function Admissions() {
           </p>
         </div>
 
-        {/* FORM */}
         <form
           className="admission-form"
           onSubmit={handleSubmit}
         >
-          {/* Parent Name */}
           <input
             type="text"
             name="parentName"
@@ -257,7 +283,6 @@ function Admissions() {
             required
           />
 
-          {/* Student Name */}
           <input
             type="text"
             name="studentName"
@@ -267,7 +292,6 @@ function Admissions() {
             required
           />
 
-          {/* Email */}
           <input
             type="email"
             name="email"
@@ -277,7 +301,6 @@ function Admissions() {
             required
           />
 
-          {/* Phone */}
           <input
             type="tel"
             name="phone"
@@ -287,7 +310,6 @@ function Admissions() {
             required
           />
 
-          {/* Class */}
           <select
             name="class"
             value={formData.class}
@@ -307,7 +329,6 @@ function Admissions() {
             <option value="Grade 7">Grade 7</option>
           </select>
 
-          {/* Message */}
           <textarea
             name="message"
             rows="5"
@@ -316,7 +337,6 @@ function Admissions() {
             onChange={handleChange}
           ></textarea>
 
-          {/* Submit */}
           <button
             type="submit"
             disabled={loading}
@@ -328,9 +348,11 @@ function Admissions() {
             )}
           </button>
 
-          {/* Status */}
           {status && (
-            <p className="form-status" role="status">
+            <p
+              className={`form-status ${statusType}`}
+              role="status"
+            >
               {status}
             </p>
           )}

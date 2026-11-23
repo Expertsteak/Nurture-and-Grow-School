@@ -1,12 +1,15 @@
-
 import express from "express";
+import mongoose from "mongoose";
+
 import AdmissionEnquiry from "../models/AdmissionEnquiry.js";
 import ContactMessage from "../models/ContactMessage.js";
 import CareerApplication from "../models/CareerApplication.js";
+
 import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
+// FORM CONFIGURATION
 const resources = {
   admissions: {
     model: AdmissionEnquiry,
@@ -30,7 +33,7 @@ const resources = {
   contacts: {
     model: ContactMessage,
     fields: ["name", "email", "phone", "message"],
-    required: ["name", "email", "phone", "message"],
+    required: ["name", "email", "message"],
   },
 
   careers: {
@@ -54,9 +57,18 @@ const resources = {
   },
 };
 
-// PUBLIC: Submit a form
+// FRONTEND URLS
+const endpoints = {
+  admissions: "admission-enquiries",
+  contacts: "contact-messages",
+  careers: "career-applications",
+};
+
+// PUBLIC: SUBMIT FORMS
 Object.entries(resources).forEach(([type, config]) => {
-  router.post(`/${type}`, async (req, res) => {
+  const endpoint = endpoints[type];
+
+  router.post(`/${endpoint}`, async (req, res) => {
     try {
       const missing = config.required.some(
         (field) =>
@@ -81,40 +93,52 @@ Object.entries(resources).forEach(([type, config]) => {
 
       const saved = await config.model.create(submission);
 
-      res.status(201).json({
+      return res.status(201).json({
         message: "Submission saved successfully!",
         id: saved._id,
       });
+
     } catch (error) {
       console.error(`${type} submission error:`, error);
-      res.status(500).json({
+
+      return res.status(500).json({
         message: "Failed to save submission.",
       });
     }
   });
 
-  // ADMIN: Fetch submissions
-  router.get(`/${type}`, authMiddleware, async (req, res) => {
+  // ADMIN: FETCH SUBMISSIONS
+  router.get(`/${endpoint}`, authMiddleware, async (req, res) => {
     try {
       const submissions = await config.model
         .find()
         .sort({ createdAt: -1 });
 
-      res.status(200).json(submissions);
+      return res.status(200).json(submissions);
+
     } catch (error) {
       console.error(`${type} fetch error:`, error);
-      res.status(500).json({
+
+      return res.status(500).json({
         message: "Failed to fetch submissions.",
       });
     }
   });
 
-  // ADMIN: Mark as read or unread
+  // ADMIN: MARK AS READ / UNREAD
   router.patch(
-    `/${type}/:id/read`,
+    `/${endpoint}/:id/read`,
     authMiddleware,
     async (req, res) => {
       try {
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+          return res.status(400).json({
+            message: "Invalid submission ID.",
+          });
+        }
+
         if (typeof req.body.isRead !== "boolean") {
           return res.status(400).json({
             message: "isRead must be true or false.",
@@ -122,7 +146,7 @@ Object.entries(resources).forEach(([type, config]) => {
         }
 
         const submission = await config.model.findByIdAndUpdate(
-          req.params.id,
+          id,
           { isRead: req.body.isRead },
           { new: true, runValidators: true }
         );
@@ -133,28 +157,36 @@ Object.entries(resources).forEach(([type, config]) => {
           });
         }
 
-        res.status(200).json({
+        return res.status(200).json({
           message: "Read status updated.",
           submission,
         });
+
       } catch (error) {
         console.error(`${type} update error:`, error);
-        res.status(400).json({
+
+        return res.status(500).json({
           message: "Could not update submission.",
         });
       }
     }
   );
 
-  // ADMIN: Delete submission
+  // ADMIN: DELETE SUBMISSION
   router.delete(
-    `/${type}/:id`,
+    `/${endpoint}/:id`,
     authMiddleware,
     async (req, res) => {
       try {
-        const submission = await config.model.findByIdAndDelete(
-          req.params.id
-        );
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+          return res.status(400).json({
+            message: "Invalid submission ID.",
+          });
+        }
+
+        const submission = await config.model.findByIdAndDelete(id);
 
         if (!submission) {
           return res.status(404).json({
@@ -162,12 +194,14 @@ Object.entries(resources).forEach(([type, config]) => {
           });
         }
 
-        res.status(200).json({
+        return res.status(200).json({
           message: "Submission deleted successfully.",
         });
+
       } catch (error) {
         console.error(`${type} delete error:`, error);
-        res.status(400).json({
+
+        return res.status(500).json({
           message: "Could not delete submission.",
         });
       }

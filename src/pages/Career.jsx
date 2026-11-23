@@ -1,10 +1,11 @@
-
 import { useState } from "react";
 import "./Career.css";
 import Hero from "../components/hero";
 
-// Local backend URL
-const API_URL = "http://localhost:5000/api/submissions";
+// Automatically select local or deployed backend
+const API_URL = import.meta.env.DEV
+  ? "http://localhost:5000/api/submissions"
+  : "https://nurture-grow-backend.onrender.com/api/submissions";
 
 function Career() {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ function Career() {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
 
-  // Handle input changes
+  // HANDLE INPUT
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -30,60 +31,77 @@ function Career() {
     }));
   };
 
-  // Submit application
-  
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  // SUBMIT APPLICATION
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    setLoading(true);
-    setMessage("");
+    try {
+      setLoading(true);
+      setMessage("");
+      setMessageType("");
 
-    const response = await fetch(
-      `${API_URL}/career-applications`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-    );
-
-    const contentType =
-      response.headers.get("content-type") || "";
-
-    if (!contentType.includes("application/json")) {
-      throw new Error("Backend API did not return JSON.");
-    }
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        data.message || "Application submission failed."
+      const response = await fetch(
+        `${API_URL}/career-applications`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
       );
+
+      // Check response type
+      const contentType =
+        response.headers.get("content-type") || "";
+
+      if (!contentType.includes("application/json")) {
+        const responseText = await response.text();
+
+        console.error(
+          "Non-JSON backend response:",
+          responseText.slice(0, 300)
+        );
+
+        throw new Error(
+          "Backend API error. Please check the server and API route."
+        );
+      }
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Application submission failed."
+        );
+      }
+
+      setMessage("Application submitted successfully!");
+      setMessageType("success");
+
+      // Clear form after successful submission
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        qualification: "",
+        experience: "",
+        position: "",
+      });
+
+    } catch (error) {
+      console.error("Career submission error:", error);
+
+      setMessage(
+        error.message || "Something went wrong. Please try again."
+      );
+
+      setMessageType("error");
+
+    } finally {
+      setLoading(false);
     }
-
-    setMessage("Application submitted successfully!");
-
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      qualification: "",
-      experience: "",
-      position: "",
-    });
-
-  } catch (error) {
-    console.error("Career submission error:", error);
-    setMessage(error.message || "Something went wrong.");
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   return (
     <>
@@ -277,7 +295,7 @@ const handleSubmit = async (e) => {
             </select>
           </div>
 
-          {/* SUBMIT BUTTON */}
+          {/* SUBMIT */}
           <button
             type="submit"
             disabled={loading}
@@ -287,7 +305,7 @@ const handleSubmit = async (e) => {
               : "Submit Application"}
           </button>
 
-          {/* STATUS MESSAGE */}
+          {/* STATUS */}
           {message && (
             <p
               className={`form-message ${messageType}`}

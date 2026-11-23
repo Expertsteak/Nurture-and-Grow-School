@@ -1,13 +1,13 @@
-
 import "./Contact.css";
 import Hero from "../components/hero";
 import { useState } from "react";
 
-// Local backend URL
-const API_URL = "http://localhost:5000/api/submissions";
+// Automatically select local or deployed backend
+const API_URL = import.meta.env.DEV
+  ? "http://localhost:5000/api/submissions"
+  : "https://nurture-grow-backend.onrender.com/api/submissions";
 
 function Contact() {
-  // FORM STATE
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,7 +38,6 @@ function Contact() {
       setStatus("");
       setStatusType("");
 
-      // Save contact message in MongoDB
       const response = await fetch(
         `${API_URL}/contact-messages`,
         {
@@ -75,7 +74,6 @@ function Contact() {
         );
       }
 
-      // Success
       setStatus("Message sent successfully!");
       setStatusType("success");
 
