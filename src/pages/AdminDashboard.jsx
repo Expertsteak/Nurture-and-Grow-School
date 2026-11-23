@@ -1,5 +1,5 @@
-
 import { useEffect, useState } from "react";
+import ManageEvents from "../components/ManageEvents";
 import "./AdminDashboard.css";
 
 const API_URL = "https://nurture-grow-backend.onrender.com/api/media";
@@ -12,7 +12,6 @@ function AdminDashboard() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  // FETCH IMAGES
   const fetchMedia = async () => {
     try {
       const response = await fetch(API_URL);
@@ -32,7 +31,6 @@ function AdminDashboard() {
     fetchMedia();
   }, []);
 
-  // UPLOAD IMAGE
   const handleUpload = async (e) => {
     e.preventDefault();
 
@@ -72,11 +70,9 @@ function AdminDashboard() {
       }
 
       setMessage("Image uploaded successfully!");
-
       setTitle("");
       setCategory("Events");
       setImage(null);
-
       e.target.reset();
 
       await fetchMedia();
@@ -87,7 +83,6 @@ function AdminDashboard() {
     }
   };
 
-  // DELETE IMAGE
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this image?"
@@ -117,7 +112,6 @@ function AdminDashboard() {
       }
 
       setMessage("Image deleted successfully!");
-
       await fetchMedia();
     } catch (error) {
       setMessage(error.message);
@@ -126,23 +120,21 @@ function AdminDashboard() {
 
   return (
     <div className="admin-dashboard">
-
-      {/* HEADER */}
       <div className="admin-header">
         <h2>Admin Dashboard</h2>
-        <p>Manage your school gallery</p>
+        <p>Manage your school gallery and events</p>
       </div>
 
-      {/* UPLOAD SECTION */}
-      <section className="admin-upload-section">
+      {/* EVENTS MANAGEMENT */}
+      <ManageEvents />
 
+      {/* GALLERY UPLOAD */}
+      <section className="admin-upload-section">
         <h3>Upload Gallery Image</h3>
 
         <form className="admin-upload-form" onSubmit={handleUpload}>
-
           <div className="admin-form-group">
             <label>Image Title</label>
-
             <input
               className="admin-input"
               type="text"
@@ -155,7 +147,6 @@ function AdminDashboard() {
 
           <div className="admin-form-group">
             <label>Category</label>
-
             <select
               className="admin-input"
               value={category}
@@ -171,7 +162,6 @@ function AdminDashboard() {
 
           <div className="admin-form-group">
             <label>Select Image</label>
-
             <input
               className="admin-input admin-file-input"
               type="file"
@@ -188,30 +178,21 @@ function AdminDashboard() {
           >
             {loading ? "Uploading..." : "Upload Image"}
           </button>
-
         </form>
 
-        {message && (
-          <p className="admin-message">{message}</p>
-        )}
-
+        {message && <p className="admin-message">{message}</p>}
       </section>
 
-      {/* GALLERY SECTION */}
+      {/* GALLERY MANAGEMENT */}
       <section className="admin-gallery-section">
-
         <h3>Uploaded Gallery Images ({media.length})</h3>
 
         {media.length === 0 ? (
-          <p className="admin-empty">
-            No images uploaded yet.
-          </p>
+          <p className="admin-empty">No images uploaded yet.</p>
         ) : (
           <div className="admin-gallery-grid">
-
             {media.map((item) => (
               <div className="admin-gallery-card" key={item._id}>
-
                 <img
                   src={item.imageUrl}
                   alt={item.title}
@@ -229,15 +210,11 @@ function AdminDashboard() {
                     Delete
                   </button>
                 </div>
-
               </div>
             ))}
-
           </div>
         )}
-
       </section>
-
     </div>
   );
 }

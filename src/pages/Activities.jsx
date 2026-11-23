@@ -1,286 +1,145 @@
+
+import { useEffect, useState } from "react";
 import Hero from "../components/hero";
 import "./Activities.css";
-import plantation from "../assets/plantation.jpeg";
-import art from "../assets/art&craft.jpeg";
-import sports from "../assets/sports.jpeg";
-// import yoga from "../assets/yoga.jpeg";
-import { Link } from "react-router-dom";
+
+const API_URL = "https://nurture-grow-backend.onrender.com/api/events";
 
 function Activities() {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch events");
+        }
+
+        const data = await response.json();
+        setEvents(data);
+      } catch (err) {
+        setError("Unable to load events at the moment.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  const formatDate = (date) => {
+    return new Date(date).toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
+
   return (
     <>
       <Hero
-        title="School Activities"
-        subtitle="Learning Beyond the Classroom"
+        title="School Events"
+        subtitle="Celebrating Learning, Creativity & Togetherness"
       />
 
-      {/*INTRO */}
+      {/* INTRO */}
 
-      <section className="activity-intro">
-        <div className="intro-text">
-          <span>Co-Curricular Activities</span>
-          <h2>Learning Beyond Books</h2>
+      <section className="events-intro">
+        <div className="events-intro-text">
+          <span>Memories & Moments</span>
+          <h2>Life at Nurture & Grow</h2>
+
           <p>
-            At Nurture & Grow Primary School, we believe that education is
-            more than textbooks. Every child deserves opportunities to
-            discover their talents, develop confidence, build friendships,
-            and learn valuable life skills.
+            At Nurture & Grow Primary School, every event is an
+            opportunity for children to learn, explore, express
+            themselves and create wonderful memories.
           </p>
+
           <p>
-            Through sports, celebrations, cultural events, creative
-            activities and personality development programs, we nurture
-            every child's physical, emotional and intellectual growth.
+            From cultural celebrations and competitions to educational
+            activities and special occasions, our school events help
+            children build confidence, creativity, teamwork and
+            meaningful friendships.
           </p>
         </div>
       </section>
 
-      {/* ACTIVITIES  */}
+      {/* EVENTS */}
 
-      <section className="activities">
-        <h2>Our Activities</h2>
-        <div className="activity-grid">
-          <div className="activity-card">
-            <i className="fa-solid fa-seedling"></i>
-            <h3>Plantation Activities</h3>
-            <p>
-              Teaching students to care for nature through plantation
-              drives and environmental awareness.
-            </p>
-          </div>
-
-          <div className="activity-card">
-            <i className="fa-solid fa-futbol"></i>
-            <h3>Sports</h3>
-            <p>
-              Indoor and outdoor sports that improve teamwork,
-              confidence and physical fitness.
-            </p>
-          </div>
-
-          <div className="activity-card">
-            <i className="fa-solid fa-person-praying"></i>
-            <h3>Yoga</h3>
-            <p>
-              Daily yoga sessions that improve focus,
-              flexibility and healthy living.
-            </p>
-          </div>
-
-          <div className="activity-card">
-            <i className="fa-solid fa-flag"></i>
-            <h3>Independence Day</h3>
-            <p>
-              Patriotic celebrations with speeches,
-              cultural performances and flag hoisting.
-            </p>
-          </div>
-
-          <div className="activity-card">
-            <i className="fa-solid fa-landmark"></i>
-            <h3>Republic Day</h3>
-            <p>
-              Celebrating our Constitution through
-              student performances and awareness programs.
-            </p>
-          </div>
-
-          <div className="activity-card">
-            <i className="fa-solid fa-palette"></i>
-            <h3>Art & Craft</h3>
-            <p>
-              Encouraging imagination through drawing,
-              painting and creative crafts.
-            </p>
-          </div>
-
-          <div className="activity-card">
-            <i className="fa-solid fa-user-graduate"></i>
-            <h3>Personality Development</h3>
-            <p>
-              Building communication skills,
-              leadership and self-confidence.
-            </p>
-          </div>
-
-          <div className="activity-card">
-            <i className="fa-solid fa-bus"></i>
-            <h3>Educational Trips</h3>
-            <p>
-              Practical learning experiences through
-              educational visits and excursions.
-            </p>
-          </div>
-
-          <div className="activity-card">
-            <i className="fa-solid fa-award"></i>
-            <h3>Annual Day</h3>
-            <p>
-              A grand celebration showcasing every
-              child's talent and creativity.
-            </p>
-          </div>
-
+      <section className="school-events-section">
+        <div className="school-events-heading">
+          <span>What's Happening</span>
+          <h2>Our School Events</h2>
+          <p>
+            Discover the latest events and celebrations at our school.
+          </p>
         </div>
+
+        {loading && (
+          <p className="school-events-status">Loading events...</p>
+        )}
+
+        {error && (
+          <p className="school-events-status school-events-error">
+            {error}
+          </p>
+        )}
+
+        {!loading && !error && events.length === 0 && (
+          <p className="school-events-status">
+            No events available at the moment. Stay tuned!
+          </p>
+        )}
+
+        {!loading && !error && events.length > 0 && (
+          <div className="school-events-grid">
+            {events.map((event) => (
+              <article className="school-event-card" key={event._id}>
+                {event.imageUrl && (
+                  <div className="school-event-image-wrapper">
+                    <img
+                      src={event.imageUrl}
+                      alt={event.title}
+                      className="school-event-image"
+                    />
+                  </div>
+                )}
+
+                <div className="school-event-content">
+                  <div className="school-event-date">
+                    <i className="fa-regular fa-calendar"></i>
+                    <span>{formatDate(event.date)}</span>
+                  </div>
+
+                  <h3>{event.title}</h3>
+
+                  <div className="school-event-details">
+                    <p>
+                      <i className="fa-regular fa-clock"></i>
+                      <span>{event.time}</span>
+                    </p>
+
+                    <p>
+                      <i className="fa-solid fa-location-dot"></i>
+                      <span>{event.location}</span>
+                    </p>
+                  </div>
+
+                  <p className="school-event-description">
+                    {event.description}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
-
-      {/*FEATURED ACTIVITIES*/}
-
-<section className="featured-activities">
-    <h2>Featured Activities</h2>
-    {/* Plantation */}
-
-    <div className="feature">
-
-        <div className="feature-image">
-            <img src={plantation} alt="Plantation Activity"/>
-        </div>
-
-        <div className="feature-content">
-            <span>Environmental Awareness</span>
-            <h3>Plantation Drive</h3>
-            <p>
-                Our students actively participate in plantation drives to
-                understand the importance of protecting nature and creating
-                a greener future.
-            </p>
-            <ul>
-                <li>🌱 Tree Plantation</li>
-                <li>🌿 Eco Awareness</li>
-                <li>♻ Clean Campus Campaign</li>
-            </ul>
-
-            <Link to="/gallery" className="feature-btn">
-                View Gallery
-            </Link>
-        </div>
-
-    </div>
-
-    {/* Sports */}
-    <div className="feature reverse">
-
-        <div className="feature-image">
-            <img src={sports} alt="Sports"/>
-        </div>
-
-        <div className="feature-content">
-            <span>Physical Development</span>
-            <h3>Sports Activities</h3>
-            <p>
-                Sports help children develop teamwork, confidence,
-                discipline and healthy competition.
-            </p>
-            <ul>
-                <li>⚽ Football</li>
-                <li>🏃 Running</li>
-                <li>🏅 Sports Day Events</li>
-            </ul>
-
-            <Link to="/gallery" className="feature-btn">
-                View Gallery
-            </Link>
-        </div>
-
-    </div>
-
-    {/* Art */}
-
-    <div className="feature">
-
-        <div className="feature-image">
-            <img src={art} alt="Art"/>
-        </div>
-
-        <div className="feature-content">
-            <span>Creative Learning</span>
-            <h3>Art & Craft</h3>
-            <p>
-                Creative activities encourage imagination,
-                innovation and artistic expression.
-            </p>
-            <ul>
-                <li>🎨 Drawing</li>
-                <li>🖌 Painting</li>
-                <li>✂ Craft Making</li>
-            </ul>
-
-            <Link to="/gallery" className="feature-btn">
-                View Gallery
-            </Link>
-        </div>
-
-    </div>
-
-    {/* Yoga */}
-
-    <div className="feature reverse">
-
-        <div className="feature-image">
-            {/* <img src={yoga} alt="Yoga"/> */}
-        </div>
-
-        <div className="feature-content">
-            <span>Healthy Lifestyle</span>
-            <h3>Yoga Sessions</h3>
-            <p>
-                Yoga improves flexibility, concentration,
-                emotional well-being and discipline among children.
-            </p>
-            <ul>
-                <li>🧘 Daily Yoga</li>
-                <li>💚 Healthy Living</li>
-                <li>🧠 Better Focus</li>
-            </ul>
-            <Link to="/gallery" className="feature-btn">
-                View Gallery
-            </Link>
-        </div>
-    </div>
-</section>
-
-{/* UPCOMING EVENTS*/}
-
-<section className="upcoming-events">
-    <h2>Events </h2>
-    <div className="event-grid">
-        <div className="event-card">
-            <span>15 Aug</span>
-            <h3>Independence Day</h3>
-            <p>Flag Hoisting, Cultural Programs & Speeches</p>
-        </div>
-        <div className="event-card">
-            <span>05 Sep</span>
-            <h3>Teacher's Day</h3>
-            <p>Celebrating our respected teachers.</p>
-        </div>
-        <div className="event-card">
-            <span>Oct</span>
-            <h3>Spell Bee Competition</h3>
-            <p>Spelling the hardest & longest words.</p>
-        </div>
-        <div className="event-card">
-            <span>14 Nov</span>
-            <h3>Children's Day</h3>
-            <p>Games, Fun Activities & Performances.</p>
-        </div>
-        <div className="event-card">
-            <span>22 Dec</span>
-            <h3>Mathematics Day</h3>
-            <p>Adding, Calculating and competitions.</p>
-        </div>
-        <div className="event-card">
-            <span>26 Jan</span>
-            <h3>Republic Day</h3>
-            <p>Celebrating the republic of India.</p>
-        </div>
-        <div className="event-card">
-            <span>28 Feb</span>
-            <h3>Science Day</h3>
-            <p>Experimenting & Exploring the nature.</p>
-        </div>
-    </div>
-</section>
     </>
   );
 }
+
 export default Activities;
