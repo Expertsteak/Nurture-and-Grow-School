@@ -9,6 +9,7 @@ import authMiddleware from "./middleware/authMiddleware.js";
 import mediaRoutes from "./routes/mediaRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import noticeRoutes from "./routes/noticeRoutes.js";
+import submissionRoutes from "./routes/submissionRoutes.js";
 
 
 const app = express();
@@ -31,6 +32,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/media", mediaRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/notices", noticeRoutes);
+app.use("/api/submissions", submissionRoutes);
 
 app.get("/api/admin/check", authMiddleware, (req, res) => {
   res.status(200).json({

@@ -1,13 +1,12 @@
+
 import "./Contact.css";
 import Hero from "../components/hero";
-
 import { useState } from "react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "../firebase";
 
+// Local backend URL
+const API_URL = "http://localhost:5000/api/submissions";
 
 function Contact() {
-
   // FORM STATE
   const [formData, setFormData] = useState({
     name: "",
@@ -16,50 +15,69 @@ function Contact() {
     message: "",
   });
 
-
   const [loading, setLoading] = useState(false);
-
   const [status, setStatus] = useState("");
-
-
+  const [statusType, setStatusType] = useState("");
 
   // HANDLE INPUT
   const handleChange = (e) => {
-
     const { name, value } = e.target;
 
     setFormData((previousData) => ({
       ...previousData,
       [name]: value,
     }));
-
   };
-
-
 
   // SUBMIT FORM
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setStatus("");
 
     try {
-      // Save message to Firestore
-      await addDoc(
-        collection(db, "contactMessages"),
+      setLoading(true);
+      setStatus("");
+      setStatusType("");
+
+      // Save contact message in MongoDB
+      const response = await fetch(
+        `${API_URL}/contact-messages`,
         {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          subject: formData.subject,
-          createdAt: serverTimestamp(),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
         }
       );
 
-      // Success message
-      setStatus(
-        "Your message has been sent successfully! 🎉"
-      );
+      // Check response type
+      const contentType =
+        response.headers.get("content-type") || "";
+
+      if (!contentType.includes("application/json")) {
+        const responseText = await response.text();
+
+        console.error(
+          "Non-JSON backend response:",
+          responseText.slice(0, 300)
+        );
+
+        throw new Error(
+          "Backend API error. Please check the server and API route."
+        );
+      }
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Message submission failed."
+        );
+      }
+
+      // Success
+      setStatus("Message sent successfully!");
+      setStatusType("success");
 
       // Clear form
       setFormData({
@@ -68,37 +86,32 @@ function Contact() {
         phone: "",
         message: "",
       });
+
     } catch (error) {
-      console.error(
-        "Error sending message:",
-        error
-      );
+      console.error("Contact submission error:", error);
+
       setStatus(
-        "Something went wrong. Please try again."
+        error.message || "Something went wrong. Please try again."
       );
+
+      setStatusType("error");
+
     } finally {
       setLoading(false);
     }
   };
 
-
   return (
-
     <>
-
-      {/*HERO*/}
-
+      {/* HERO */}
       <Hero
         title="Contact Us"
         subtitle="We'd Love to Hear From You"
       />
 
       {/* CONTACT INFORMATION */}
-
       <section className="contact-info">
-
         <div className="section-heading">
-
           <span>GET IN TOUCH</span>
 
           <h2>
@@ -109,20 +122,14 @@ function Contact() {
             Have a question about admissions or our school?
             Feel free to contact us. We are happy to help you.
           </p>
-
         </div>
-
 
         <div className="contact-cards">
 
           {/* Address */}
-
           <div className="contact-card">
-
             <div className="contact-icon">
-
               <i className="fa-solid fa-location-dot"></i>
-
             </div>
 
             <h3>Visit Us</h3>
@@ -132,18 +139,12 @@ function Contact() {
               <br />
               Hyderabad, Telangana
             </p>
-
           </div>
 
-
           {/* Phone */}
-
           <div className="contact-card">
-
             <div className="contact-icon">
-
               <i className="fa-solid fa-phone"></i>
-
             </div>
 
             <h3>Call Us</h3>
@@ -153,18 +154,12 @@ function Contact() {
               <br />
               Mon - Sat | 7:00 AM - 2:30 PM
             </p>
-
           </div>
 
-
           {/* Email */}
-
           <div className="contact-card">
-
             <div className="contact-icon">
-
               <i className="fa-solid fa-envelope"></i>
-
             </div>
 
             <h3>Email Us</h3>
@@ -174,18 +169,12 @@ function Contact() {
               <br />
               We will reply as soon as possible.
             </p>
-
           </div>
 
-
           {/* School Hours */}
-
           <div className="contact-card">
-
             <div className="contact-icon">
-
               <i className="fa-solid fa-clock"></i>
-
             </div>
 
             <h3>School Hours</h3>
@@ -195,23 +184,16 @@ function Contact() {
               <br />
               7:45 AM - 2:30 PM
             </p>
-
           </div>
 
         </div>
-
       </section>
 
-
-      {/*CONTACT FORM*/}
-
+      {/* CONTACT FORM */}
       <section className="contact-section">
 
-
         {/* LEFT CONTENT */}
-
         <div className="contact-content">
-
           <span>MESSAGE US</span>
 
           <h2>
@@ -223,9 +205,7 @@ function Contact() {
             get back to you shortly.
           </p>
 
-
           <div className="contact-points">
-
             <p>
               <i className="fa-solid fa-circle-check"></i>
               Quick Response
@@ -240,27 +220,19 @@ function Contact() {
               <i className="fa-solid fa-circle-check"></i>
               Admission Guidance
             </p>
-
           </div>
-
         </div>
 
-
-        {/*FORM*/}
-
+        {/* FORM */}
         <form
           className="contact-form"
           onSubmit={handleSubmit}
         >
 
-
           {/* NAME + EMAIL */}
-
           <div className="form-row">
 
-
             <div className="form-group">
-
               <label htmlFor="name">
                 Your Name
               </label>
@@ -274,12 +246,9 @@ function Contact() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
-
             <div className="form-group">
-
               <label htmlFor="email">
                 Email Address
               </label>
@@ -293,16 +262,12 @@ function Contact() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
           </div>
 
-
           {/* PHONE */}
-
           <div className="form-group">
-
             <label htmlFor="phone">
               Phone Number
             </label>
@@ -316,13 +281,10 @@ function Contact() {
               onChange={handleChange}
               required
             />
-
           </div>
 
           {/* MESSAGE */}
-
           <div className="form-group">
-
             <label htmlFor="message">
               Your Message
             </label>
@@ -336,63 +298,50 @@ function Contact() {
               onChange={handleChange}
               required
             ></textarea>
-
           </div>
 
-
           {/* SUBMIT */}
-
           <button
             type="submit"
             disabled={loading}
           >
-
-            {loading
-              ? "Sending..."
-              : "Send Message"
-            }
+            {loading ? "Sending..." : "Send Message"}
 
             {!loading && (
               <i className="fa-solid fa-paper-plane"></i>
             )}
-
           </button>
 
-
           {/* STATUS MESSAGE */}
-
           {status && (
-
-            <p className="form-status">
+            <p
+              className={`form-status ${statusType}`}
+              role="status"
+            >
               {status}
             </p>
-
           )}
 
         </form>
-
       </section>
 
-      {/*LOCATION / MAP*/}
-
+      {/* LOCATION / MAP */}
       <section className="map">
+        <h2>Find Us</h2>
 
-       <h2>Find Us</h2>
-
-      
-<iframe
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.4015722418203!2d78.38577307591044!3d17.392505702656198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9d108f23a19f%3A0xacf7e85eb2aa896c!2sNurture%20and%20Grow%20primary%20school!5e0!3m2!1sen!2sin!4v1786333910065!5m2!1sen!2sin"
-  width="100%"
-  height="450"
-  style={{ border: 0 }}
-  allowFullScreen
-  loading="lazy"
-  referrerPolicy="strict-origin-when-cross-origin"
-  title="Nurture & Grow Primary School Location"
-></iframe>
-
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.4015722418203!2d78.38577307591044!3d17.392505702656198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9d108f23a19f%3A0xacf7e85eb2aa896c!2sNurture%20and%20Grow%20primary%20school!5e0!3m2!1sen!2sin!4v1786333910065!5m2!1sen!2sin"
+          width="100%"
+          height="450"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="strict-origin-when-cross-origin"
+          title="Nurture & Grow Primary School Location"
+        ></iframe>
       </section>
     </>
   );
 }
+
 export default Contact;

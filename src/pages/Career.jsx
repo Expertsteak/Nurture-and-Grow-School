@@ -1,15 +1,12 @@
+
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
-import {
-  collection,
-  addDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { db } from "../firebase";
 import "./Career.css";
 import Hero from "../components/hero";
-function Career() {
 
+// Local backend URL
+const API_URL = "http://localhost:5000/api/submissions";
+
+function Career() {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -19,73 +16,56 @@ function Career() {
     position: "",
   });
 
-  const [resume, setResume] = useState(null);
-
   const [loading, setLoading] = useState(false);
-
   const [message, setMessage] = useState("");
+  const [messageType, setMessageType] = useState("");
 
-  // HANDLE INPUT
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+
+    setFormData((previousData) => ({
+      ...previousData,
       [name]: value,
-    });
+    }));
   };
 
-  // HANDLE RESUME
-  const handleResume = (e) => {
-    setResume(e.target.files[0]);
-  };
-
-  // SUBMIT FORM
-   
+  // Submit application
+  
 const handleSubmit = async (e) => {
   e.preventDefault();
-  setLoading(true);
-
-  let applicationSaved = false;
 
   try {
-    // STEP 1: Save application in Firebase
-    await addDoc(
-      collection(db, "careerApplications"),
+    setLoading(true);
+    setMessage("");
+
+    const response = await fetch(
+      `${API_URL}/career-applications`,
       {
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
-        qualification: formData.qualification,
-        experience: formData.experience,
-        position: formData.position,
-        createdAt: serverTimestamp(),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       }
     );
 
-    applicationSaved = true;
+    const contentType =
+      response.headers.get("content-type") || "";
 
-    // STEP 2: Send email using EmailJS
-    const templateParams = {
-      to_email: "YOUR_GMAIL@gmail.com",
-      full_name: formData.fullName,
-      applicant_email: formData.email,
-      phone: formData.phone,
-      qualification: formData.qualification,
-      experience: formData.experience,
-      position: formData.position,
-    };
+    if (!contentType.includes("application/json")) {
+      throw new Error("Backend API did not return JSON.");
+    }
 
-    await emailjs.send(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      templateParams,
-      {
-        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-      }
-    );
+    const data = await response.json();
 
-    // STEP 3: Show success and clear form
-    setMessage("Application submitted successfully! 🎉");
+    if (!response.ok) {
+      throw new Error(
+        data.message || "Application submission failed."
+      );
+    }
+
+    setMessage("Application submitted successfully!");
 
     setFormData({
       fullName: "",
@@ -97,17 +77,8 @@ const handleSubmit = async (e) => {
     });
 
   } catch (error) {
-    console.error("Application submission error:", error);
-
-    if (applicationSaved) {
-      setMessage(
-        "Application saved, but email failed to send. Please contact the administrator."
-      );
-    } else {
-      setMessage(
-        error.message || "Something went wrong. Please try again."
-      );
-    }
+    console.error("Career submission error:", error);
+    setMessage(error.message || "Something went wrong.");
   } finally {
     setLoading(false);
   }
@@ -117,13 +88,14 @@ const handleSubmit = async (e) => {
   return (
     <>
       <Hero
-       title="Career "
-       subtitle="We provide best career opportunities."
-       />
-      {/*WHY WORK WITH US */}
+        title="Career"
+        subtitle="We provide best career opportunities."
+      />
 
+      {/* WHY WORK WITH US */}
       <section className="why-work">
         <h2>Why Work With Us?</h2>
+
         <div className="why-grid">
 
           <div className="why-card">
@@ -165,11 +137,11 @@ const handleSubmit = async (e) => {
         </div>
       </section>
 
-      {/*APPLICATION FORM*/}
-
+      {/* APPLICATION FORM */}
       <section className="career-form">
 
         <h2>Teaching Application Form</h2>
+
         <p className="form-intro">
           Interested in joining our team?
           Fill out the application form below.
@@ -179,7 +151,10 @@ const handleSubmit = async (e) => {
 
           {/* FULL NAME */}
           <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
+            <label htmlFor="fullName">
+              Full Name
+            </label>
+
             <input
               type="text"
               id="fullName"
@@ -187,12 +162,16 @@ const handleSubmit = async (e) => {
               placeholder="Enter your full name"
               value={formData.fullName}
               onChange={handleChange}
-              required/>
+              required
+            />
           </div>
 
           {/* EMAIL */}
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">
+              Email Address
+            </label>
+
             <input
               type="email"
               id="email"
@@ -200,12 +179,16 @@ const handleSubmit = async (e) => {
               placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
-              required/>
+              required
+            />
           </div>
 
           {/* PHONE */}
           <div className="form-group">
-            <label htmlFor="phone">Phone Number</label>
+            <label htmlFor="phone">
+              Phone Number
+            </label>
+
             <input
               type="tel"
               id="phone"
@@ -213,12 +196,16 @@ const handleSubmit = async (e) => {
               placeholder="Enter your phone number"
               value={formData.phone}
               onChange={handleChange}
-              required/>
+              required
+            />
           </div>
 
           {/* QUALIFICATION */}
           <div className="form-group">
-            <label htmlFor="qualification">Qualification</label>
+            <label htmlFor="qualification">
+              Qualification
+            </label>
+
             <input
               type="text"
               id="qualification"
@@ -226,12 +213,16 @@ const handleSubmit = async (e) => {
               placeholder="e.g. B.Ed, M.Ed, M.A."
               value={formData.qualification}
               onChange={handleChange}
-              required/>
+              required
+            />
           </div>
 
           {/* EXPERIENCE */}
           <div className="form-group">
-            <label htmlFor="experience">Experience</label>
+            <label htmlFor="experience">
+              Experience
+            </label>
+
             <input
               type="text"
               id="experience"
@@ -239,47 +230,77 @@ const handleSubmit = async (e) => {
               placeholder="e.g. 2 years"
               value={formData.experience}
               onChange={handleChange}
-              required/>
+              required
+            />
           </div>
 
           {/* POSITION */}
           <div className="form-group">
-            <label htmlFor="position">Position Applying For</label>
+            <label htmlFor="position">
+              Position Applying For
+            </label>
+
             <select
               id="position"
               name="position"
               value={formData.position}
               onChange={handleChange}
-              required>
-              <option value="">Select a position</option>
-              <option value="Primary Teacher">Primary Teacher</option>
-              <option value="Pre-Primary Teacher">Pre-Primary Teacher</option>
-              <option value="Subject Teacher">Subject Teacher</option>
-              <option value="Art & Craft Teacher">Art & Craft Teacher</option>
-              <option value="Sports Teacher">Sports Teacher</option>
-              <option value="Other">Other</option>
+              required
+            >
+              <option value="">
+                Select a position
+              </option>
+
+              <option value="Primary Teacher">
+                Primary Teacher
+              </option>
+
+              <option value="Pre-Primary Teacher">
+                Pre-Primary Teacher
+              </option>
+
+              <option value="Subject Teacher">
+                Subject Teacher
+              </option>
+
+              <option value="Art & Craft Teacher">
+                Art & Craft Teacher
+              </option>
+
+              <option value="Sports Teacher">
+                Sports Teacher
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
             </select>
           </div>
 
-          {/* SUBMIT */}
+          {/* SUBMIT BUTTON */}
           <button
             type="submit"
             disabled={loading}
           >
-            {loading?
-             "Submitting..." : "Submit Application"
-            }
+            {loading
+              ? "Submitting..."
+              : "Submit Application"}
           </button>
 
-          {/* MESSAGE */}
+          {/* STATUS MESSAGE */}
           {message && (
-            <p className="form-message">
+            <p
+              className={`form-message ${messageType}`}
+              role="status"
+            >
               {message}
             </p>
           )}
+
         </form>
       </section>
     </>
   );
 }
+
 export default Career;
