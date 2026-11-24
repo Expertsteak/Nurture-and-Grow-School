@@ -86,6 +86,76 @@ function Home() {
         </div>
       </section>
 
+      {/* STAR STUDENTS OF THE WEEK */}
+
+      <section className="star-students-section">
+        <div className="section-heading">
+          <span>OUR LITTLE ACHIEVERS</span>
+
+          <h2>
+            Star Students
+            <strong> of the Week</strong>
+          </h2>
+
+          <p>
+            Celebrating our students for their discipline,
+            intelligence and good behaviour.
+          </p>
+        </div>
+
+        {["Primary", "Pre-Primary"].map((section) => (
+          <div className="star-public-section" key={section}>
+            <h3>{section}</h3>
+
+            <div className="star-public-grid">
+              {["Discipline", "Smart", "Obedient"].map((category) => {
+                const student = starStudents.find(
+                  (item) =>
+                    item.section === section &&
+                    item.category === category
+                );
+
+                return (
+                  <div
+                    className="star-public-card"
+                    key={`${section}-${category}`}
+                  >
+                    <span className="star-category">
+                      {category} Star
+                    </span>
+
+                    {student ? (
+                      <>
+                        {student.imageUrl ? (
+                          <img
+                            src={student.imageUrl}
+                            alt={`Star student ${student.name}`}
+                            className="star-public-image"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="star-public-avatar">
+                            {student.name.charAt(0).toUpperCase()}
+                          </div>
+                        )}
+
+                        <h4>{student.name}</h4>
+
+                        <p>Class: {student.className}</p>
+                      </>
+                    ) : (
+                      <p className="star-public-pending">
+                        Coming Soon
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </section>
+
       {/* WHY CHOOSE US */}
 
       <section className="why-us">
@@ -201,76 +271,6 @@ function Home() {
             <i className="fa-solid fa-arrow-right"></i>
           </Link>
         </div>
-      </section>
-
-      {/* STAR STUDENTS OF THE WEEK */}
-
-      <section className="star-students-section">
-        <div className="section-heading">
-          <span>OUR LITTLE ACHIEVERS</span>
-
-          <h2>
-            Star Students
-            <strong> of the Week</strong>
-          </h2>
-
-          <p>
-            Celebrating our students for their discipline,
-            intelligence and good behaviour.
-          </p>
-        </div>
-
-        {["Primary", "Pre-Primary"].map((section) => (
-          <div className="star-public-section" key={section}>
-            <h3>{section}</h3>
-
-            <div className="star-public-grid">
-              {["Discipline", "Smart", "Obedient"].map((category) => {
-                const student = starStudents.find(
-                  (item) =>
-                    item.section === section &&
-                    item.category === category
-                );
-
-                return (
-                  <div
-                    className="star-public-card"
-                    key={`${section}-${category}`}
-                  >
-                    <span className="star-category">
-                      {category} Star
-                    </span>
-
-                    {student ? (
-                      <>
-                        {student.imageUrl ? (
-                          <img
-                            src={student.imageUrl}
-                            alt={`Star student ${student.name}`}
-                            className="star-public-image"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="star-public-avatar">
-                            {student.name.charAt(0).toUpperCase()}
-                          </div>
-                        )}
-
-                        <h4>{student.name}</h4>
-
-                        <p>Class: {student.className}</p>
-                      </>
-                    ) : (
-                      <p className="star-public-pending">
-                        Coming Soon
-                      </p>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        ))}
       </section>
 
       {/* GALLERY */}
