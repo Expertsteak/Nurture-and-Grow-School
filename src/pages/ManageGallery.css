@@ -1,0 +1,149 @@
+
+.manage-gallery {
+  width: 100%;
+}
+
+.gallery-page-heading {
+  margin-bottom: 25px;
+}
+
+.gallery-page-heading h2 {
+  color: #14532d;
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+.gallery-page-heading p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.gallery-upload-form {
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: white;
+  padding: 25px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.gallery-upload-form h3,
+.gallery-admin-list h3 {
+  color: #14532d;
+  margin-bottom: 12px;
+}
+
+.gallery-upload-form label {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.gallery-upload-form input,
+.gallery-upload-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  box-sizing: border-box;
+  background: white;
+  font-size: 14px;
+}
+
+.gallery-upload-form button {
+  padding: 13px;
+  background: #14532d;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.gallery-upload-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.gallery-admin-message {
+  color: #14532d;
+  background: #ecfdf5;
+  padding: 10px;
+  border-radius: 7px;
+  overflow-wrap: anywhere;
+}
+
+.gallery-admin-list {
+  margin-top: 40px;
+}
+
+.gallery-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.gallery-admin-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.gallery-admin-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-admin-card-info {
+  padding: 15px;
+}
+
+.gallery-admin-card-info h4 {
+  color: #14532d;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+}
+
+.gallery-admin-card-info p {
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.gallery-admin-card-info button {
+  width: 100%;
+  padding: 10px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.gallery-admin-empty {
+  padding: 20px;
+  color: #64748b;
+  background: white;
+  border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .gallery-admin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-upload-form {
+    padding: 18px;
+  }
+}

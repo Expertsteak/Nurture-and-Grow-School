@@ -10,6 +10,7 @@ import mediaRoutes from "./routes/mediaRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import noticeRoutes from "./routes/noticeRoutes.js";
 import submissionRoutes from "./routes/submissionRoutes.js";
+import starStudentRoutes from "./routes/starStudentRoutes.js";
 
 
 const app = express();
@@ -33,6 +34,7 @@ app.use("/api/media", mediaRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/notices", noticeRoutes);
 app.use("/api/submissions", submissionRoutes);
+app.use("/api/star-students", starStudentRoutes);
 
 app.get("/api/admin/check", authMiddleware, (req, res) => {
   res.status(200).json({

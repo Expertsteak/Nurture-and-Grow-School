@@ -1,0 +1,188 @@
+
+.manage-star-students {
+  width: 100%;
+  padding: 10px;
+}
+
+.star-students-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.star-students-header h2 {
+  color: #14532d;
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.star-students-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+.star-students-header button {
+  padding: 10px 18px;
+  background: #14532d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.star-students-header button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.star-section {
+  margin-bottom: 35px;
+}
+
+.star-section h3 {
+  color: #14532d;
+  font-size: 21px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.star-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.star-admin-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  padding: 18px;
+}
+
+.star-admin-card h4 {
+  color: #14532d;
+  font-size: 17px;
+  margin-bottom: 16px;
+}
+
+.star-current-student {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: #f8faf8;
+  padding: 12px;
+  border-radius: 7px;
+  margin-bottom: 18px;
+}
+
+.star-admin-image,
+.star-admin-placeholder {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.star-admin-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #dcfce7;
+  color: #14532d;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.star-current-student strong {
+  color: #222;
+  font-size: 14px;
+}
+
+.star-current-student p {
+  color: #555;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.star-current-student small {
+  color: #15803d;
+  font-size: 11px;
+}
+
+.star-not-added {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.star-admin-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.star-admin-card form label {
+  color: #444;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.star-admin-card form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.star-admin-card form input:focus {
+  outline: none;
+  border-color: #14532d;
+}
+
+.star-admin-card form button {
+  margin-top: 8px;
+  padding: 10px;
+  background: #14532d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.star-admin-card form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.star-remove-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.star-students-message {
+  color: #14532d;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .star-students-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .star-admin-grid {
+    grid-template-columns: 1fr;
+  }
+}

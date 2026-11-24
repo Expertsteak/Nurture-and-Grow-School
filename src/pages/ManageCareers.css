@@ -1,0 +1,132 @@
+
+.manage-careers {
+  width: 100%;
+  padding: 10px;
+}
+
+.careers-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.careers-page-header h2 {
+  color: #14532d;
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.careers-page-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+.careers-page-header button {
+  padding: 10px 18px;
+  background: #14532d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.careers-page-header button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.careers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.career-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+  padding: 18px;
+}
+
+.career-card.is-unread {
+  border-left: 4px solid #d97706;
+}
+
+.career-card.is-read {
+  border-left: 4px solid #16a34a;
+}
+
+.career-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.career-card-header span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #14532d;
+}
+
+.career-card-header small {
+  color: #777;
+  font-size: 12px;
+}
+
+.career-details p {
+  color: #444;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+
+.career-details strong {
+  color: #222;
+}
+
+.career-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.career-actions button {
+  padding: 9px 13px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #14532d;
+  color: white;
+}
+
+.career-actions button:last-child {
+  background: #dc2626;
+}
+
+.careers-message {
+  color: #b91c1c;
+  margin: 15px 0;
+}
+
+.careers-empty {
+  color: #777;
+  padding: 20px 0;
+}
+
+@media (max-width: 600px) {
+  .careers-page-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .careers-grid {
+    grid-template-columns: 1fr;
+  }
+}

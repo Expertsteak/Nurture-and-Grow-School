@@ -1,0 +1,146 @@
+
+/* ADMIN LAYOUT */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* SIDEBAR */
+.admin-sidebar {
+  width: 250px;
+  min-width: 250px;
+  background: #14532d;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 15px;
+  box-sizing: border-box;
+}
+
+.admin-sidebar-brand {
+  padding: 10px 12px 30px;
+}
+
+.admin-sidebar-brand h2 {
+  font-size: 21px;
+  margin-bottom: 5px;
+}
+
+.admin-sidebar-brand p {
+  color: #bbf7d0;
+  font-size: 13px;
+}
+
+/* NAVIGATION */
+.admin-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  color: #dcfce7;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.admin-nav-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.admin-nav-link.active {
+  background: white;
+  color: #14532d;
+  font-weight: 600;
+}
+
+.admin-nav-icon {
+  width: 22px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* LOGOUT */
+.admin-logout-btn {
+  margin-top: auto;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-logout-btn:hover {
+  background: white;
+  color: #14532d;
+}
+
+/* MAIN CONTENT */
+.admin-layout-content {
+  flex: 1;
+  min-width: 0;
+  padding: 35px;
+  box-sizing: border-box;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .admin-sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+
+  .admin-layout-content {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 650px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    min-width: 0;
+    padding: 15px;
+  }
+
+  .admin-sidebar-brand {
+    padding: 5px 10px 15px;
+  }
+
+  .admin-sidebar-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .admin-nav-link {
+    padding: 10px;
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .admin-nav-icon {
+    font-size: 16px;
+  }
+
+  .admin-logout-btn {
+    margin-top: 15px;
+  }
+
+  .admin-layout-content {
+    padding: 18px 12px;
+  }
+}

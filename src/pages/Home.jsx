@@ -1,11 +1,14 @@
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import aboutImage from "../assets/school.webp";
 
-  function Home() {
+function Home() {
   const [galleryImages, setGalleryImages] = useState([]);
+  const [starStudents, setStarStudents] = useState([]);
 
+  // FETCH GALLERY IMAGES
   useEffect(() => {
     const fetchGalleryImages = async () => {
       try {
@@ -18,7 +21,6 @@ import aboutImage from "../assets/school.webp";
         }
 
         const data = await response.json();
-
         setGalleryImages(data.slice(0, 6));
 
       } catch (error) {
@@ -28,14 +30,36 @@ import aboutImage from "../assets/school.webp";
 
     fetchGalleryImages();
   }, []);
+
+  // FETCH STAR STUDENTS
+  useEffect(() => {
+    const fetchStarStudents = async () => {
+      try {
+        const response = await fetch(
+          "https://nurture-grow-backend.onrender.com/api/star-students"
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to load star students");
+        }
+
+        const data = await response.json();
+        setStarStudents(data);
+
+      } catch (error) {
+        console.error("Star students error:", error);
+      }
+    };
+
+    fetchStarStudents();
+  }, []);
+
   return (
     <>
       {/* HERO SECTION */}
 
       <section className="hero">
-
         <div className="hero-content">
-
           <span className="hero-small-title">
             WELCOME TO OUR SCHOOL
           </span>
@@ -51,7 +75,6 @@ import aboutImage from "../assets/school.webp";
           </p>
 
           <div className="hero-buttons">
-
             <Link to="/admissions" className="btn">
               Apply Now
             </Link>
@@ -59,21 +82,14 @@ import aboutImage from "../assets/school.webp";
             <Link to="/about" className="btn btn-outline">
               Learn More
             </Link>
-
           </div>
-
-         
         </div>
-
       </section>
-
 
       {/* WHY CHOOSE US */}
 
       <section className="why-us">
-
         <div className="section-heading">
-
           <span>WHY CHOOSE US</span>
 
           <h2>
@@ -85,11 +101,9 @@ import aboutImage from "../assets/school.webp";
             We provide a caring and inspiring environment where
             every child gets the opportunity to learn and grow.
           </p>
-
         </div>
 
         <div className="cards">
-
           <div className="card">
             <div className="card-icon">
               <i className="fa-solid fa-user-graduate"></i>
@@ -102,7 +116,6 @@ import aboutImage from "../assets/school.webp";
               success and development.
             </p>
           </div>
-
 
           <div className="card">
             <div className="card-icon">
@@ -117,7 +130,6 @@ import aboutImage from "../assets/school.webp";
             </p>
           </div>
 
-
           <div className="card">
             <div className="card-icon">
               <i className="fa-solid fa-school"></i>
@@ -131,7 +143,6 @@ import aboutImage from "../assets/school.webp";
             </p>
           </div>
 
-
           <div className="card">
             <div className="card-icon">
               <i className="fa-solid fa-shield-heart"></i>
@@ -144,18 +155,13 @@ import aboutImage from "../assets/school.webp";
               for every student.
             </p>
           </div>
-
         </div>
-
       </section>
-
 
       {/* ABOUT SCHOOL */}
 
       <section className="about-preview">
-
         <div className="about-image">
-
           <div className="image-decoration"></div>
 
           <img
@@ -167,12 +173,9 @@ import aboutImage from "../assets/school.webp";
             <strong>Quality</strong>
             <span>Education</span>
           </div>
-
         </div>
 
-
         <div className="about-content">
-
           <span className="section-label">
             ABOUT OUR SCHOOL
           </span>
@@ -197,81 +200,128 @@ import aboutImage from "../assets/school.webp";
             Discover More
             <i className="fa-solid fa-arrow-right"></i>
           </Link>
-
         </div>
-
       </section>
 
+      {/* STAR STUDENTS OF THE WEEK */}
 
-{/* GALLERY */}
+      <section className="star-students-section">
+        <div className="section-heading">
+          <span>OUR LITTLE ACHIEVERS</span>
 
-<section className="home-gallery">
+          <h2>
+            Star Students
+            <strong> of the Week</strong>
+          </h2>
 
-  <div className="section-heading">
-
-    <span>OUR GALLERY</span>
-
-    <h2>
-      Moments of
-      <strong> Learning & Joy</strong>
-    </h2>
-
-    <p>
-      Take a glimpse at our school activities, classrooms,
-      celebrations and memorable moments.
-    </p>
-
-  </div>
-
-  <div className="home-gallery-grid">
-
-    {galleryImages.length === 0 ? (
-
-      <p className="home-gallery-empty">
-        Gallery images will be displayed here soon.
-      </p>
-
-    ) : (
-
-      galleryImages.map((item) => (
-
-        <div className="home-gallery-item" key={item._id}>
-
-          <img
-            src={item.imageUrl}
-            alt={item.title}
-            loading="lazy"
-          />
-
-          <div className="home-gallery-placeholder">
-
-            <i className="fa-solid fa-image"></i>
-
-            <span>{item.title}</span>
-
-          </div>
-
+          <p>
+            Celebrating our students for their discipline,
+            intelligence and good behaviour.
+          </p>
         </div>
 
-      ))
+        {["Primary", "Pre-Primary"].map((section) => (
+          <div className="star-public-section" key={section}>
+            <h3>{section}</h3>
 
-    )}
+            <div className="star-public-grid">
+              {["Discipline", "Smart", "Obedient"].map((category) => {
+                const student = starStudents.find(
+                  (item) =>
+                    item.section === section &&
+                    item.category === category
+                );
 
-  </div>
+                return (
+                  <div
+                    className="star-public-card"
+                    key={`${section}-${category}`}
+                  >
+                    <span className="star-category">
+                      {category} Star
+                    </span>
 
-  <Link to="/gallery" className="btn gallery-btn">
-    View Full Gallery
-    <i className="fa-solid fa-arrow-right"></i>
-  </Link>
+                    {student ? (
+                      <>
+                        {student.imageUrl ? (
+                          <img
+                            src={student.imageUrl}
+                            alt={`Star student ${student.name}`}
+                            className="star-public-image"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <div className="star-public-avatar">
+                            {student.name.charAt(0).toUpperCase()}
+                          </div>
+                        )}
 
-</section>
+                        <h4>{student.name}</h4>
 
+                        <p>Class: {student.className}</p>
+                      </>
+                    ) : (
+                      <p className="star-public-pending">
+                        Coming Soon
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </section>
 
+      {/* GALLERY */}
+
+      <section className="home-gallery">
+        <div className="section-heading">
+          <span>OUR GALLERY</span>
+
+          <h2>
+            Moments of
+            <strong> Learning & Joy</strong>
+          </h2>
+
+          <p>
+            Take a glimpse at our school activities, classrooms,
+            celebrations and memorable moments.
+          </p>
+        </div>
+
+        <div className="home-gallery-grid">
+          {galleryImages.length === 0 ? (
+            <p className="home-gallery-empty">
+              Gallery images will be displayed here soon.
+            </p>
+          ) : (
+            galleryImages.map((item) => (
+              <div className="home-gallery-item" key={item._id}>
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  loading="lazy"
+                />
+
+                <div className="home-gallery-placeholder">
+                  <i className="fa-solid fa-image"></i>
+                  <span>{item.title}</span>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        <Link to="/gallery" className="btn gallery-btn">
+          View Full Gallery
+          <i className="fa-solid fa-arrow-right"></i>
+        </Link>
+      </section>
 
       {/* FACTS */}
 
       <section className="facts">
-
         <div className="fact">
           <i className="fa-solid fa-child"></i>
           <h2>Nursery</h2>
@@ -295,107 +345,92 @@ import aboutImage from "../assets/school.webp";
           <h2>Hyderabad</h2>
           <p>Our Location</p>
         </div>
-
       </section>
 
       {/* FAQ */}
 
-<section className="faq">
+      <section className="faq">
+        <div className="section-heading">
+          <span>FAQ</span>
 
-  <div className="section-heading">
+          <h2>
+            Frequently Asked
+            <strong> Questions</strong>
+          </h2>
 
-    <span>FAQ</span>
+          <p>
+            Find answers to some common questions about
+            Nurture & Grow Primary School.
+          </p>
+        </div>
 
-    <h2>
-      Frequently Asked
-      <strong> Questions</strong>
-    </h2>
+        <div className="faq-container">
+          <details>
+            <summary>
+              Which classes are offered at the school?
+              <i className="fa-solid fa-chevron-down"></i>
+            </summary>
 
-    <p>
-      Find answers to some common questions about
-      Nurture & Grow Primary School.
-    </p>
+            <p>
+              We offer quality English medium education from
+              Nursery to Grade 7.
+            </p>
+          </details>
 
-  </div>
+          <details>
+            <summary>
+              Is the school English medium?
+              <i className="fa-solid fa-chevron-down"></i>
+            </summary>
 
+            <p>
+              Yes, Nurture & Grow Primary School provides
+              English medium education.
+            </p>
+          </details>
 
-  <div className="faq-container">
+          <details>
+            <summary>
+              How can I apply for admission?
+              <i className="fa-solid fa-chevron-down"></i>
+            </summary>
 
-    <details>
-      <summary>
-        Which classes are offered at the school?
-        <i className="fa-solid fa-chevron-down"></i>
-      </summary>
+            <p>
+              You can visit our Admissions page and submit
+              the Admission Enquiry form.
+            </p>
+          </details>
 
-      <p>
-        We offer quality English medium education from
-        Nursery to Grade 7.
-      </p>
-    </details>
+          <details>
+            <summary>
+              Where is the school located?
+              <i className="fa-solid fa-chevron-down"></i>
+            </summary>
 
+            <p>
+              Nurture & Grow Primary School is located
+              in Hyderabad.
+            </p>
+          </details>
 
-    <details>
-      <summary>
-        Is the school English medium?
-        <i className="fa-solid fa-chevron-down"></i>
-      </summary>
+          <details>
+            <summary>
+              How can I contact the school?
+              <i className="fa-solid fa-chevron-down"></i>
+            </summary>
 
-      <p>
-        Yes, Nurture & Grow Primary School provides
-        English medium education.
-      </p>
-    </details>
-
-
-    <details>
-      <summary>
-        How can I apply for admission?
-        <i className="fa-solid fa-chevron-down"></i>
-      </summary>
-
-      <p>
-        You can visit our Admissions page and submit
-        the Admission Enquiry form.
-      </p>
-    </details>
-
-
-    <details>
-      <summary>
-        Where is the school located?
-        <i className="fa-solid fa-chevron-down"></i>
-      </summary>
-
-      <p>
-        Nurture & Grow Primary School is located
-        in Hyderabad.
-      </p>
-    </details>
-
-
-    <details>
-      <summary>
-        How can I contact the school?
-        <i className="fa-solid fa-chevron-down"></i>
-      </summary>
-
-      <p>
-        You can contact us through the Contact page
-        or use the contact details provided in the footer.
-      </p>
-    </details>
-
-  </div>
-
-</section>
-
+            <p>
+              You can contact us through the Contact page
+              or use the contact details provided in the footer.
+            </p>
+          </details>
+        </div>
+      </section>
 
       {/* CTA */}
 
       <section className="cta">
-
         <div className="cta-content">
-
           <span>ADMISSIONS ARE OPEN</span>
 
           <h2>
@@ -412,11 +447,8 @@ import aboutImage from "../assets/school.webp";
             Enroll Today
             <i className="fa-solid fa-arrow-right"></i>
           </Link>
-
         </div>
-
       </section>
-
     </>
   );
 }
