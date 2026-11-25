@@ -27,6 +27,8 @@ import ManageAdmissions from "./pages/ManageAdmissions";
 import ManageContacts from "./pages/ManageContacts";
 import ManageCareers from "./pages/ManageCareers";
 import ManageStarStudents from "./pages/ManageStarStudents";
+import ManageStudents from "./pages/ManageStudents";
+import StudentDetails from "./pages/StudentDetails";
 
 // Public website layout
 function PublicLayout() {
@@ -96,6 +98,10 @@ function App() {
           <Route path="contacts" element={<ManageContacts />} />
 
           <Route path="careers" element={<ManageCareers />} />
+
+          <Route path="students" element={<ManageStudents />} />
+
+          <Route path="students/:id" element={<StudentDetails />} />
 
         </Route>
 

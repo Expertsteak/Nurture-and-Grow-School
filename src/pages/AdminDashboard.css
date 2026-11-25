@@ -80,3 +80,57 @@
     padding: 20px;
   }
 }
+
+.admin-stats-section {
+  margin: 30px 0;
+}
+
+.admin-stats-section h2,
+.admin-sections-title {
+  margin-bottom: 20px;
+  color: #234b36;
+}
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.admin-stat-card {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid #e5eee8;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.admin-stat-icon {
+  font-size: 28px;
+}
+
+.admin-stat-card p {
+  margin: 12px 0 6px;
+  color: #64748b;
+}
+
+.admin-stat-card h3 {
+  font-size: 24px;
+  color: #234b36;
+}
+
+.admin-stats-error {
+  color: #b91c1c;
+}
+
+@media (max-width: 768px) {
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

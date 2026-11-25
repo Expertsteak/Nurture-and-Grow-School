@@ -11,6 +11,7 @@ function AdminLayout() {
     { label: "Notices", path: "/admin/notices", icon: "▤" },
     { label: "Gallery", path: "/admin/gallery", icon: "▧" },
     { label: "Star Students", path: "/admin/star-students", icon: "★" },
+    { label: "Student Management", path: "/admin/students", icon: "♧" },
     { label: "Admissions", path: "/admin/admissions", icon: "♙" },
     { label: "Contact Messages", path: "/admin/contacts", icon: "✉" },
     { label: "Careers", path: "/admin/careers", icon: "▣" },

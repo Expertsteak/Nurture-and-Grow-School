@@ -1,0 +1,339 @@
+
+.student-details-page {
+  padding: 25px;
+  color: #333;
+}
+
+.student-back-btn {
+  background: #14532d;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.student-back-btn:hover {
+  background: #166534;
+}
+
+.student-details-page > h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.student-profile-card,
+.student-fees-section {
+  background: white;
+  padding: 25px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.student-profile-card h3,
+.student-fees-section > h3 {
+  font-size: 22px;
+  color: #14532d;
+  margin-bottom: 25px;
+}
+
+.student-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.student-profile-grid span,
+.student-fee-summary span {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.student-profile-grid p {
+  font-size: 16px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.student-address {
+  grid-column: 1 / -1;
+}
+
+/* Fee Forms */
+
+.student-fee-form,
+.student-payment-form {
+  background: #f9fafb;
+  padding: 22px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.student-fee-form h4,
+.student-payment-form h4,
+.student-payment-history h4 {
+  font-size: 18px;
+  color: #14532d;
+  margin-bottom: 8px;
+}
+
+.student-fee-form label,
+.student-payment-form label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.student-fee-form input,
+.student-payment-form input,
+.student-payment-form select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+  background: white;
+}
+
+.student-fee-form input:focus,
+.student-payment-form input:focus,
+.student-payment-form select:focus {
+  border-color: #166534;
+}
+
+.student-fee-form button,
+.student-payment-form button {
+  background: #14532d;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+.student-fee-form button:hover,
+.student-payment-form button:hover {
+  background: #166534;
+}
+
+.student-payment-form button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.student-final-fee {
+  background: #ecfdf5;
+  color: #14532d;
+  padding: 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+/* Fee Summary */
+
+.student-fee-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.student-fee-summary > div {
+  background: #f0fdf4;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #dcfce7;
+}
+
+.student-fee-summary h3 {
+  font-size: 21px;
+  color: #14532d;
+  margin-top: 10px;
+}
+
+/* Payment History */
+
+.student-payment-history {
+  margin-top: 30px;
+}
+
+.student-payment-history h4 {
+  margin-bottom: 18px;
+}
+
+.student-no-fees {
+  color: #6b7280;
+  margin-top: 20px;
+}
+
+.student-fee-message {
+  background: #ecfdf5;
+  color: #166534;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .student-details-page {
+    padding: 15px;
+  }
+
+  .student-profile-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .student-profile-card,
+  .student-fees-section {
+    padding: 18px;
+  }
+
+  .student-address {
+    grid-column: auto;
+  }
+
+  .student-fee-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .student-fee-summary > div {
+    padding: 16px;
+  }
+}
+
+.student-receipt-btn {
+  background: #234b36;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.student-receipt-section {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f8faf9;
+  border: 1px solid #dce8df;
+  border-radius: 10px;
+}
+
+.receipt-print-area {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px;
+  background: white;
+  border: 1px solid #ddd;
+  color: #222;
+}
+
+.receipt-header {
+  text-align: center;
+  border-bottom: 2px solid #234b36;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.receipt-header h2 {
+  color: #234b36;
+  margin-bottom: 8px;
+}
+
+.receipt-number {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.receipt-student-details,
+.receipt-payment-details {
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.receipt-student-details p,
+.receipt-payment-details p {
+  margin: 10px 0;
+}
+
+.receipt-payment-details h4 {
+  color: #234b36;
+  margin-bottom: 15px;
+}
+
+.receipt-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+.receipt-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.receipt-actions button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  background: #234b36;
+  color: white;
+  cursor: pointer;
+}
+
+.receipt-actions button:last-child {
+  background: #64748b;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .receipt-print-area,
+  .receipt-print-area * {
+    visibility: visible;
+  }
+
+  .receipt-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: none;
+    border: none;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .student-receipt-section {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .receipt-actions {
+    display: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+}
